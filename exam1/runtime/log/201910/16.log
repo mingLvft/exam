@@ -1,0 +1,431 @@
+---------------------------------------------------------------
+[ 2019-10-16T08:38:25+08:00 ] 127.0.0.1 GET www.exam.com/admin/major/index.html
+[运行时间：0.663215s] [吞吐率：1.51req/s] [内存消耗：2,308.20kb] [文件加载：59]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'major',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/major/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.015789s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000014s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ DB ] INIT mysql
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.270986s ]
+[ info ] [ RUN ] app\admin\controller\Major->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Major.php ]
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\major\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.063192s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_admin_role` [ RunTime:0.087452s ]
+[ sql ] [ SQL ] SELECT * FROM `em_admin_role` WHERE  `admin_id` = 4 [ RunTime:0.002855s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_rule` [ RunTime:0.016160s ]
+[ sql ] [ SQL ] SELECT * FROM `em_rule` [ RunTime:0.001115s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_major` [ RunTime:0.033875s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_major` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.001596s ]
+[ sql ] [ SQL ] SELECT * FROM `em_major` WHERE  `status` = 1 LIMIT 0,20 [ RunTime:0.000879s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:26+08:00 ] 127.0.0.1 GET www.exam.com/admin/subject/index.html
+[运行时间：0.171138s] [吞吐率：5.84req/s] [内存消耗：2,526.62kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'subject',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/subject/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000523s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000010s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.001502s ]
+[ info ] [ RUN ] app\admin\controller\Subject->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Subject.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\subject\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.010302s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_subject` [ RunTime:0.013157s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_subject` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.000551s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name` FROM `em_subject` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` WHERE  `a`.`status` = 1 LIMIT 0,20 [ RunTime:0.014804s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:29+08:00 ] 127.0.0.1 GET www.exam.com/admin/major/index.html
+[运行时间：0.052038s] [吞吐率：19.22req/s] [内存消耗：2,303.63kb] [文件加载：59]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'major',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/major/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000516s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000012s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.001243s ]
+[ info ] [ RUN ] app\admin\controller\Major->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Major.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\major\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.009618s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_major` [ RunTime:0.009118s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_major` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.000437s ]
+[ sql ] [ SQL ] SELECT * FROM `em_major` WHERE  `status` = 1 LIMIT 0,20 [ RunTime:0.000455s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:30+08:00 ] 127.0.0.1 GET www.exam.com/admin/subject/index.html
+[运行时间：0.054365s] [吞吐率：18.39req/s] [内存消耗：2,526.62kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'subject',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/subject/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000510s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000011s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.001182s ]
+[ info ] [ RUN ] app\admin\controller\Subject->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Subject.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\subject\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.006050s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_subject` [ RunTime:0.011864s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_subject` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.000530s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name` FROM `em_subject` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` WHERE  `a`.`status` = 1 LIMIT 0,20 [ RunTime:0.000702s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:31+08:00 ] 127.0.0.1 GET www.exam.com/admin/single/index.html
+[运行时间：0.222791s] [吞吐率：4.49req/s] [内存消耗：2,612.38kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'single',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/single/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000971s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000045s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.002334s ]
+[ info ] [ RUN ] app\admin\controller\Single->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Single.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\single\index.html [ array (
+  0 => 'data',
+  1 => 'major',
+  2 => 'subject',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001929s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_single` [ RunTime:0.042065s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_single` WHERE  (  status=1 ) LIMIT 1 [ RunTime:0.010298s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name`,`c`.`subject_name` FROM `em_single` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` INNER JOIN `em_subject` `c` ON `a`.`subject_id`=`c`.`id` WHERE  (  a.status=1 ) LIMIT 0,20 [ RunTime:0.024224s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_major` [ RunTime:0.011639s ]
+[ sql ] [ SQL ] SELECT * FROM `em_major` WHERE  `status` = 1 [ RunTime:0.001036s ]
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_subject` [ RunTime:0.014082s ]
+[ sql ] [ SQL ] SELECT * FROM `em_subject` WHERE  `status` = 1 [ RunTime:0.000397s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:32+08:00 ] 127.0.0.1 GET www.exam.com/admin/single/trash.html
+[运行时间：0.102529s] [吞吐率：9.75req/s] [内存消耗：2,566.76kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'single',
+    2 => 'trash',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/single/trash_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000458s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000011s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.001166s ]
+[ info ] [ RUN ] app\admin\controller\Single->trash[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Single.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\single\trash.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001374s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_single` [ RunTime:0.010493s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_single` WHERE  (  status=0 ) LIMIT 1 [ RunTime:0.000671s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name`,`c`.`subject_name` FROM `em_single` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` INNER JOIN `em_subject` `c` ON `a`.`subject_id`=`c`.`id` WHERE  (  a.status=0 ) LIMIT 0,20 [ RunTime:0.000677s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:32+08:00 ] 127.0.0.1 GET www.exam.com/admin/selection/index.html
+[运行时间：0.137999s] [吞吐率：7.25req/s] [内存消耗：2,535.88kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'selection',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/selection/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000511s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000011s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.001463s ]
+[ info ] [ RUN ] app\admin\controller\Selection->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Selection.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\selection\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.011789s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_selection` [ RunTime:0.028417s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_selection` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.000424s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name`,`c`.`subject_name` FROM `em_selection` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` INNER JOIN `em_subject` `c` ON `a`.`subject_id`=`c`.`id` WHERE  `a`.`status` = 1 LIMIT 0,20 [ RunTime:0.000604s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:33+08:00 ] 127.0.0.1 GET www.exam.com/admin/judge/index.html
+[运行时间：0.142310s] [吞吐率：7.03req/s] [内存消耗：2,533.59kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'judge',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/judge/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.001145s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000025s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.003439s ]
+[ info ] [ RUN ] app\admin\controller\Judge->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Judge.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\judge\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001750s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_judge` [ RunTime:0.030603s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_judge` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.000909s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name`,`c`.`subject_name` FROM `em_judge` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` INNER JOIN `em_subject` `c` ON `a`.`subject_id`=`c`.`id` WHERE  `a`.`status` = 1 LIMIT 0,20 [ RunTime:0.001844s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:38:34+08:00 ] 127.0.0.1 GET www.exam.com/admin/operation/index.html
+[运行时间：0.082473s] [吞吐率：12.13req/s] [内存消耗：2,531.03kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'operation',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571127286',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/operation/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000456s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000011s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.001175s ]
+[ info ] [ RUN ] app\admin\controller\Operation->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Operation.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\operation\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001533s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_operation` [ RunTime:0.011986s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_operation` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.000420s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name`,`c`.`subject_name` FROM `em_operation` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` INNER JOIN `em_subject` `c` ON `a`.`subject_id`=`c`.`id` WHERE  `a`.`status` = 1 LIMIT 0,20 [ RunTime:0.001014s ]
+---------------------------------------------------------------
+[ 2019-10-16T08:44:38+08:00 ] 127.0.0.1 GET www.exam.com/admin/operation/index.html
+[运行时间：0.052227s] [吞吐率：19.15req/s] [内存消耗：2,531.23kb] [文件加载：62]
+[ info ] [ LANG ] D:\phpStudy\PHPTutorial\WWW\exam1\thinkphp\lang\zh-cn.php
+[ info ] [ ROUTE ] array (
+  'type' => 'module',
+  'module' => 
+  array (
+    0 => 'admin',
+    1 => 'operation',
+    2 => 'index',
+  ),
+)
+[ info ] [ HEADER ] array (
+  'cookie' => 'pgv_pvi=6920314880; pgv_si=s2128145408; __cfduid=d22fff10a720b1095b8f6bf5856c1adf31570673030; _ga=GA1.2.682047457.1570694924; PHPSESSID=4898eojcjbqls2847596u0j93t; Hm_lvt_b393d153aeb26b46e9431fabaf0f6190=1569552275,1571114296; admin=%7B%22id%22%3A4%2C%22username%22%3A%22admin%22%2C%22password%22%3A%22123456%22%2C%22tel%22%3A2147483647%2C%22status%22%3A1%2C%22add_time%22%3A%222019-10-08+21%3A21%3A11%22%7D; username=admin; id=4; Hm_lpvt_b393d153aeb26b46e9431fabaf0f6190=1571186323',
+  'accept-language' => 'zh-CN,zh;q=0.9',
+  'accept-encoding' => 'gzip, deflate',
+  'referer' => 'http://www.exam.com/admin/index/index.html',
+  'accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
+  'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
+  'upgrade-insecure-requests' => '1',
+  'cache-control' => 'max-age=0',
+  'connection' => 'close',
+  'host' => 'www.exam.com',
+)
+[ info ] [ PARAM ] array (
+  '/admin/operation/index_html' => '',
+)
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000723s ]
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Login @app_init [ RunTime:0.000011s ]
+[ info ] [ CACHE ] INIT File
+[ info ] [ CACHE ] INIT File
+[ info ] [ BEHAVIOR ] Run app\admin\behavior\Rule @app_init [ RunTime:0.001873s ]
+[ info ] [ RUN ] app\admin\controller\Operation->index[ D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\controller\Operation.php ]
+[ info ] [ DB ] INIT mysql
+[ info ] [ VIEW ] D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\operation\index.html [ array (
+  0 => 'data',
+) ]
+[ info ] [ LOG ] INIT File
+[ sql ] [ DB ] CONNECT:[ UseTime:0.001591s ] mysql:host=127.0.0.1;port=3306;dbname=exam1;charset=utf8
+[ sql ] [ SQL ] SHOW COLUMNS FROM `em_operation` [ RunTime:0.009338s ]
+[ sql ] [ SQL ] SELECT COUNT(*) AS tp_count FROM `em_operation` WHERE  `status` = 1 LIMIT 1 [ RunTime:0.000681s ]
+[ sql ] [ SQL ] SELECT `a`.*,`b`.`major_name`,`c`.`subject_name` FROM `em_operation` `a` INNER JOIN `em_major` `b` ON `a`.`major_id`=`b`.`id` INNER JOIN `em_subject` `c` ON `a`.`subject_id`=`c`.`id` WHERE  `a`.`status` = 1 LIMIT 0,20 [ RunTime:0.000701s ]
