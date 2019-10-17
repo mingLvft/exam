@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\rule\edit.html";i:1570758583;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\rule\edit.html";i:1571302513;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -80,9 +80,6 @@
                         </label>
                         <input type="radio" name="is_show" value="1" lay-skin="primary" title="是" <?php if($data['is_show'] == '1'): ?>checked=""<?php endif; ?>>
                         <input type="radio" name="is_show" value="0" lay-skin="primary" title="否" <?php if($data['is_show'] == '0'): ?>checked=""<?php endif; ?>>
-                        <div class="layui-inline layui-show-xs-block">
-                            <button class="layui-btn"  lay-submit="" lay-filter="add"><i class="layui-icon"></i>增加</button>
-                        </div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label">

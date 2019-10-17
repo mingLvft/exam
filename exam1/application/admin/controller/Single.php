@@ -128,6 +128,7 @@ class Single extends Common
         }
     }
 
+    //二级联动 返回数据
     public function major(){
         $major_id = input('post.major_id');
         $data = Db::name('subject')->where("major_id",$major_id)->select();

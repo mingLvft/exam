@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:87:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\operation\trash.html";i:1569750800;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:87:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\operation\trash.html";i:1571211755;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -86,7 +86,7 @@
                                 <input type="checkbox" name="id" value="<?php echo $vo['id']; ?>" lay-skin="primary">
                               </td>
                                 <td><?php echo $vo['id']; ?></td>
-                                <td><?php echo $vo['name']; ?></td>
+                                <td><?php echo $vo['operation_name']; ?></td>
                                 <td><?php echo $vo['major_name']; ?></td>
                                 <td><?php echo $vo['subject_name']; ?></td>
                                 <td><?php echo $vo['add_time']; ?></td>

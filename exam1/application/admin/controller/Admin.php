@@ -2,7 +2,8 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
-
+use think\Cookie;
+use think\Cache;
 /*
  * 管理员添加
  */
@@ -21,6 +22,9 @@ class Admin extends Common{
     //管理员添加
     public function add(){
         if(request()->isPost()){
+            $id = Cookie::get('id');
+            //删除缓存文件
+            Cache::rm('user_'.$id);
             $data = input('post.data/a');
             if (!$data) {
                 return json(array('status' => 0, 'msg' => '参数错误'));
@@ -50,6 +54,9 @@ class Admin extends Common{
     //管理员修改
     public function edit(){
         if(request()->isPost()){
+            $id = Cookie::get('id');
+            //删除缓存文件
+            Cache::rm('user_'.$id);
             $data = input('post.data/a');
             if (!$data) {
                 return json(array('status' => 0, 'msg' => '参数错误'));
@@ -87,6 +94,9 @@ class Admin extends Common{
 
     //管理员的删除
     public function del(){
+        $id = Cookie::get('id');
+        //删除缓存文件
+        Cache::rm('user_'.$id);
         $model = Db::name('admin');
         $id = input('post.id/a');
         //转换成数组方便使用mysql in语法

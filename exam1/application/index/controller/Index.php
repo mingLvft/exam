@@ -1,6 +1,6 @@
 <?php
 namespace app\index\controller;
-
+use think\Db;
 class Index
 {
     public function index()
@@ -9,20 +9,63 @@ class Index
     }
 
     //实现学生登陆
-        public function login(){
-            if(request()->isPost()){
-                $data = input('post.');
-                $json = model('Students')->login($data);
-                return $json;
-            }
+    public function login(){
+        if(request()->isPost()){
+            $data = input('post.');
+            $json = model('Students')->login($data);
+            return $json;
         }
+    }
 
-        //实现学生修改
-        public function changePassword(){
-            if(request()->isPost()){
-                $data = input('post.');
-                $json = model('Students')->changePassword($data);
-                return $json;
-            }
+    //实现学生修改
+    public function changePassword(){
+        if(request()->isPost()){
+            $data = input('post.');
+            $json = model('Students')->changePassword($data);
+            return $json;
         }
+    }
+
+    //实现登陆后选择 专业科目 点击开始考试 需要返回题
+    public function getQuestion(){
+        $data = input('get.');
+        $major_id = $data['major_id'];
+        //获取科目id
+        $subject_id = $data['subject_id'];
+        //获取单选题
+        $single = Db::name('single')->field('right_key,status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        //多选题
+        $selection = Db::name('selection')->field('right_key,status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        //判断题
+        $judge = Db::name('judge')->field('right_key,status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        //操作题
+        $operation = Db::name('operation')->field('status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        return json(['code'=>1,'msg'=>'开始考试','single'=>$single,
+            'selection'=>$selection,'judge'=>$judge,'operation'=>$operation]);
+    }
+
+    // 答题 进入下一题  需要缓存到文件
+    public function nxet(){
+
+    }
+
+    //评分
+    public function star(){
+        $data = input('post.');
+        //判断题型
+        switch ($data['xx']){
+            case 'single':
+                
+                break;
+            case 'selection':
+
+                break;
+            case 'judge':
+
+                break;
+            case 'operation':
+
+                break;
+        }
+    }
 }

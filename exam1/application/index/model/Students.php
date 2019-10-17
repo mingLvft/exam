@@ -22,12 +22,11 @@ class Students extends Model{
         //保存用户的信息
         $data = $this->where("id_card",$data['username'])->find();
         //获取专业科目信息
-        $major_subject = $this->alias('a')->field('b.id,c.id,c.subject_name')
+        $major_subject = $this->alias('a')->field('c.id,c.subject_name')
             ->join('em_major b','a.major_id=b.id')
-            ->join('em_subject c','b.id=c.major_id')->where('id_card',$info['id_card'])->select();
-        //获取题
-        $single = Db::name('Single')->where('major_id='.$data['major_id'].' and subject_id='.$data['subject_id'])->select();
-        return json(['code'=>1,'msg'=>'登陆成功','data'=>$data,'major_subject'=>$major_subject,'single'=>$single]);
+            ->join('em_subject c','b.id=c.major_id')->where('id_card',$data['id_card'])->select();
+        //返回 登陆状态 用户信息 科目
+        return json(['code'=>1,'msg'=>'登陆成功','data'=>$data,'major_subject'=>$major_subject]);
     }
 
     //实现学生修改

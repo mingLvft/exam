@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\add.html";i:1571125407;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\add.html";i:1571125515;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -74,11 +74,11 @@
                             <input type="text" id="L_username" name="class_name" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
-                        <label for="desc" class="layui-form-label"><span class="x-red">*</span>性别</label>
+                        <label for="desc" class="layui-form-label"><span class="x-red">*</span>专业</label>
                         <div class="layui-input-block">
                             <select name="major_id" lay-verify="">
                                 <option value="">专业</option>
-                                <?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                <?php if(is_array($major) || $major instanceof \think\Collection || $major instanceof \think\Paginator): $i = 0; $__LIST__ = $major;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                                 <option value="<?php echo $vo['id']; ?>"><?php echo $vo['major_name']; ?></option>
                                 <?php endforeach; endif; else: echo "" ;endif; ?>
                             </select>

@@ -2,19 +2,26 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
-
+use think\Cookie;
+use think\Cache;
 class Rule extends Common{
 
     //权限页面显示
     public function index(){
-        $count = Db::name('rule')->where("is_show",1)->count();
-        $data = Db::name('rule')->where("is_show",1)->paginate(20,$count);
+        $count = Db::name('rule')->count();
+        $data = Db::name('rule')->paginate(20,$count);
+        //解决分页选择上级权限bug
+        $rule = Db::name('rule')->select();
         $this->assign('data',$data);
+        $this->assign('rule',$rule);
         return $this->fetch();
     }
 
     //权限添加
     public function add(){
+        $id = Cookie::get('id');
+        //删除缓存文件
+        Cache::rm('user_'.$id);
         $model = Db::name('rule');
         $data = input('post.data/a');
         if (!$data) {
@@ -32,6 +39,9 @@ class Rule extends Common{
     //权限编辑
     public function edit(){
         if(request()->isPost()){
+            $id = Cookie::get('id');
+            //删除缓存文件
+            Cache::rm('user_'.$id);
             $model = Db::name('rule');
             $data = input('post.data/a');
             if (!$data) {
@@ -57,6 +67,9 @@ class Rule extends Common{
 
     //权限的删除
     public function del(){
+        $id = Cookie::get('id');
+        //删除缓存文件
+        Cache::rm('user_'.$id);
         $model = Db::name('rule');
         $id = input('post.id/a');
         //转换成数组方便使用mysql in语法

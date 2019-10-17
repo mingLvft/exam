@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\judge\trash.html";i:1569749370;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\judge\trash.html";i:1571211691;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -87,7 +87,7 @@
                                 <input type="checkbox" name="id" value="<?php echo $vo['id']; ?>" lay-skin="primary">
                               </td>
                                 <td><?php echo $vo['id']; ?></td>
-                                <td><?php echo $vo['name']; ?></td>
+                                <td><?php echo $vo['judge_name']; ?></td>
                                 <td><?php echo $vo['right_key']; ?></td>
                                 <td><?php echo $vo['major_name']; ?></td>
                                 <td><?php echo $vo['subject_name']; ?></td>

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\rule\index.html";i:1570804800;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\rule\index.html";i:1571299458;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -56,9 +56,11 @@
                                 上级权限：<div class="layui-inline layui-show-xs-block">
                                     <select name="parent_id">
                                         <option value="0">顶级权限</option>
-                                        <?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                                        <option value="<?php echo $vo['id']; ?>"><?php echo $vo['rule_name']; ?></option>
-                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                        <?php if(is_array($rule) || $rule instanceof \think\Collection || $rule instanceof \think\Paginator): $i = 0; $__LIST__ = $rule;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo['parent_id'] == '0'): ?>
+                                        <option value="<?php echo $vo['id']; ?>">|--<?php echo $vo['rule_name']; ?></option>
+                                        <?php endif; if($vo['action_name'] == 'index'): ?>
+                                        <option value="<?php echo $vo['id']; ?>">|----<?php echo $vo['rule_name']; ?></option>
+                                        <?php endif; endforeach; endif; else: echo "" ;endif; ?>
                                     </select>
                                 </div>
                                 是否菜单显示

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\index\index.html";i:1571123692;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\index\index.html";i:1571298976;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
     <head>
@@ -77,123 +77,149 @@
         <div class="left-nav">
             <div id="side-nav">
                 <ul id="nav">
+                    <?php if(is_array($menus) || $menus instanceof \think\Collection || $menus instanceof \think\Paginator): $i = 0; $__LIST__ = $menus;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo['parent_id'] == '0'): ?>
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="学生管理">&#xe6b8;</i>
-                            <cite>学生管理</cite>
+                            <i class="iconfont left-nav-li" lay-tips="<?php echo $vo['rule_name']; ?>">&#xe6b8;</i>
+                            <cite><?php echo $vo['rule_name']; ?></cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
+                            <?php if(is_array($menus) || $menus instanceof \think\Collection || $menus instanceof \think\Paginator): $i = 0; $__LIST__ = $menus;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;if($v['parent_id'] == $vo['id']): ?>
                             <li>
-                                <a onclick="xadmin.add_tab('学生列表','<?php echo url('Students/index'); ?>')">
+                                <a onclick="xadmin.add_tab('<?php echo $v['rule_name']; ?>','<?php echo url($v['module_name'].'/'.$v['controller_name'].'/'.$v['action_name']); ?>')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>学生列表</cite></a>
+                                    <cite><?php echo $v['rule_name']; ?></cite></a>
+                                <?php if(is_array($menus) || $menus instanceof \think\Collection || $menus instanceof \think\Paginator): $i = 0; $__LIST__ = $menus;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$trash): $mod = ($i % 2 );++$i;if($trash['parent_id'] == $v['id']): ?>
                                         <ul class="sub-menu">
                                             <li>
-                                                <a onclick="xadmin.add_tab('学生回收站','<?php echo url('Students/trash'); ?>')">
+                                                <a onclick="xadmin.add_tab('<?php echo $trash['rule_name']; ?>','<?php echo url($trash['module_name'].'/'.$trash['controller_name'].'/'.$trash['action_name']); ?>')">
                                                     <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>学生回收站</cite></a>
+                                                    <cite><?php echo $trash['rule_name']; ?></cite></a>
                                             </li>
                                         </ul>
+                                <?php endif; endforeach; endif; else: echo "" ;endif; ?>
                             </li>
+                            <?php endif; endforeach; endif; else: echo "" ;endif; ?>
                         </ul>
                     </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="题库">&#xe723;</i>
-                            <cite>题库</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('单选题','<?php echo url('Single/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>单选题</cite></a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a onclick="xadmin.add_tab('单选题回收站','<?php echo url('Single/trash'); ?>')">
-                                                    <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>单选题回收站</cite></a>
-                                            </li>
-                                        </ul>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('多选题','<?php echo url('Selection/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>多选题</cite></a>
-                                        <ul class="sub-menu">
-                                        <li>
-                                            <a onclick="xadmin.add_tab('多选题回收站','<?php echo url('Selection/trash'); ?>')">
-                                                <i class="iconfont">&#xe6a7;</i>
-                                                <cite>多选题回收站</cite></a>
-                                        </li>
-                                        </ul>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('判断题','<?php echo url('Judge/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>判断题</cite></a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a onclick="xadmin.add_tab('判断题回收站','<?php echo url('Judge/trash'); ?>')">
-                                                    <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>判断题回收站</cite></a>
-                                            </li>
-                                        </ul>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('操作题','<?php echo url('Operation/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>操作题</cite></a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a onclick="xadmin.add_tab('操作题回收站','<?php echo url('Operation/trash'); ?>')">
-                                                    <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>操作题回收站</cite></a>
-                                            </li>
-                                        </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="考试管理">&#xe723;</i>
-                            <cite>考试管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('专业管理','<?php echo url('Major/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>专业管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('科目管理','<?php echo url('Subject/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>科目管理</cite></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
-                            <cite>管理员管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('管理员列表','<?php echo url('Admin/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>管理员列表</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('角色管理','<?php echo url('Role/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>角色管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('权限管理','<?php echo url('Rule/index'); ?>')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>权限管理</cite></a>
-                            </li>
-                        </ul>
-                    </li>
+                    <?php endif; endforeach; endif; else: echo "" ;endif; ?>
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="学生管理">&#xe6b8;</i>-->
+<!--                            <cite>学生管理</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('学生列表','<?php echo url('Students/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>学生列表</cite></a>-->
+<!--                                <ul class="sub-menu">-->
+<!--                                    <li>-->
+<!--                                        <a onclick="xadmin.add_tab('学生回收站','<?php echo url('Students/trash'); ?>')">-->
+<!--                                            <i class="iconfont">&#xe6a7;</i>-->
+<!--                                            <cite>学生回收站</cite></a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="题库">&#xe723;</i>-->
+<!--                            <cite>题库</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('单选题','<?php echo url('Single/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>单选题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                            <li>-->
+<!--                                                <a onclick="xadmin.add_tab('单选题回收站','<?php echo url('Single/trash'); ?>')">-->
+<!--                                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                    <cite>单选题回收站</cite></a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('多选题','<?php echo url('Selection/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>多选题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                        <li>-->
+<!--                                            <a onclick="xadmin.add_tab('多选题回收站','<?php echo url('Selection/trash'); ?>')">-->
+<!--                                                <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                <cite>多选题回收站</cite></a>-->
+<!--                                        </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('判断题','<?php echo url('Judge/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>判断题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                            <li>-->
+<!--                                                <a onclick="xadmin.add_tab('判断题回收站','<?php echo url('Judge/trash'); ?>')">-->
+<!--                                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                    <cite>判断题回收站</cite></a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('操作题','<?php echo url('Operation/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>操作题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                            <li>-->
+<!--                                                <a onclick="xadmin.add_tab('操作题回收站','<?php echo url('Operation/trash'); ?>')">-->
+<!--                                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                    <cite>操作题回收站</cite></a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="考试管理">&#xe723;</i>-->
+<!--                            <cite>考试管理</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('专业列表','<?php echo url('Major/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>专业管理</cite></a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('科目列表','<?php echo url('Subject/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>科目管理</cite></a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>-->
+<!--                            <cite>管理员管理</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('管理员列表','<?php echo url('Admin/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>管理员列表</cite></a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('角色列表','<?php echo url('Role/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>角色管理</cite></a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('权限列表','<?php echo url('Rule/index'); ?>')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>权限管理</cite></a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                 </ul>
             </div>
         </div>

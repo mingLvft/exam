@@ -76,123 +76,155 @@
         <div class="left-nav">
             <div id="side-nav">
                 <ul id="nav">
+                    {volist name="menus" id="vo"}
+                    {eq name="vo.parent_id" value="0"}
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="学生管理">&#xe6b8;</i>
-                            <cite>学生管理</cite>
+                            <i class="iconfont left-nav-li" lay-tips="{$vo.rule_name}">&#xe6b8;</i>
+                            <cite>{$vo.rule_name}</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
+                            {volist name="menus" id="v"}
+                            {eq name="v.parent_id" value="$vo.id"}
                             <li>
-                                <a onclick="xadmin.add_tab('学生列表','{:url(\'Students/index\')}')">
+                                <a onclick="xadmin.add_tab('{$v.rule_name}','{:url($v.module_name.'/'.$v.controller_name.'/'.$v.action_name)}')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>学生列表</cite></a>
+                                    <cite>{$v.rule_name}</cite></a>
+                                {volist name="menus" id="trash"}
+                                {eq name="trash.parent_id" value="$v.id"}
                                         <ul class="sub-menu">
                                             <li>
-                                                <a onclick="xadmin.add_tab('学生回收站','{:url(\'Students/trash\')}')">
+                                                <a onclick="xadmin.add_tab('{$trash.rule_name}','{:url($trash.module_name.'/'.$trash.controller_name.'/'.$trash.action_name)}')">
                                                     <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>学生回收站</cite></a>
+                                                    <cite>{$trash.rule_name}</cite></a>
                                             </li>
                                         </ul>
+                                {/eq}
+                                {/volist}
                             </li>
+                            {/eq}
+                            {/volist}
                         </ul>
                     </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="题库">&#xe723;</i>
-                            <cite>题库</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('单选题','{:url(\'Single/index\')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>单选题</cite></a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a onclick="xadmin.add_tab('单选题回收站','{:url(\'Single/trash\')}')">
-                                                    <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>单选题回收站</cite></a>
-                                            </li>
-                                        </ul>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('多选题','{:url(\'Selection/index\')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>多选题</cite></a>
-                                        <ul class="sub-menu">
-                                        <li>
-                                            <a onclick="xadmin.add_tab('多选题回收站','{:url(\'Selection/trash\')}')">
-                                                <i class="iconfont">&#xe6a7;</i>
-                                                <cite>多选题回收站</cite></a>
-                                        </li>
-                                        </ul>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('判断题','{:url(\'Judge/index\')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>判断题</cite></a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a onclick="xadmin.add_tab('判断题回收站','{:url(\'Judge/trash\')}')">
-                                                    <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>判断题回收站</cite></a>
-                                            </li>
-                                        </ul>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('操作题','{:url(\'Operation/index\')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>操作题</cite></a>
-                                        <ul class="sub-menu">
-                                            <li>
-                                                <a onclick="xadmin.add_tab('操作题回收站','{:url(\'Operation/trash\')}')">
-                                                    <i class="iconfont">&#xe6a7;</i>
-                                                    <cite>操作题回收站</cite></a>
-                                            </li>
-                                        </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="考试管理">&#xe723;</i>
-                            <cite>考试管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('专业管理','{:url(\'Major/index\')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>专业管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('科目管理','{:url(\'Subject/index\')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>科目管理</cite></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
-                            <cite>管理员管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('管理员列表','{:url('Admin/index')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>管理员列表</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('角色管理','{:url('Role/index')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>角色管理</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('权限管理','{:url('Rule/index')}')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>权限管理</cite></a>
-                            </li>
-                        </ul>
-                    </li>
+                    {/eq}
+                    {/volist}
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="学生管理">&#xe6b8;</i>-->
+<!--                            <cite>学生管理</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('学生列表','{:url(\'Students/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>学生列表</cite></a>-->
+<!--                                <ul class="sub-menu">-->
+<!--                                    <li>-->
+<!--                                        <a onclick="xadmin.add_tab('学生回收站','{:url(\'Students/trash\')}')">-->
+<!--                                            <i class="iconfont">&#xe6a7;</i>-->
+<!--                                            <cite>学生回收站</cite></a>-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="题库">&#xe723;</i>-->
+<!--                            <cite>题库</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('单选题','{:url(\'Single/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>单选题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                            <li>-->
+<!--                                                <a onclick="xadmin.add_tab('单选题回收站','{:url(\'Single/trash\')}')">-->
+<!--                                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                    <cite>单选题回收站</cite></a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('多选题','{:url(\'Selection/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>多选题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                        <li>-->
+<!--                                            <a onclick="xadmin.add_tab('多选题回收站','{:url(\'Selection/trash\')}')">-->
+<!--                                                <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                <cite>多选题回收站</cite></a>-->
+<!--                                        </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('判断题','{:url(\'Judge/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>判断题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                            <li>-->
+<!--                                                <a onclick="xadmin.add_tab('判断题回收站','{:url(\'Judge/trash\')}')">-->
+<!--                                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                    <cite>判断题回收站</cite></a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('操作题','{:url(\'Operation/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>操作题</cite></a>-->
+<!--                                        <ul class="sub-menu">-->
+<!--                                            <li>-->
+<!--                                                <a onclick="xadmin.add_tab('操作题回收站','{:url(\'Operation/trash\')}')">-->
+<!--                                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                                    <cite>操作题回收站</cite></a>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="考试管理">&#xe723;</i>-->
+<!--                            <cite>考试管理</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('专业列表','{:url(\'Major/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>专业管理</cite></a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('科目列表','{:url(\'Subject/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>科目管理</cite></a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a href="javascript:;">-->
+<!--                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>-->
+<!--                            <cite>管理员管理</cite>-->
+<!--                            <i class="iconfont nav_right">&#xe697;</i></a>-->
+<!--                        <ul class="sub-menu">-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('管理员列表','{:url(\'Admin/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>管理员列表</cite></a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('角色列表','{:url(\'Role/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>角色管理</cite></a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a onclick="xadmin.add_tab('权限列表','{:url(\'Rule/index\')}')">-->
+<!--                                    <i class="iconfont">&#xe6a7;</i>-->
+<!--                                    <cite>权限管理</cite></a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                 </ul>
             </div>
         </div>

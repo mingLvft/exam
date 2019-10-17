@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\admin\add.html";i:1570671279;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\admin\add.html";i:1571302960;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -56,7 +56,7 @@
                       <label class="layui-form-label"><span class="x-red">*</span>角色</label>
                       <div class="layui-input-block">
                           <?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-                        <input type="checkbox" name="role[]" value="<?php echo $vo['id']; ?>" lay-skin="primary" title="<?php echo $vo['role_name']; ?>" checked="">
+                        <input type="checkbox" name="role[]" value="<?php echo $vo['id']; ?>" lay-skin="primary" title="<?php echo $vo['role_name']; ?>">
                           <?php endforeach; endif; else: echo "" ;endif; ?>
                       </div>
                   </div>
@@ -84,8 +84,8 @@
         </div>
         <script>layui.use(['form', 'layer'],
             function() {
-                $ = layui.jquery;
                 var form = layui.form,
+                $ = layui.jquery,
                 layer = layui.layer;
 
                 //自定义验证规则
@@ -137,10 +137,10 @@
                     }
                     return roleListIds;
                 };
+
                 //监听提交
                 form.on('submit(add)', function(data) {
                     $.post("<?php echo url('Admin/add'); ?>",{data:filterData(data.field)},function (data) {
-                        layer.alert(data);return false;
                         if(data.status == 1){
                             //发异步，把数据提交给php
                             layer.alert(data.msg, {icon: 6}, function() {

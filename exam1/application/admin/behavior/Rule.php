@@ -66,7 +66,7 @@ class Rule extends Controller{
                     $this->user['menus'][] = $value;
                 }
             }
-            Cache::set('user_'.$id,$this->user,600);
+            Cache::set('user_'.$id,$this->user);
         }
         //针对超级管理员不进行权限认证
         if($this->user['role_id'] ==1){

@@ -12,6 +12,7 @@ use think\Route;
 
 Route::rule('api/login', 'index/index/login', 'get | post');        //学生登陆路由
 Route::rule('api/changePassword', 'index/index/changePassword', 'post');      //修改密码路由
+Route::rule('api/getQuestion', 'index/index/getQuestion', 'get | post');      //开始考试路由
 
 $origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
 

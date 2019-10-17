@@ -32,7 +32,7 @@
                                 <div class="layui-input-block">
                                     {volist name="rule" id="vo"}
                                     {neq name="vo.parent_id" value="0"}
-                                    <input name="rule[]" lay-skin="primary" {in name="vo.id" value="$data.rule_id"}checked=""{/in} type="checkbox" value="{$vo.id}" title="{$vo.rule_name}">
+                                    <input name="rule[]" class="{$vo.controller_name}" lay-skin="primary" {in name="vo.id" value="$data.rule_id"}checked=""{/in} type="checkbox" value="{$vo.id}" title="{$vo.rule_name}">
                                     {/neq}
                                     {/volist}
                                 </div>

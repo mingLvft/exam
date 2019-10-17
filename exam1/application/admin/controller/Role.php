@@ -2,7 +2,8 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
-
+use think\Cookie;
+use think\Cache;
 class Role extends Common{
 
     //角色页面显示
@@ -10,7 +11,7 @@ class Role extends Common{
         $data = model('Role')->getAllData(1);
         $this->assign('data',$data);
         //获取所有权限
-        $rule = Db::name('rule')->where("is_show",1)->select();
+        $rule = Db::name('rule')->select();
         $this->assign('rule',$rule);
         return $this->fetch();
     }
@@ -18,6 +19,9 @@ class Role extends Common{
     //角色添加
     public function add(){
         if(request()->isPost()){
+            $id = Cookie::get('id');
+            //删除缓存文件
+            Cache::rm('user_'.$id);
             $data = input('post.data/a');
             if (!$data) {
                 return json(array('status' => 0, 'msg' => '参数错误'));
@@ -40,7 +44,7 @@ class Role extends Common{
             }
         }else{
             //查询出所有权限信息
-            $rule = Db::name('rule')->where("is_show",1)->select();
+            $rule = Db::name('rule')->select();
             $this->assign('rule',$rule);
             return $this->fetch();
         }
@@ -49,6 +53,9 @@ class Role extends Common{
     //角色编辑
     public function edit(){
         if(request()->isPost()){
+            $id = Cookie::get('id');
+            //删除缓存文件
+            Cache::rm('user_'.$id);
             $data = input('post.data/a');
             if (!$data) {
                 return json(array('status' => 0, 'msg' => '参数错误'));
@@ -76,7 +83,7 @@ class Role extends Common{
                 ->field('a.*,b.rule_id')
                 ->where("a.id",$id)->find();
             //查询出所有权限信息
-            $rule = Db::name('rule')->where("is_show",1)->select();
+            $rule = Db::name('rule')->select();
             $this->assign('rule',$rule);
             $this->assign('data',$data);
             return $this->fetch();
@@ -85,6 +92,9 @@ class Role extends Common{
 
     //角色的删除
     public function del(){
+        $id = Cookie::get('id');
+        //删除缓存文件
+        Cache::rm('user_'.$id);
         $model = Db::name('role');
         $id = input('post.id/a');
         //转换成数组方便使用mysql in语法

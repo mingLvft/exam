@@ -3,6 +3,7 @@ namespace app\admin\controller;
 use think\captcha\Captcha;
 use think\Controller;
 use think\Cookie;
+use think\Cache;
 /*
  * 管理员登陆
  */
@@ -30,6 +31,10 @@ class Login extends Controller
 
     //退出登录
     public function logout(){
+        $id = Cookie::get('id');
+        //删除缓存文件
+        Cache::rm('user_'.$id);
+        //删除cookie
         Cookie::delete('admin');
         Cookie::delete('username');
         Cookie::delete('id');

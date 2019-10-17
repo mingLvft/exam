@@ -58,11 +58,11 @@ class Admin extends Model{
             return json(array('status'=>0,'msg'=>'密码错误'));
         }
         //保存用户信息是正确的可以登录  保存用户信息
-        Cookie::set('admin',$info);
+        Cookie::set('admin',$info,18000);
         //保存管理员名
-        Cookie::set('username',$info['username']);
+        Cookie::set('username',$info['username'],18000);
         //保存管理员id
-        Cookie::set('id',$info['id']);
+        Cookie::set('id',$info['id'],18000);
         return json(array('status'=>1,'msg'=>'登陆成功'));
     }
 }
