@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 17/10/2019 17:29:11
+ Date: 21/10/2019 17:05:26
 */
 
 SET NAMES utf8mb4;
@@ -29,17 +29,18 @@ CREATE TABLE `em_admin`  (
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态:1是,0否',
   `add_time` datetime NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_admin
 -- ----------------------------
 INSERT INTO `em_admin` VALUES (4, 'admin', '123456', 2147483647, 1, '2019-10-08 21:21:11');
-INSERT INTO `em_admin` VALUES (5, 'qwe', '123456', 2147483647, 1, '2019-10-09 08:39:47');
+INSERT INTO `em_admin` VALUES (5, 'tom', '123456', 2147483647, 1, '2019-10-09 08:39:47');
 INSERT INTO `em_admin` VALUES (20, 'user', '123456', 153456454, 1, '2019-10-09 10:00:29');
 INSERT INTO `em_admin` VALUES (30, 'li', '123456', 1234564, 1, '2019-10-09 10:10:29');
-INSERT INTO `em_admin` VALUES (32, 'we', '123456', 123123, 1, '2019-10-09 10:24:57');
-INSERT INTO `em_admin` VALUES (35, 'qq', '123456', 111, 1, '2019-10-10 08:42:30');
+INSERT INTO `em_admin` VALUES (32, 'check', '123456', 123123, 1, '2019-10-09 10:24:57');
+INSERT INTO `em_admin` VALUES (35, 'peter', '123456', 111, 1, '2019-10-10 08:42:30');
+INSERT INTO `em_admin` VALUES (36, 'tomk', '123456', 456151, 1, '2019-10-18 08:47:37');
 
 -- ----------------------------
 -- Table structure for em_admin_role
@@ -50,7 +51,7 @@ CREATE TABLE `em_admin_role`  (
   `admin_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户ID',
   `role_id` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_admin_role
@@ -61,6 +62,7 @@ INSERT INTO `em_admin_role` VALUES (13, 32, '4,5');
 INSERT INTO `em_admin_role` VALUES (16, 4, '1');
 INSERT INTO `em_admin_role` VALUES (17, 5, '5');
 INSERT INTO `em_admin_role` VALUES (18, 35, '4,5');
+INSERT INTO `em_admin_role` VALUES (19, 36, '1,4,7');
 
 -- ----------------------------
 -- Table structure for em_judge
@@ -80,11 +82,11 @@ CREATE TABLE `em_judge`  (
 -- ----------------------------
 -- Records of em_judge
 -- ----------------------------
-INSERT INTO `em_judge` VALUES (1, '这是题目 a', '1', 1, 4, 1, '2019-09-29 17:31:16');
-INSERT INTO `em_judge` VALUES (2, '这是题目', '1', 1, 1, 2, '2019-09-29 17:31:57');
-INSERT INTO `em_judge` VALUES (3, '这是题目', '1', 1, 3, 1, '2019-09-29 17:32:04');
+INSERT INTO `em_judge` VALUES (1, 'php中,双引号字符串支持变量解析以及转义字符.', '1', 1, 4, 1, '2019-09-29 17:31:16');
+INSERT INTO `em_judge` VALUES (2, '在返回数组中的所有值，可以使用array_value( )函数', '1', 1, 1, 2, '2019-09-29 17:31:57');
+INSERT INTO `em_judge` VALUES (3, 'php语言中的数值型字符串可以和数字变量进行混合运算. ', '1', 1, 3, 1, '2019-09-29 17:32:04');
 INSERT INTO `em_judge` VALUES (4, '这是题目', '1', 0, 1, 1, '2019-09-29 17:32:23');
-INSERT INTO `em_judge` VALUES (5, '啊   ', '0', 1, 1, 1, '2019-09-29 17:39:03');
+INSERT INTO `em_judge` VALUES (5, '运算符“++”可以对常量和变量进行累加1 ', '0', 1, 1, 1, '2019-09-29 17:39:03');
 
 -- ----------------------------
 -- Table structure for em_major
@@ -124,9 +126,9 @@ CREATE TABLE `em_operation`  (
 -- Records of em_operation
 -- ----------------------------
 INSERT INTO `em_operation` VALUES (1, '操作题', 0, 1, 1, '2019-09-29 17:53:29');
-INSERT INTO `em_operation` VALUES (2, '操作题', 1, 1, 1, '2019-09-29 17:53:39');
-INSERT INTO `em_operation` VALUES (3, '操作题', 1, 2, 2, '2019-09-29 17:53:43');
-INSERT INTO `em_operation` VALUES (4, '操作题 ', 1, 2, 2, '2019-09-29 17:53:49');
+INSERT INTO `em_operation` VALUES (2, '请简述一下htmlspecialchars和htmlentities的区别？', 1, 1, 1, '2019-09-29 17:53:39');
+INSERT INTO `em_operation` VALUES (3, '请简述func_get_args和func_num_args的功能。\n', 1, 2, 2, '2019-09-29 17:53:43');
+INSERT INTO `em_operation` VALUES (4, '请简述echo、print和print_r的区别？\n', 1, 2, 2, '2019-09-29 17:53:49');
 
 -- ----------------------------
 -- Table structure for em_role
@@ -168,7 +170,7 @@ CREATE TABLE `em_role_rule`  (
 INSERT INTO `em_role_rule` VALUES (1, 6, '2,3,5,45');
 INSERT INTO `em_role_rule` VALUES (2, 7, '10,4,24,28');
 INSERT INTO `em_role_rule` VALUES (3, 5, '1,2,36,41');
-INSERT INTO `em_role_rule` VALUES (4, 4, '10,4,24,28,45');
+INSERT INTO `em_role_rule` VALUES (4, 4, '9,10,4,24,28,45');
 INSERT INTO `em_role_rule` VALUES (5, 8, '5,6,8,9,31');
 
 -- ----------------------------
@@ -272,10 +274,10 @@ CREATE TABLE `em_selection`  (
 -- ----------------------------
 -- Records of em_selection
 -- ----------------------------
-INSERT INTO `em_selection` VALUES (1, '这是题目  ', '选项', '选项', '选项', '选项', '答案', 1, 1, 1, '2019-09-28 11:33:55');
-INSERT INTO `em_selection` VALUES (2, '的', '的', '的', '的', '的', '的', 1, 1, 1, '2019-09-28 15:28:35');
+INSERT INTO `em_selection` VALUES (1, '使用CSS对文本进行修饰，若使文本闪烁，text-decoration的取值为 ', 'none', 'underline', 'overline', 'blink', 'B,C', 1, 1, 1, '2019-09-28 11:33:55');
+INSERT INTO `em_selection` VALUES (2, 'JavaScript脚本语言的前身是', 'Basic', 'Live Script', 'VBScript', 'Oak', 'A,B', 1, 1, 1, '2019-09-28 15:28:35');
 INSERT INTO `em_selection` VALUES (3, '阿萨德 ', '阿萨德', '阿萨德阿萨德阿三', '掉分速度', '斯蒂芬', '斯蒂芬', 0, 1, 2, '2019-09-28 16:04:46');
-INSERT INTO `em_selection` VALUES (4, '多选题  ', '多选题', '多选题', '多选题', '多选题', '多选题', 1, 2, 3, '2019-09-29 15:27:47');
+INSERT INTO `em_selection` VALUES (4, 'XML基于的标准是', 'HTML   ', 'MIME ', 'SGML', 'CGI', 'B,C,D', 1, 2, 3, '2019-09-29 15:27:47');
 
 -- ----------------------------
 -- Table structure for em_single
@@ -299,10 +301,10 @@ CREATE TABLE `em_single`  (
 -- ----------------------------
 -- Records of em_single
 -- ----------------------------
-INSERT INTO `em_single` VALUES (1, '这是题目    ', '选项', '选项', '选项', '选项', '答案', 1, 2, 1, '2019-09-28 11:33:55');
-INSERT INTO `em_single` VALUES (2, '的 ', '的', '的', '的', '的', '的', 1, 1, 2, '2019-09-28 15:28:35');
+INSERT INTO `em_single` VALUES (1, '这是题目    ', '选项', '选项', '选项', '选项', '答案', 0, 2, 1, '2019-09-28 11:33:55');
+INSERT INTO `em_single` VALUES (2, '的 ', '的', '的', '的', '的', '的', 0, 1, 2, '2019-09-28 15:28:35');
 INSERT INTO `em_single` VALUES (3, '单选题', '单选题', '单选题', '单选题', '单选题', '单选题', 0, 2, 3, '2019-09-29 15:31:26');
-INSERT INTO `em_single` VALUES (4, 'PHP考试题---单选题', '', '', '', '', '', 1, 2, 6, '2019-10-09 18:03:22');
+INSERT INTO `em_single` VALUES (4, 'PHP考试题---单选题', '', '', '', '', '', 0, 2, 6, '2019-10-09 18:03:22');
 INSERT INTO `em_single` VALUES (5, ' JavaScript脚本语言的前身是', 'Basic', 'Live Script', 'Oak', 'VBScript', 'B', 1, 2, 6, '2019-10-09 18:03:22');
 INSERT INTO `em_single` VALUES (6, '使用CSS对文本进行修饰，若使文本闪烁，text-decoration的取值为', 'none', 'underline', 'overline', 'blink', 'D', 1, 2, 6, '2019-10-09 18:03:22');
 INSERT INTO `em_single` VALUES (7, 'XML基于的标准是', 'HTML   ', 'MIME ', 'SGML', 'CGI', 'C', 1, 2, 6, '2019-10-09 18:03:22');
@@ -383,9 +385,19 @@ CREATE TABLE `em_topic`  (
   `class_name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '班级',
   `major_id` int(10) NOT NULL COMMENT '专业id',
   `subject_id` int(10) NOT NULL COMMENT '科目id',
-  `create_time` datetime NOT NULL COMMENT '添加时间',
+  `add_time` datetime NOT NULL COMMENT '添加时间',
   `scroe` int(10) NOT NULL COMMENT '总分数',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '提交试卷' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '提交试卷' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of em_topic
+-- ----------------------------
+INSERT INTO `em_topic` VALUES (1, 'single13-C,single10-B,single14-B,single12-B,single11-C', 'single13-C,single10-B,single14-B,single12-B,single11-C,selection2-BC,selection1-AB', 'judge5-1', 'operation2-阿萨德', '老李', '17软件3', 1, 1, '2019-10-21 16:15:24', 6);
+INSERT INTO `em_topic` VALUES (2, 'single13-B,single12-B,single10-C,single11-B,single14-A', 'single13-B,single12-B,single10-C,single11-B,single14-A,selection2-BC,selection1-AB', 'judge5-1', 'operation2-打完去', '老李', '17软件3', 1, 1, '2019-10-21 16:38:07', 3);
+INSERT INTO `em_topic` VALUES (3, 'single11-B,single14-C,single12-B,single10-B,single13-B', 'single11-B,single14-C,single12-B,single10-B,single13-B,selection2-BC,selection1-BC', 'judge5-1', 'operation2-dasdas', '老李', '17软件3', 1, 1, '2019-10-21 16:39:17', 9);
+INSERT INTO `em_topic` VALUES (4, 'single11-B,single10-C,single12-D,single14-C,single13-B', 'single11-B,single10-C,single12-D,single14-C,single13-B,selection2-BC,selection1-BC', 'judge5-1', 'operation2-dasdasd', '老李', '17软件3', 1, 1, '2019-10-21 16:43:37', 6);
+INSERT INTO `em_topic` VALUES (5, 'single11-B,single10-C,single12-D,single14-C,single13-B', 'single11-B,single10-C,single12-D,single14-C,single13-B,selection2-BC,selection1-BC', 'judge5-1', 'operation2-dasdasd', '老李', '17软件3', 1, 1, '2019-10-21 16:43:47', 6);
+INSERT INTO `em_topic` VALUES (6, 'single13-C,single14-D,single10-C,single11-C,single12-D', 'single13-C,single14-D,single10-C,single11-C,single12-D,selection2-BC,selection1-BC', 'judge5-1', 'operation2-das', '老李', '17软件3', 1, 1, '2019-10-21 16:44:26', 3);
 
 SET FOREIGN_KEY_CHECKS = 1;
