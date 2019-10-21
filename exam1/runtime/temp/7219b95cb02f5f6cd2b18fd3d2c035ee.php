@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\add.html";i:1571125515;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\add.html";i:1571368141;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -111,6 +111,7 @@
                 //监听提交
                 form.on('submit(add)', function(data) {
                     $.post("<?php echo url('Students/add'); ?>",{data:data.field},function (data) {
+                       layer.alert(data);return false;
                         if(data.status == 1){
                             //发异步，把数据提交给php
                             layer.alert(data.msg, {icon: 6}, function() {

@@ -3,21 +3,21 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 /*
- * 单选题
+ * 判断题
  */
 class Judge extends Common
 {
 
-    //单选题页面
+    //判断题页面
     public function index()
     {
-        //获取单选题下对应的专业和科目信息
+        //获取判断题下对应的专业和科目信息
         $data = model('judge')->getAllData(1);
         $this->assign('data',$data);
         return $this->fetch();
     }
 
-    //单选题添加
+    //判断题添加
     public function add(){
         if (request()->isPost()) {
             $model = Db::name('judge');
@@ -43,7 +43,7 @@ class Judge extends Common
         }
     }
 
-    //单选题修改
+    //判断题修改
     public function edit(){
         if(request()->isPost()){
             $model = Db::name('judge');
@@ -72,7 +72,7 @@ class Judge extends Common
         }
     }
 
-    //单选题的删除
+    //判断题的删除
     public function del(){
         $model = Db::name('judge');
         $id = input('post.id/a');
@@ -86,15 +86,15 @@ class Judge extends Common
         }
     }
 
-    //单选题回收站
+    //判断题回收站
     public function trash(){
-        //获取单选题下对应的专业和科目信息
+        //获取判断题下对应的专业和科目信息
         $data = model('judge')->getAllData(0);
         $this->assign('data',$data);
         return $this->fetch();
     }
 
-    //单选题回收站单选题的恢复
+    //判断题回收站判断题的恢复
     public function recover(){
         $model = Db::name('judge');
         $id = input('post.id/a');
@@ -109,7 +109,7 @@ class Judge extends Common
         }
     }
 
-    //单选题回收站单选题彻底删除
+    //判断题回收站判断题彻底删除
     public function remove(){
         $model = Db::name('judge');
         $id = input('post.id');

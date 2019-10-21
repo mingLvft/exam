@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\judge\edit.html";i:1569752402;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\judge\edit.html";i:1571211691;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -36,7 +36,7 @@
                     <div class="layui-form-item">
                         <label for="desc" class="layui-form-label">题目</label>
                         <div class="layui-input-block">
-                            <textarea placeholder="请输入题目" id="desc" name="name" lay-verify="required" class="layui-textarea"><?php echo $data['name']; ?> </textarea>
+                            <textarea placeholder="请输入题目" id="desc" name="judge_name" lay-verify="required" class="layui-textarea"><?php echo $data['judge_name']; ?> </textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">

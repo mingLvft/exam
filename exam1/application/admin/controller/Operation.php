@@ -3,21 +3,21 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Db;
 /*
- * 单选题
+ * 操作题
  */
 class Operation extends Common
 {
 
-    //单选题页面
+    //操作题页面
     public function index()
     {
-        //获取单选题下对应的专业和科目信息
+        //获取操作题下对应的专业和科目信息
         $data = model('operation')->getAllData(1);
         $this->assign('data',$data);
         return $this->fetch();
     }
 
-    //单选题添加
+    //操作题添加
     public function add(){
         if (request()->isPost()) {
             $model = Db::name('operation');
@@ -43,7 +43,7 @@ class Operation extends Common
         }
     }
 
-    //单选题修改
+    //操作题修改
     public function edit(){
         if(request()->isPost()){
             $model = Db::name('operation');
@@ -72,7 +72,7 @@ class Operation extends Common
         }
     }
 
-    //单选题的删除
+    //操作题的删除
     public function del(){
         $model = Db::name('operation');
         $id = input('post.id/a');
@@ -86,15 +86,15 @@ class Operation extends Common
         }
     }
 
-    //单选题回收站
+    //操作题回收站
     public function trash(){
-        //获取单选题下对应的专业和科目信息
+        //获取操作题下对应的专业和科目信息
         $data = model('operation')->getAllData(0);
         $this->assign('data',$data);
         return $this->fetch();
     }
 
-    //单选题回收站单选题的恢复
+    //操作题回收站操作题的恢复
     public function recover(){
         $model = Db::name('operation');
         $id = input('post.id/a');
@@ -109,7 +109,7 @@ class Operation extends Common
         }
     }
 
-    //单选题回收站单选题彻底删除
+    //操作题回收站操作题彻底删除
     public function remove(){
         $model = Db::name('operation');
         $id = input('post.id');

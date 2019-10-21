@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\role\edit.html";i:1571285578;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\role\edit.html";i:1571304093;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -52,7 +52,7 @@
                             <td>
                                 <div class="layui-input-block">
                                     <?php if(is_array($rule) || $rule instanceof \think\Collection || $rule instanceof \think\Paginator): $i = 0; $__LIST__ = $rule;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;if($vo['parent_id'] != '0'): ?>
-                                    <input name="rule[]" lay-skin="primary" <?php if(in_array(($vo['id']), is_array($data['rule_id'])?$data['rule_id']:explode(',',$data['rule_id']))): ?>checked=""<?php endif; ?> type="checkbox" value="<?php echo $vo['id']; ?>" title="<?php echo $vo['rule_name']; ?>">
+                                    <input name="rule[]" class="<?php echo $vo['controller_name']; ?>" lay-skin="primary" <?php if(in_array(($vo['id']), is_array($data['rule_id'])?$data['rule_id']:explode(',',$data['rule_id']))): ?>checked=""<?php endif; ?> type="checkbox" value="<?php echo $vo['id']; ?>" title="<?php echo $vo['rule_name']; ?>">
                                     <?php endif; endforeach; endif; else: echo "" ;endif; ?>
                                 </div>
                             </td>

@@ -28,6 +28,7 @@ class Admin extends Model{
         $data['add_time'] = date("Y-m-d H:i:s");
         //删除字段role
         unset($data['role']);
+//        $data['password'] = md5($data['password']);
         //insertGetId方法新增数据并返回主键值
         $id = $this->insertGetId($data);
         return $id;

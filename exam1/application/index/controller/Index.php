@@ -1,5 +1,8 @@
 <?php
 namespace app\index\controller;
+use app\admin\model\Subject;
+use think\Session;
+use think\Cookie;
 use think\Db;
 class Index
 {
@@ -33,15 +36,20 @@ class Index
         //获取科目id
         $subject_id = $data['subject_id'];
         //获取单选题
-        $single = Db::name('single')->field('right_key,status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        $single = Db::name('single')->field('right_key,status,major_id,subject_id,add_time',true)->where("status = 1 and major_id= $major_id and subject_id in ($subject_id)")->select()->toArray();
         //多选题
-        $selection = Db::name('selection')->field('right_key,status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        $selection = Db::name('selection')->field('right_key,status,major_id,subject_id,add_time',true)->where("status = 1 and major_id= $major_id and subject_id in ($subject_id)")->select()->toArray();
         //判断题
-        $judge = Db::name('judge')->field('right_key,status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        $judge = Db::name('judge')->field('right_key,status,major_id,subject_id,add_time',true)->where("status = 1 and major_id= $major_id and subject_id in ($subject_id)")->select()->toArray();
         //操作题
-        $operation = Db::name('operation')->field('status,major_id,subject_id,add_time',true)->where("major_id= $major_id and subject_id in ($subject_id)")->select();
+        $operation = Db::name('operation')->field('status,major_id,subject_id,add_time',true)->where("status = 1 and major_id= $major_id and subject_id in ($subject_id)")->select()->toArray();
+        //打乱数组
+        shuffle($single);
+        shuffle($selection);
+        shuffle($judge);
+        shuffle($operation);
         return json(['code'=>1,'msg'=>'开始考试','single'=>$single,
-            'selection'=>$selection,'judge'=>$judge,'operation'=>$operation]);
+            'selection'=>$selection,'judge'=>$judge,'operation'=>$operation,'subject_id'=>$subject_id]);
     }
 
     // 答题 进入下一题  需要缓存到文件
@@ -50,22 +58,107 @@ class Index
     }
 
     //评分
-    public function star(){
+    public function commitQuestion(){
+        //获取cookie信息
+        $admin = Cookie::get('admin');
+        $admin = json_decode($admin);
         $data = input('post.');
-        //判断题型
-        switch ($data['xx']){
-            case 'single':
-                
-                break;
-            case 'selection':
-
-                break;
-            case 'judge':
-
-                break;
-            case 'operation':
-
-                break;
+        $subject_id = $data['subject_id'];
+        //格式化json
+        $data = json_decode($data["questions"]);
+        //获取单选题答案
+        $single_value = Db::name('single')->field('id,right_key')->where('status',1)->select();
+        foreach ($single_value as $key => $value){
+            $single[$value['id']] = $value['right_key'];
+        }
+        //获取多选题答案
+        $selection_value = Db::name('selection')->field('id,right_key')->where('status',1)->select();
+        foreach ($selection_value as $key => $value){
+            //字符串转数组（分隔符）为了去掉 '.'号
+            $str = explode(',',$value['right_key']);
+            //数组转字符串
+            $str = implode('',$str);
+            //字符串转数组 （方便排序）
+            $arr = str_split($str);
+            //字母排序 降序
+            asort($arr);
+            //数组转字符串
+            $str = implode('',$arr);
+            $selection[$value['id']] = $str;
+        }
+        //获取判断题答案
+        $judge_value = Db::name('judge')->field('id,right_key')->where('status',1)->select();
+        foreach ($judge_value as $key => $value){
+            $judge[$value['id']] = $value['right_key'];
+        }
+        //循环提交的答案
+        foreach ($data as $key => $value){
+            $id = $data[$key]->id; //提交的题号
+            $right_key = $data[$key]->answer;  //提交的答案
+            //判断题型
+            switch ($data[$key]->type){
+                case 1:   //判断题   拼接提交答案
+                    $answer_judge[$id] = $right_key;
+                    break;
+                case 2:   //单选题  拼接提交答案
+                    $answer_single[$id] = $right_key;
+                    break;
+                case 3:   //多选题  拼接提交答案 （转数组）
+                    $str = implode('',$right_key);
+                    //字符串转数组 （方便排序）
+                    $arr = str_split($str);
+                    //字母排序 降序
+                    asort($arr);
+                    //数组转字符串
+                    $str = implode('',$arr);
+                    $answer_selection[$id] = $str;
+                    break;
+                case 4:   //操作题  提交答案
+                    $answer_operation[$id] = $right_key;
+                    break;
+            }
+        }
+        //判断分数(答对题数)
+        $judge_count = count(array_intersect_assoc($judge,$answer_judge));
+        $single_count = count(array_intersect_assoc($single,$answer_single));
+        $selection_count = count(array_intersect_assoc($selection,$answer_selection));
+        //总分
+        $count = $judge_count*5+$single_count*3+$selection_count*3;
+        //拼接提交数据
+        foreach($answer_judge as $key => $value){
+            $commit1[] = 'judge'.$key.'-'.$value;
+            $commit_judge = implode(',',$commit1);
+        }
+        foreach($answer_single as $key => $value){
+            $commit2[] = 'single'.$key.'-'.$value;
+            $commit_single = implode(',',$commit2);
+        }
+        foreach($answer_selection as $key => $value){
+            $commit2[] = 'selection'.$key.'-'.$value;
+            $commit_selection = implode(',',$commit2);
+        }
+        foreach($answer_operation as $key => $value){
+            $commit3[] = 'operation'.$key.'-'.$value;
+            $commit_operation = implode(',',$commit3);
+        }
+        $data = [
+            'single' => $commit_single,
+            'selection' => $commit_selection,
+            'judge' => $commit_judge,
+            'operation' => $commit_operation,
+            'username' => $admin->username,
+            'class_name' => $admin->class_name,
+            'major_id' => $admin->major_id,
+            'subject_id' => $subject_id,
+            'add_time' => date('Y-m-d H:i:s'),
+            'scroe' => $count,
+        ];
+        //提交的数据 到数据库
+        $res = Db::name('topic')->insert($data);
+        if($res){
+            return json(['code'=>'1','msg'=>'提交成功']);
+        }else{
+            return json(['code'=>'0','msg'=>'提交失败']);
         }
     }
 }

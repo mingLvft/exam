@@ -8,14 +8,11 @@ use think\Db;
 class Students extends Common{
     //学生列表
     public function index(){
-//        $qq = "sinlge-1";
-//        explode('-',$qq);
-//        dump($qq);die;
         $model = Db::name('students');
         //获取数据总条数 实现分页
         $count = $model->where("status",1)->count();
         $data = $model->alias('a')->field('a.*,b.major_name')
-            ->join('em_major b','a.major_id=b.id')->where("a.status",1)->paginate(20,$count);
+            ->join('em_major b','a.major_id=b.id')->where("a.status",1)->order('id')->paginate(20,$count);
         $this->assign('data',$data);
         return $this->fetch();
     }
