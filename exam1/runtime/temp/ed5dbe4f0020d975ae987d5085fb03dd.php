@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\index\welcome.html";i:1569552765;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:85:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\index\welcome.html";i:1571705676;}*/ ?>
 <!DOCTYPE html>
 <html class="x-admin-sm">
     <head>
@@ -24,7 +24,7 @@
                     <div class="layui-card">
                         <div class="layui-card-body ">
                             <blockquote class="layui-elem-quote">欢迎管理员：
-                                <span class="x-red">test</span>！当前时间:2018-04-25 20:50:53
+                                <span class="x-red"><?php echo \think\Cookie::get('username'); ?></span>！当前时间:2018-04-25 20:50:53
                             </blockquote>
                         </div>
                     </div>

@@ -10,10 +10,12 @@
 // +----------------------------------------------------------------------
 use think\Route;
 
-Route::rule('api/login', 'index/index/login', 'get | post');        //学生登陆路由
-Route::rule('api/changePassword', 'index/index/changePassword', 'post');      //修改密码路由
-Route::rule('api/getQuestion', 'index/index/getQuestion', 'get | post');      //开始考试路由
-Route::rule('api/commitQuestion', 'index/index/commitQuestion', 'get | post');      //提交考试路由
+Route::rule('api/login', 'api/index/login', 'get | post');        //学生登陆路由
+Route::rule('api/changePassword', 'api/index/changePassword', 'post');      //修改密码路由
+Route::rule('api/getQuestion', 'api/index/getQuestion', 'get | post');      //开始考试路由
+Route::rule('api/commitQuestion', 'api/index/commitQuestion', 'get | post');      //提交考试路由
+Route::rule('api/getGrade', 'api/index/getGrade', 'get');      //请求成绩
+Route::rule('api/getUserinfo', 'api/index/getUserinfo', 'get');      //请求成绩
 
 $origin = isset($_SERVER['HTTP_ORIGIN'])? $_SERVER['HTTP_ORIGIN'] : '';
 

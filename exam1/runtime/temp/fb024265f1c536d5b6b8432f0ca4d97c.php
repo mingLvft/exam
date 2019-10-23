@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\single\index.html";i:1571211842;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\single\index.html";i:1571720209;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -74,12 +74,12 @@
                             <button type="button" class="layui-btn" id="myfile">
                                 选择文件：<i class="layui-icon">&#xe67c;</i>导入
                             </button>
+                            <button type="button" class="layui-btn" id="upload-bth">上传</button>
                             <a href="<?php echo url('Single/export'); ?>">
                             <button type="button" class="layui-btn" >
                                 <i class="layui-icon">&#xe67c;</i>导出
                             </button>
                             </a>
-                            <button type="button" class="layui-btn" id="upload-bth">上传</button>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form" lay-size="sm">

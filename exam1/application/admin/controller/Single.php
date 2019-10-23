@@ -233,7 +233,7 @@ class Single extends Common
                 $data = [];
                 $i=0;
                 foreach($excel_array as $k=>$v) {
-                    $data[$k]['name'] = $v[0];
+                    $data[$k]['single_name'] = $v[0];
                     $data[$k]['A'] = $v[1];
                     $data[$k]['B'] = $v[2];
                     $data[$k]['C'] = $v[3];

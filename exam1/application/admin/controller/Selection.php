@@ -94,7 +94,7 @@ class Selection extends Common
         return $this->fetch();
     }
 
-    //多选题回收站多选题的恢复
+    //多选题回收站的恢复
     public function recover(){
         $model = Db::name('selection');
         $id = input('post.id/a');
@@ -109,7 +109,7 @@ class Selection extends Common
         }
     }
 
-    //多选题回收站多选题彻底删除
+    //多选题回收站彻底删除
     public function remove(){
         $model = Db::name('selection');
         $id = input('post.id');

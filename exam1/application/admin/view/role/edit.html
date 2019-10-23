@@ -24,7 +24,7 @@
                             <td>
                                 {volist name="rule" id="vo"}
                                 {eq name="vo.parent_id" value="0"}
-                                <input type="checkbox" name="rule[]"  {in name="vo.id" value="$data.rule_id"}checked=""{/in} lay-skin="primary" value="{$vo.id}" lay-filter="father" title="{$vo.rule_name}">
+                                <input type="checkbox" name="rule[]" class="{$vo.controller_name}" {in name="vo.id" value="$data.rule_id"}checked=""{/in} lay-skin="primary" value="{$vo.id}" lay-filter="father" title="{$vo.rule_name}">
                                 {/eq}
                                 {/volist}
                             </td>
