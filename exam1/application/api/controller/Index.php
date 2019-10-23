@@ -54,7 +54,12 @@ class Index
         shuffle($selection);
         shuffle($judge);
         shuffle($operation);
-        //返回是否考试状态  成绩库 已有成绩   判断身份证专业科目
+////        //获取点击开始时 当前时间
+//        $time = date('Y-m-d H:i:s');
+////        //日期转换为时间戳
+//        $time = strtotime($time);
+//        dump($time);die;
+        //返回是否考试状态  成绩库 已有成绩   判断身份证专业科目  status 1为删除状态正常   数据库有成绩需返回已考试
         $exam_status = Db::name('topic')->where('status = 1 and id_card='.$admin['id_card'].' and major_id='.$major_id.' and subject_id='.$subject_id)->find();
         if($exam_status){
             // 返回状态已经考试过了
@@ -89,6 +94,7 @@ class Index
                 'subject_id' => $subject_id,
                 'add_time' => date('Y-m-d H:i:s'),
                 'scroe' => 0,
+                'not_read' => 0
             ];
             //提交的数据 到数据库
             $res = Db::name('topic')->insert($data);
@@ -97,117 +103,11 @@ class Index
             }else{
                 return json(['code'=>'0','msg'=>'判断作弊提交失败']);
             }
-        }elseif($data['error'] == 2){
-            //判断超时交卷
-            //接受前端数据
-            $data = input('post.');
-            $subject_id = $data['subject_id'];
-            //格式化json
-            $data = json_decode($data["questions"]);
-            //循环提交的答案
-            foreach ($data as $key => $value){
-                $id = $data[$key]->id; //提交的题号
-                $right_key = isset($data[$key]->answer) ? $data[$key]->answer : '空';  //提交的答案
-                //判断题型
-                switch ($data[$key]->type){
-                    case 1:   //判断题   拼接提交答案
-                        $answer_judge[$id] = $right_key;
-                        break;
-                    case 2:   //单选题  拼接提交答案
-                        $answer_single[$id] = $right_key;
-                        break;
-                    case 3:   //多选题  拼接提交答案 （转数组）
-                        $str = implode('',$right_key);
-                        //字符串转数组 （方便排序）
-                        $arr = str_split($str);
-                        //字母排序 降序
-                        asort($arr);
-                        //数组转字符串
-                        $str = implode('',$arr);
-                        $answer_selection[$id] = $str;
-                        break;
-                    case 4:   //操作题  提交答案
-                        $answer_operation[$id] = $right_key;
-                        break;
-                }
-            }
-
-            if($answer_judge){
-                //获取判断题答案
-                $judge_value = Db::name('judge')->field('id,right_key')->where('status',1)->select();
-                foreach ($judge_value as $key => $value){
-                    $judge[$value['id']] = $value['right_key'];
-                }
-            }
-            if ($answer_single){
-                //获取单选题答案
-                $single_value = Db::name('single')->field('id,right_key')->where('status',1)->select();
-                foreach ($single_value as $key => $value){
-                    $single[$value['id']] = $value['right_key'];
-                }
-            }
-            if ($answer_selection){
-                //获取多选题答案
-                $selection_value = Db::name('selection')->field('id,right_key')->where('status',1)->select();
-                foreach ($selection_value as $key => $value){
-                    //字符串转数组（分隔符）为了去掉 '.'号
-                    $str = explode(',',$value['right_key']);
-                    //数组转字符串
-                    $str = implode('',$str);
-                    //字符串转数组 （方便排序）
-                    $arr = str_split($str);
-                    //字母排序 降序
-                    asort($arr);
-                    //数组转字符串
-                    $str = implode('',$arr);
-                    $selection[$value['id']] = $str;
-                }
-            }
-            //判断分数(答对题数)
-            $judge_count = count(array_intersect_assoc($judge,$answer_judge));
-            $single_count = count(array_intersect_assoc($single,$answer_single));
-            $selection_count = count(array_intersect_assoc($selection,$answer_selection));
-            //总分
-            $count = $judge_count*5+$single_count*3+$selection_count*3;
-            //拼接提交答案数据
-            foreach($answer_judge as $key => $value){
-                $commit1[] = 'judge'.$key.'-'.$value;
-                $commit_judge = implode(',',$commit1);
-            }
-            foreach($answer_single as $key => $value){
-                $commit2[] = 'single'.$key.'-'.$value;
-                $commit_single = implode(',',$commit2);
-            }
-            foreach($answer_selection as $key => $value){
-                $commit3[] = 'selection'.$key.'-'.$value;
-                $commit_selection = implode(',',$commit3);
-            }
-            foreach($answer_operation as $key => $value){
-                $commit4[] = 'operation'.$key.'-'.$value;
-                $commit_operation = implode(',',$commit4);
-            }
-            $data = [
-                'single' => $commit_single,
-                'selection' => $commit_selection,
-                'judge' => $commit_judge,
-                'operation' => $commit_operation,
-                'id_card' => $admin->id_card,
-                'username' => $admin->username,
-                'class_name' => $admin->class_name,
-                'major_id' => $admin->major_id,
-                'subject_id' => $subject_id,
-                'add_time' => date('Y-m-d H:i:s'),
-                'scroe' => $count,
-                'not_read' => 0
-            ];
-            //提交的数据 到数据库
-            $res = Db::name('topic')->insert($data);
-            if($res){
-                return json(['code'=>'1','msg'=>'超时自动交卷提交成功']);
-            }else{
-                return json(['code'=>'0','msg'=>'超时自动交卷提交失败']);
-            }
         }
+//        //判断超时交卷   提交答案用isset判断是否有答案
+//        //接受前端数据
+//        $data = input('post.');
+//        $subject_id = $data['subject_id'];
         //格式化json
         $data = json_decode($data["questions"]);
         //获取单选题答案
@@ -238,7 +138,7 @@ class Index
         //循环提交的答案
         foreach ($data as $key => $value){
             $id = $data[$key]->id; //提交的题号
-            $right_key = $data[$key]->answer;  //提交的答案
+            $right_key = isset($data[$key]->answer) ? $data[$key]->answer : '空';  //提交的答案
             //判断题型
             switch ($data[$key]->type){
                 case 1:   //判断题   拼接提交答案
@@ -248,20 +148,27 @@ class Index
                     $answer_single[$id] = $right_key;
                     break;
                 case 3:   //多选题  拼接提交答案 （转数组）
-                    $str = implode('',$right_key);
-                    //字符串转数组 （方便排序）
-                    $arr = str_split($str);
-                    //字母排序 降序
-                    asort($arr);
-                    //数组转字符串
-                    $str = implode('',$arr);
-                    $answer_selection[$id] = $str;
+                    //为空时传空
+                    if(!$right_key){
+                        $answer_selection[$id] = '空';
+                    }else{
+                        //数组转字符串
+                        $str = implode('',$right_key);
+                        //字符串转数组 （方便排序）
+                        $arr = str_split($str);
+                        //字母排序 降序
+                        asort($arr);
+                        //数组转字符串
+                        $str = implode('',$arr);
+                        $answer_selection[$id] = $str;
+                    }
                     break;
                 case 4:   //操作题  提交答案
                     $answer_operation[$id] = $right_key;
                     break;
             }
         }
+
         //判断分数(答对题数)
         $judge_count = count(array_intersect_assoc($judge,$answer_judge));
         $single_count = count(array_intersect_assoc($single,$answer_single));
@@ -314,7 +221,7 @@ class Index
         $data = Db::name('topic')->alias('a')->field('a.scroe,a.not_read,b.major_name,c.subject_name')
             ->join('em_major b','a.major_id=b.id')
             ->join('em_subject c','a.subject_id=c.id')
-            ->where('id_card',$id_card)->select();
+            ->where('a.status = 1 and a.id_card='.$id_card)->select();
         if($data){
             return json(['code'=>1,'msg'=>'查询成功','scroe'=>$data]);
         }else{

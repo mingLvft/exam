@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 23/10/2019 11:29:14
+ Date: 23/10/2019 17:46:15
 */
 
 SET NAMES utf8mb4;
@@ -188,7 +188,7 @@ CREATE TABLE `em_rule`  (
   `is_show` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否导航菜单显示1  显示 0 不显示',
   `add_time` datetime NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_rule
@@ -252,7 +252,10 @@ INSERT INTO `em_rule` VALUES (56, '权限列表', 'admin', 'rule', 'index', 47, 
 INSERT INTO `em_rule` VALUES (57, '权限添加', 'admin', 'rule', 'add', 47, 0, '2019-10-17 10:06:33');
 INSERT INTO `em_rule` VALUES (58, '权限编辑', 'admin', 'rule', 'edit', 47, 0, '2019-10-17 10:06:47');
 INSERT INTO `em_rule` VALUES (59, '权限删除', 'admin', 'rule', 'del', 47, 0, '2019-10-17 10:07:14');
-INSERT INTO `em_rule` VALUES (60, '成绩管理', 'admin', 'scroe', 'index', 38, 1, '0000-00-00 00:00:00');
+INSERT INTO `em_rule` VALUES (60, '成绩管理列表', 'admin', 'scroe', 'index', 38, 1, '2019-10-23 14:40:31');
+INSERT INTO `em_rule` VALUES (61, '成绩回收站', 'admin', 'scroe', 'trash', 60, 1, '2019-10-23 14:40:34');
+INSERT INTO `em_rule` VALUES (62, '成绩回收站恢复', 'admin', 'scroe', 'recover', 60, 0, '2019-10-23 14:45:31');
+INSERT INTO `em_rule` VALUES (63, '成绩回收站删除', 'admin', 'scroe', 'remove', 60, 0, '2019-10-23 14:45:33');
 
 -- ----------------------------
 -- Table structure for em_selection
@@ -354,13 +357,13 @@ CREATE TABLE `em_students`  (
 -- ----------------------------
 INSERT INTO `em_students` VALUES (1, '123', '老李', '男', '123', 1000, '17软件3', 1, '校长', 1, '2019-09-27 23:50:53');
 INSERT INTO `em_students` VALUES (2, '151', '老狗', '女', '123', 1000, '17软件3', 4, '校长', 1, '2019-09-27 23:44:57');
-INSERT INTO `em_students` VALUES (3, '5165564564', '老金', '男', '123456', 1000, '17软件3', 3, '校长', 1, '2019-09-27 23:44:52');
-INSERT INTO `em_students` VALUES (4, '132353453453', '阿三', '女', '123456', 1000, '17软件3', 4, '校长', 1, '2019-09-28 00:16:24');
-INSERT INTO `em_students` VALUES (5, '1561512315654', '阿长', '男', '123456', 1000, '17软件3', 1, '校长', 1, '2019-09-28 00:15:42');
-INSERT INTO `em_students` VALUES (6, '5103120123123', '老李', '男', '123456', 1000, '17软件3', 2, '校长', 1, '2019-09-28 00:46:30');
-INSERT INTO `em_students` VALUES (7, '1515121231151', '老狗', '男', '123456', 1000, '17软件3', 1, '校长', 1, '2019-09-28 00:46:36');
-INSERT INTO `em_students` VALUES (8, '12312425235', '玩儿是', '男', '123456', 1000, '17软件3', 2, '校长', 1, '2019-09-28 00:53:33');
-INSERT INTO `em_students` VALUES (9, '51013212312', '阿萨德', '男', '123456', 1000, '17软件3', 1, '校长', 1, '2019-09-28 09:21:40');
+INSERT INTO `em_students` VALUES (3, '103', '老金', '男', '123', 1000, '17软件3', 3, '校长', 1, '2019-09-27 23:44:52');
+INSERT INTO `em_students` VALUES (4, '121', '阿三', '女', '123', 1000, '17软件3', 4, '校长', 1, '2019-09-28 00:16:24');
+INSERT INTO `em_students` VALUES (5, '321', '阿长', '男', '123', 1000, '17软件3', 1, '校长', 1, '2019-09-28 00:15:42');
+INSERT INTO `em_students` VALUES (6, '234', '老李', '男', '123', 1000, '17软件3', 2, '校长', 1, '2019-09-28 00:46:30');
+INSERT INTO `em_students` VALUES (7, '1234', '老狗', '男', '123', 1000, '17软件3', 1, '校长', 1, '2019-09-28 00:46:36');
+INSERT INTO `em_students` VALUES (8, '12342', '玩儿是', '男', '123', 1000, '17软件3', 2, '校长', 1, '2019-09-28 00:53:33');
+INSERT INTO `em_students` VALUES (9, '211', '阿萨德', '男', '123', 1000, '17软件3', 1, '校长', 1, '2019-09-28 09:21:40');
 
 -- ----------------------------
 -- Table structure for em_subject
@@ -405,12 +408,29 @@ CREATE TABLE `em_topic`  (
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态 0已删除的成绩 1未删除的成绩',
   `not_read` tinyint(4) NOT NULL COMMENT '1 为已经阅卷 0为未阅卷',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = MyISAM AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '提交试卷分数题库' ROW_FORMAT = Dynamic;
+) ENGINE = MyISAM AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '提交试卷分数题库' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of em_topic
 -- ----------------------------
-INSERT INTO `em_topic` VALUES (1, 'single13-C,single10-B,single14-B,single12-B,single11-C', 'selection2-BC,selection1-AB', 'judge5-1', 'operation2-阿萨德', '123', '老李', '17软件3', 1, 1, '2019-10-21 16:15:24', 9, 1, 1);
-INSERT INTO `em_topic` VALUES (40, 'single26-C,single29-空,single25-空,single27-空,single28-空', 'selection6-C', 'judge1-1', 'operation4-空', '151', '老狗', '17软件3', 4, 5, '2019-10-23 11:24:12', 5, 1, 0);
+INSERT INTO `em_topic` VALUES (1, 'single13-C,single10-B,single14-B,single12-B,single11-C', 'selection2-BC,selection1-AB', 'judge5-1', 'operation2-阿萨德', '123', '老李', '17软件3', 1, 1, '2019-10-21 16:15:24', 9, 0, 1);
+INSERT INTO `em_topic` VALUES (41, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '151', '老狗', '17软件3', 4, 5, '2019-10-23 14:58:30', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (40, 'single26-C,single29-空,single25-空,single27-空,single28-空', 'selection6-C', 'judge1-1', 'operation4-空', '151', '老狗', '17软件3', 4, 5, '2019-10-23 11:24:12', 5, 0, 0);
+INSERT INTO `em_topic` VALUES (42, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '151', '老狗', '17软件3', 4, 5, '2019-10-23 14:58:44', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (56, 'single21-空,single24-空,single22-空,single20-空,single23-空', 'selection5-', 'judge6-空', 'operation2-空', '123', '老李', '17软件3', 1, 4, '2019-10-23 16:50:10', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (55, 'single22-空,single20-空,single24-空,single21-空,single23-空', 'selection5-', 'judge6-空', 'operation2-空', '123', '老李', '17软件3', 1, 4, '2019-10-23 16:48:31', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (51, 'single25-空,single29-空,single26-空,single28-空,single27-空', 'selection6-', 'judge1-空', 'operation4-空', '151', '老狗', '17软件3', 4, 5, '2019-10-23 16:14:59', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (53, 'single21-空,single22-空,single23-空,single24-空,single20-空', 'selection5-', 'judge6-空', 'operation2-空', '123', '老李', '17软件3', 1, 4, '2019-10-23 16:45:00', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (49, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '151', '老狗', '17软件3', 4, 5, '2019-10-23 16:07:56', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (57, 'single22-空,single24-空,single23-空,single20-空,single21-空', 'selection5-', 'judge6-空', 'operation2-空', '123', '老李', '17软件3', 1, 4, '2019-10-23 16:51:46', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (58, 'single22-空,single23-空,single24-空,single20-空,single21-空', 'selection5-', 'judge6-空', 'operation2-空', '123', '老李', '17软件3', 1, 4, '2019-10-23 16:55:57', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (59, 'single23-空,single22-空,single21-空,single20-空,single24-空', 'selection5-', 'judge6-空', 'operation2-空', '123', '老李', '17软件3', 1, 4, '2019-10-23 16:56:46', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (60, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '123', '老李', '17软件3', 1, 4, '2019-10-23 17:05:37', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (61, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '123', '老李', '17软件3', 1, 4, '2019-10-23 17:07:40', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (62, 'single22-空,single21-空,single24-空,single23-空,single20-空', 'selection5-空', 'judge6-空', 'operation2-空', '123', '老李', '17软件3', 1, 4, '2019-10-23 17:11:43', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (64, 'single25-B,single28-C,single27-C,single26-C,single29-C', 'selection6-C', 'judge1-1', 'operation4-dasdas', '151', '老狗', '17软件3', 4, 5, '2019-10-23 17:28:56', 11, 0, 0);
+INSERT INTO `em_topic` VALUES (65, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '151', '老狗', '17软件3', 4, 5, '2019-10-23 17:32:15', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (66, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '151', '老狗', '17软件3', 4, 5, '2019-10-23 17:33:21', 0, 0, 0);
+INSERT INTO `em_topic` VALUES (67, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '123', '老李', '17软件3', 1, 4, '2019-10-23 17:43:11', 0, 1, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

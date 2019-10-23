@@ -48,10 +48,10 @@ class Scroe extends Controller{
             $data = $model->alias('a')->field('a.*,b.major_name,c.subject_name')
                 ->join('em_major b','a.major_id=b.id')
                 ->join('em_subject c','a.subject_id=c.id')->where('a.id',$id)->find();
-            //查询出原数据库成绩
+            //判断是否阅卷
             $info = $model->where('id',$data['id'])->select();
             if($info[0]['not_read'] == 1){
-                return json(array('status' => 0, 'msg' => '已经阅卷'));
+                $this->error('已经阅卷',url('scroe/index'));
             }
             $this->assign('data',$data);
             return $this->fetch();
@@ -86,7 +86,7 @@ class Scroe extends Controller{
 
     //成绩管理回收站的恢复
     public function recover(){
-        $model = Db::name('selection');
+        $model = Db::name('topic');
         $id = input('post.id/a');
         //转换成数组方便使用mysql in语法
         $id = implode(',',$id);
@@ -101,7 +101,7 @@ class Scroe extends Controller{
 
     //成绩管理回收站的彻底删除
     public function remove(){
-        $model = Db::name('selection');
+        $model = Db::name('topic');
         $id = input('post.id');
         $res = $model->where("id",$id)->delete();
         if ($res){
