@@ -33,7 +33,7 @@ class Role extends Model{
         return $id;
     }
 
-    //管理员修改
+    //角色修改
     public function updateRole($data){
         //删除字段role
         unset($data['rule']);

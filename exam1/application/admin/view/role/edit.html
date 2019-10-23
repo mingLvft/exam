@@ -124,14 +124,20 @@
             });
 
         form.on('checkbox(father)', function(data){
-
+            //获取 input框的 class值
+            var className = data.elem.className;
+            //字符串拆分成数组
+            var arr2 = className.split(",");
+            //循环 数组
+            $.each(arr2,function (key,val) {
             if(data.elem.checked){
-                $(data.elem).parent().siblings('td').find('input').prop("checked", true);
-                form.render(); 
+                $(data.elem).parent().siblings('td').find("."+val).prop("checked", true);
+                form.render();
             }else{
-               $(data.elem).parent().siblings('td').find('input').prop("checked", false);
-                form.render();  
+               $(data.elem).parent().siblings('td').find("."+val).prop("checked", false);
+                form.render();
             }
+            });
         });
           
           

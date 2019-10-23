@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\role\index.html";i:1571303220;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:82:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\role\index.html";i:1571827819;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -89,7 +89,7 @@
                                     <a title="编辑"  onclick="xadmin.open('编辑','<?php echo url('Role/edit'); ?>?id=<?php echo $vo['id']; ?>')" href="javascript:;">
                                       <i class="layui-icon">&#xe642;</i>
                                     </a>
-                                    <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                                    <a title="删除" onclick="member_del(this,'<?php echo $vo['id']; ?>')" href="javascript:;">
                                       <i class="layui-icon">&#xe640;</i>
                                     </a>
                                   </td>

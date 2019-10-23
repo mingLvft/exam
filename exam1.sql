@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 23/10/2019 17:46:15
+ Date: 23/10/2019 19:13:23
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `em_admin`  (
 -- ----------------------------
 -- Records of em_admin
 -- ----------------------------
-INSERT INTO `em_admin` VALUES (4, 'admin', '123456', 2147483647, 1, '2019-10-08 21:21:11');
+INSERT INTO `em_admin` VALUES (1, 'admin', '123456', 2147483647, 0, '2019-10-08 21:21:11');
 INSERT INTO `em_admin` VALUES (5, 'tom', '123456', 2147483647, 1, '2019-10-09 08:39:47');
 INSERT INTO `em_admin` VALUES (20, 'user', '123456', 153456454, 1, '2019-10-09 10:00:29');
 INSERT INTO `em_admin` VALUES (30, 'li', '123456', 1234564, 1, '2019-10-09 10:10:29');
@@ -49,20 +49,20 @@ DROP TABLE IF EXISTS `em_admin_role`;
 CREATE TABLE `em_admin_role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `admin_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户ID',
-  `role_id` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色ID',
+  `role_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_admin_role
 -- ----------------------------
-INSERT INTO `em_admin_role` VALUES (6, 20, '4,5');
-INSERT INTO `em_admin_role` VALUES (11, 30, '4,5');
-INSERT INTO `em_admin_role` VALUES (13, 32, '4,5');
-INSERT INTO `em_admin_role` VALUES (16, 4, '1');
-INSERT INTO `em_admin_role` VALUES (17, 5, '5');
-INSERT INTO `em_admin_role` VALUES (18, 35, '4,5');
-INSERT INTO `em_admin_role` VALUES (19, 36, '1,4,7');
+INSERT INTO `em_admin_role` VALUES (6, 20, '4');
+INSERT INTO `em_admin_role` VALUES (11, 30, '4');
+INSERT INTO `em_admin_role` VALUES (13, 32, '4');
+INSERT INTO `em_admin_role` VALUES (16, 1, '1');
+INSERT INTO `em_admin_role` VALUES (17, 5, '7');
+INSERT INTO `em_admin_role` VALUES (18, 35, '4');
+INSERT INTO `em_admin_role` VALUES (19, 36, '4,7,8');
 
 -- ----------------------------
 -- Table structure for em_judge
@@ -147,12 +147,12 @@ CREATE TABLE `em_role`  (
 -- ----------------------------
 -- Records of em_role
 -- ----------------------------
-INSERT INTO `em_role` VALUES (1, '超级管理员', '最高权限', 1, '2019-10-15 09:35:44');
+INSERT INTO `em_role` VALUES (1, '超级管理员', '最高权限', 0, '2019-10-15 09:35:44');
 INSERT INTO `em_role` VALUES (4, '学生管理员', '描述', 1, '2019-10-10 21:46:08');
-INSERT INTO `em_role` VALUES (5, '分类管理员', '描述', 1, '2019-10-10 21:46:11');
-INSERT INTO `em_role` VALUES (6, '专业管理员', '描述', 1, '2019-10-11 21:59:05');
-INSERT INTO `em_role` VALUES (7, '商品管理员', '描述、。', 1, '2019-10-11 22:14:33');
-INSERT INTO `em_role` VALUES (8, 'qq管理员', '啊', 1, '2019-10-17 12:08:30');
+INSERT INTO `em_role` VALUES (5, '分类管理员', '描述', 0, '2019-10-10 21:46:11');
+INSERT INTO `em_role` VALUES (6, '题库管理员', '描述', 1, '2019-10-11 21:59:05');
+INSERT INTO `em_role` VALUES (7, '权限管理员', '描述、。', 1, '2019-10-11 22:14:33');
+INSERT INTO `em_role` VALUES (8, '考试管理员', '啊', 1, '2019-10-17 12:08:30');
 
 -- ----------------------------
 -- Table structure for em_role_rule
@@ -168,11 +168,11 @@ CREATE TABLE `em_role_rule`  (
 -- ----------------------------
 -- Records of em_role_rule
 -- ----------------------------
-INSERT INTO `em_role_rule` VALUES (1, 6, '2,3,5,45');
-INSERT INTO `em_role_rule` VALUES (2, 7, '10,4,24,28');
+INSERT INTO `em_role_rule` VALUES (1, 6, '9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30');
+INSERT INTO `em_role_rule` VALUES (2, 7, '47,48,49,50,51,52,53,54,55,56,57,58,59');
 INSERT INTO `em_role_rule` VALUES (3, 5, '1,2,36,41');
-INSERT INTO `em_role_rule` VALUES (4, 4, '9,10,4,24,28,45');
-INSERT INTO `em_role_rule` VALUES (5, 8, '5,6,8,9,31');
+INSERT INTO `em_role_rule` VALUES (4, 4, '1,2,3,4,5,6,7,8');
+INSERT INTO `em_role_rule` VALUES (5, 8, '38,39,40,41,42,43,44,45,46,60,61,62,63');
 
 -- ----------------------------
 -- Table structure for em_rule
@@ -182,7 +182,7 @@ CREATE TABLE `em_rule`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `rule_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '权限名称',
   `module_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '模型名称',
-  `controller_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '控制器名称',
+  `controller_name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '控制器名称',
   `action_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '方法名称',
   `parent_id` int(11) NOT NULL DEFAULT 0 COMMENT '上级权限ID 0表示顶级权限',
   `is_show` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否导航菜单显示1  显示 0 不显示',
@@ -201,7 +201,7 @@ INSERT INTO `em_rule` VALUES (5, '学生删除', 'admin', 'students', 'del', 1, 
 INSERT INTO `em_rule` VALUES (6, '学生列表回收站', 'admin', 'students', 'trash', 2, 1, '2019-10-17 16:12:29');
 INSERT INTO `em_rule` VALUES (7, '学生列表回收站恢复', 'admin', 'students', 'recover', 2, 0, '2019-10-17 16:13:06');
 INSERT INTO `em_rule` VALUES (8, '学生列表回收站删除', 'admin', 'students', 'remove', 2, 0, '2019-10-17 16:13:31');
-INSERT INTO `em_rule` VALUES (9, '题库管理', 'admin', '#', '#', 0, 1, '2019-10-17 10:34:23');
+INSERT INTO `em_rule` VALUES (9, '题库管理', 'admin', 'single,selection,judge,operaction', '#', 0, 1, '2019-10-17 10:34:23');
 INSERT INTO `em_rule` VALUES (10, '单选题列表', 'admin', 'single', 'index', 9, 1, '2019-10-17 10:42:56');
 INSERT INTO `em_rule` VALUES (11, '单选题添加', 'admin', 'single', 'add', 9, 0, '2019-10-17 10:43:37');
 INSERT INTO `em_rule` VALUES (12, '单选题编辑', 'admin', 'single', 'edit', 9, 0, '2019-10-17 10:44:20');
@@ -230,7 +230,7 @@ INSERT INTO `em_rule` VALUES (34, '操作题删除', 'admin', 'operation', 'del'
 INSERT INTO `em_rule` VALUES (35, '操作题题回收站', 'admin', 'operation', 'trash', 31, 1, '2019-10-17 09:45:28');
 INSERT INTO `em_rule` VALUES (36, '操作题回收站恢复', 'admin', 'operation', 'recover', 31, 0, '2019-10-17 10:06:14');
 INSERT INTO `em_rule` VALUES (37, '操作题回收站删除', 'admin', 'operation', 'remove', 31, 0, '2019-10-10 22:38:11');
-INSERT INTO `em_rule` VALUES (38, '考试管理', 'admin', '#', '#', 0, 1, '2019-10-10 22:38:11');
+INSERT INTO `em_rule` VALUES (38, '考试管理', 'admin', 'major,subject,subject,scroe', '#', 0, 1, '2019-10-10 22:38:11');
 INSERT INTO `em_rule` VALUES (39, '专业列表', 'admin', 'major', 'index', 38, 1, '2019-10-15 10:05:55');
 INSERT INTO `em_rule` VALUES (40, '专业添加', 'admin', 'major', 'add', 38, 0, '2019-10-10 22:51:37');
 INSERT INTO `em_rule` VALUES (41, '专业编辑', 'admin', 'major', 'edit', 38, 0, '2019-10-10 22:52:11');
@@ -239,7 +239,7 @@ INSERT INTO `em_rule` VALUES (43, '科目列表', 'admin', 'subject', 'index', 3
 INSERT INTO `em_rule` VALUES (44, '科目添加', 'admin', 'subject', 'add', 38, 0, '2019-10-17 09:26:20');
 INSERT INTO `em_rule` VALUES (45, '科目编辑', 'admin', 'subject', 'edit', 38, 0, '2019-10-17 09:26:59');
 INSERT INTO `em_rule` VALUES (46, '科目删除', 'admin', 'subject', 'del', 38, 0, '2019-10-17 09:26:59');
-INSERT INTO `em_rule` VALUES (47, '管理员管理', 'admin', '#', '#', 0, 1, '2019-10-17 09:42:42');
+INSERT INTO `em_rule` VALUES (47, '权限管理', 'admin', 'admin,role,rule', '#', 0, 1, '2019-10-17 09:42:42');
 INSERT INTO `em_rule` VALUES (48, '管理员列表', 'admin', 'admin', 'index', 47, 1, '2019-10-17 09:45:28');
 INSERT INTO `em_rule` VALUES (49, '管理员添加', 'admin', 'admin', 'add', 47, 0, '2019-10-17 09:46:28');
 INSERT INTO `em_rule` VALUES (50, '管理员编辑', 'admin', 'admin', 'edit', 47, 0, '2019-10-17 09:50:52');
@@ -431,6 +431,6 @@ INSERT INTO `em_topic` VALUES (62, 'single22-空,single21-空,single24-空,singl
 INSERT INTO `em_topic` VALUES (64, 'single25-B,single28-C,single27-C,single26-C,single29-C', 'selection6-C', 'judge1-1', 'operation4-dasdas', '151', '老狗', '17软件3', 4, 5, '2019-10-23 17:28:56', 11, 0, 0);
 INSERT INTO `em_topic` VALUES (65, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '151', '老狗', '17软件3', 4, 5, '2019-10-23 17:32:15', 0, 0, 0);
 INSERT INTO `em_topic` VALUES (66, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '151', '老狗', '17软件3', 4, 5, '2019-10-23 17:33:21', 0, 0, 0);
-INSERT INTO `em_topic` VALUES (67, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '123', '老李', '17软件3', 1, 4, '2019-10-23 17:43:11', 0, 1, 0);
+INSERT INTO `em_topic` VALUES (67, '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '检测作弊，成绩不合格', '123', '老李', '17软件3', 1, 4, '2019-10-23 17:43:11', 1, 1, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -51,7 +51,7 @@ class Admin extends Model{
             return json(array('status'=>0,'msg'=>'用户名不存在'));
         }
         //判断用户是否被禁用
-        if($info['status'] == 0){
+        if($info['status'] == 0 && $info['id'] != 1){
             return json(array('status'=>0,'msg'=>'用户被禁用'));
         }
         if($data['password'] != $info['password']){

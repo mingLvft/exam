@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\role\edit.html";i:1571707863;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\role\edit.html";i:1571827515;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -143,14 +143,20 @@
             });
 
         form.on('checkbox(father)', function(data){
-
+            //获取 input框的 class值
+            var className = data.elem.className;
+            //字符串拆分成数组
+            var arr2 = className.split(",");
+            //循环 数组
+            $.each(arr2,function (key,val) {
             if(data.elem.checked){
-                $(data.elem).parent().siblings('td').find('input').prop("checked", true);
-                form.render(); 
+                $(data.elem).parent().siblings('td').find("."+val).prop("checked", true);
+                form.render();
             }else{
-               $(data.elem).parent().siblings('td').find('input').prop("checked", false);
-                form.render();  
+               $(data.elem).parent().siblings('td').find("."+val).prop("checked", false);
+                form.render();
             }
+            });
         });
           
           

@@ -48,11 +48,11 @@ class Scroe extends Controller{
             $data = $model->alias('a')->field('a.*,b.major_name,c.subject_name')
                 ->join('em_major b','a.major_id=b.id')
                 ->join('em_subject c','a.subject_id=c.id')->where('a.id',$id)->find();
-            //判断是否阅卷
-            $info = $model->where('id',$data['id'])->select();
-            if($info[0]['not_read'] == 1){
-                $this->error('已经阅卷',url('scroe/index'));
-            }
+//            //判断是否阅卷
+//            $info = $model->where('id',$data['id'])->select();
+//            if($info[0]['not_read'] == 1){
+//                $this->error('已经阅卷',url('scroe/index'));
+//            }
             $this->assign('data',$data);
             return $this->fetch();
         }

@@ -71,7 +71,7 @@
                                     <td>{eq name="vo.not_read" value="1"}<span style="color:green">已阅卷</span>{else/}<span style="color:deeppink">未阅卷</span>{/eq}</td>
                                     <td>{$vo.add_time}</td>
                                     <td class="td-manage">
-                                      <a title="阅卷" href="{:url('Scroe/scroe')}?id={$vo.id}" style="color: deeppink;">阅卷
+                                      <a title="阅卷" onclick="xadmin.open('阅卷','{:url('Scroe/scroe')}?id={$vo.id}',800,600)" href="javascript:;" style="color: deeppink;">阅卷
                                       </a>
                                       <a title="删除" onclick="member_del(this,'{$vo.id}')" href="javascript:;">
                                         <i class="layui-icon">&#xe640;</i>
@@ -124,6 +124,14 @@
 
       });
 
+      // function read(obj,id) {
+      //     $.ajax("{:url('Scroe/scroe')}",{id:id},function (data) {
+      //         if(data.status == 0){
+                  //已经阅卷
+                  // layer.msg(data.msg,{icon:2,time:1000});
+              // }
+          // })
+      // }
       
       /*用户-删除*/
       function member_del(obj,id){
@@ -141,6 +149,7 @@
               });
           });
       }
+
 
 
       function delAll (argument) {
