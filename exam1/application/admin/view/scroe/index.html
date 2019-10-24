@@ -50,7 +50,11 @@
                                     <th>班级</th>
                                     <th>专业</th>
                                     <th>科目</th>
-                                    <th>分数</th>
+                                    <th>单选题</th>
+                                    <th>多选题</th>
+                                    <th>判断题</th>
+                                    <th>操作题</th>
+                                    <th>总分</th>
                                     <th>状态</th>
                                     <th>考试时间</th>
                                     <th>操作</th>
@@ -67,6 +71,10 @@
                                     <td>{$vo.class_name}</td>
                                     <td>{$vo.major_name}</td>
                                     <td>{$vo.subject_name}</td>
+                                    <td>{$vo.single_scroe}分</td>
+                                    <td>{$vo.selection_scroe}分</td>
+                                    <td>{$vo.judge_scroe}分</td>
+                                    <td>{$vo.operation_scroe}分</td>
                                     <td>{$vo.scroe}分</td>
                                     <td>{eq name="vo.not_read" value="1"}<span style="color:green">已阅卷</span>{else/}<span style="color:deeppink">未阅卷</span>{/eq}</td>
                                     <td>{$vo.add_time}</td>

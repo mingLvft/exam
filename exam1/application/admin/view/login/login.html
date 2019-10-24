@@ -47,7 +47,6 @@
               //监听提交
               form.on('submit(login)', function(data){
                 $.post("{:url('Login/login')}",{data:data.field},function (data) {
-                    // layer.alert(data);return false;
                     // alert(888)
                     if(data.status == 1){
                         //登陆成功

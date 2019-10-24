@@ -32,6 +32,7 @@
                   <div class="layui-form-item">
                       <label class="layui-form-label"><span class="x-red">*</span>角色</label>
                       <div class="layui-input-block">
+                          <input type="checkbox" name="role[]" value="1" lay-skin="primary" title="超级管理员">
                           {volist name="data" id="vo"}
                         <input type="checkbox" name="role[]" value="{$vo.id}" lay-skin="primary" title="{$vo.role_name}">
                           {/volist}

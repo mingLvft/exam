@@ -8,12 +8,11 @@ use think\Db;
 class Students extends Common{
     //学生列表
     public function index(){
-        $model = Db::name('students');
-        //获取数据总条数 实现分页
-        $count = $model->where("status",1)->count();
-        $data = $model->alias('a')->field('a.*,b.major_name')
-            ->join('em_major b','a.major_id=b.id')->where("a.status",1)->order('id')->paginate(20,$count);
+        $data = model('Students')->getAllData(1);
         $this->assign('data',$data);
+        //获取专业信息
+        $major = db('major')->where("status",1)->select();
+        $this->assign('major',$major);
         return $this->fetch();
     }
 
@@ -117,6 +116,16 @@ class Students extends Common{
         }else{
             return json(array('status'=>0,'msg'=>'彻底删除失败'));
         }
+    }
+
+    //导入题
+    public function import(){
+        action('admin/Excel/impUser',['table_name'=>'em_students']);
+    }
+
+    //导出题
+    public function expData(){
+        action('admin/Download/out',['table_name'=>'em_students']);
     }
 
 }

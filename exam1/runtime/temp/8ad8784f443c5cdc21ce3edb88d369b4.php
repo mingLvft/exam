@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\admin\add.html";i:1571302960;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:81:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\admin\add.html";i:1571893024;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -55,6 +55,7 @@
                   <div class="layui-form-item">
                       <label class="layui-form-label"><span class="x-red">*</span>角色</label>
                       <div class="layui-input-block">
+                          <input type="checkbox" name="role[]" value="1" lay-skin="primary" title="超级管理员">
                           <?php if(is_array($data) || $data instanceof \think\Collection || $data instanceof \think\Paginator): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                         <input type="checkbox" name="role[]" value="<?php echo $vo['id']; ?>" lay-skin="primary" title="<?php echo $vo['role_name']; ?>">
                           <?php endforeach; endif; else: echo "" ;endif; ?>

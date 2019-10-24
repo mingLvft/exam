@@ -14,6 +14,12 @@ class Operation extends Common
         //获取操作题下对应的专业和科目信息
         $data = model('operation')->getAllData(1);
         $this->assign('data',$data);
+        //获取专业信息
+        $major = db('major')->where("status",1)->select();
+        $this->assign('major',$major);
+        //获取科目信息
+        $subject = db('subject')->where("status",1)->select();
+        $this->assign('subject',$subject);
         return $this->fetch();
     }
 
@@ -119,5 +125,29 @@ class Operation extends Common
         }else{
             return json(array('status'=>0,'msg'=>'彻底删除失败'));
         }
+    }
+
+    //二级联动 返回数据
+    public function major(){
+        $major_id = input('post.major_id');
+        $data = Db::name('subject')->where("major_id",$major_id)->select();
+        return json($data);
+    }
+
+    //导入题 二级联动
+    public function major1(){
+        $major_id = input('post.major_id1');
+        $data = Db::name('subject')->where("major_id",$major_id)->select();
+        return json($data);
+    }
+
+    //导入题
+    public function import(){
+        action('admin/Excel/impUser',['table_name'=>'em_operation']);
+    }
+
+    //导出题
+    public function expData(){
+        action('admin/Download/out',['table_name'=>'em_operation']);
     }
 }

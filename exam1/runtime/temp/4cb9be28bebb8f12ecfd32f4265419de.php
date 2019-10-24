@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:86:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\trash.html";i:1569659530;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:86:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\trash.html";i:1571899523;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -85,6 +85,7 @@
                                 <th>手机</th>
                                 <th>班级</th>
                                 <th>班主任</th>
+                                <th>地址</th>
                                 <th>添加时间</th>
                                 <th>状态</th>
                                 <th>操作</th></tr>
@@ -103,6 +104,7 @@
                                 <td><?php echo $vo['tel']; ?></td>
                                 <td><?php echo $vo['class_name']; ?></td>
                                 <td><?php echo $vo['class_teacher']; ?></td>
+                                <td><?php echo $vo['address']; ?></td>
                                 <td><?php echo $vo['add_time']; ?></td>
                               <td class="td-status">
                                 <span class="layui-btn layui-btn-danger layui-btn-mini">已删除</span>

@@ -20,15 +20,6 @@ class Major extends Common{
         if (request()->isPost()) {
             $model = Db::name('major');
             $data = input('post.data/a');
-            //验证器
-            $data_validate = [
-                'major_name' => $data['major_name'],
-            ];
-            $validate = Loader::validate('User');
-            if(!$validate->check($data_validate)){
-                return json(array('status' => 0, 'msg' => $validate->getError()));
-            }
-
             $data['add_time'] = date("Y-m-d H:i:s");
             $res = $model->insert($data);
             if ($res) {

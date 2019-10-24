@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:85:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\edit.html";i:1571125592;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:85:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\edit.html";i:1571899610;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -89,6 +89,12 @@
                             <span class="x-red">*</span>班主任</label>
                         <div class="layui-input-inline">
                             <input type="text" id="L_username" name="class_teacher" value="<?php echo $data['class_teacher']; ?>" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="L_username" class="layui-form-label">
+                            <span class="x-red">*</span>地址</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="L_username" name="address" value="<?php echo $data['address']; ?>" required="" lay-verify="required" autocomplete="off" class="layui-input"></div>
                     </div>
                     <div class="layui-form-item">
                         <label for="L_repass" class="layui-form-label"></label>

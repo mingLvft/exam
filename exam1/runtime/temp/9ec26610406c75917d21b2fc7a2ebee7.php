@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:86:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\index.html";i:1571125193;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:86:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\students\index.html";i:1571918260;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -51,16 +51,24 @@
                                     <input type="text" name="username"  placeholder="请输入学生姓名" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入身份证" autocomplete="off" class="layui-input">
+                                    <input type="text" name="id_card"  placeholder="请输入身份证" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入电话号码" autocomplete="off" class="layui-input">
+                                    <input type="text" name="tel"  placeholder="请输入电话号码" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入班级" autocomplete="off" class="layui-input">
+                                    <input type="text" name="class_name"  placeholder="请输入班级" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入班主任" autocomplete="off" class="layui-input">
+                                    <select name="major_id" lay-filter="major" id="major_id">
+                                        <option value="">请选择一个专业</option>
+                                        <?php if(is_array($major) || $major instanceof \think\Collection || $major instanceof \think\Paginator): $i = 0; $__LIST__ = $major;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                        <option value="<?php echo $vo['id']; ?>" <?php if(\think\Request::instance()->get('major_id') == $vo['id']): ?>selected<?php endif; ?>><?php echo $vo['major_name']; ?></option>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </select>
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <input type="text" name="class_teacher"  placeholder="请输入班主任" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -70,12 +78,23 @@
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加','<?php echo url('Students/add'); ?>',600,400)"><i class="layui-icon"></i>添加</button>
-                            <button type="button" class="layui-btn" id="test1">
-                                <i class="layui-icon">&#xe67c;</i>导入学生
-                            </button>
-                            <button type="button" class="layui-btn" id="test1">
-                                <i class="layui-icon">&#xe67c;</i>导出学生
-                            </button>
+                            <form  class="layui-form layui-col-space5" style="display: inline-block" name="form1" action="<?php echo url('Students/import'); ?>" enctype="multipart/form-data" href="javascript:;" method="post" id="import">
+                                <div class="layui-inline layui-show-xs-block">
+                                    <select name="major_id1" lay-filter="major1" id="major_id1"  >
+                                        <option value="">请选择一个专业</option>
+                                        <?php if(is_array($major) || $major instanceof \think\Collection || $major instanceof \think\Paginator): $i = 0; $__LIST__ = $major;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                        <option value="<?php echo $vo['id']; ?>" <?php if(\think\Request::instance()->get('major_id') == $vo['id']): ?>selected<?php endif; ?>><?php echo $vo['major_name']; ?></option>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </select>
+                                </div>
+                                <input type="file" name="name" id="file" value=""/>
+                                <input type="submit" value="提交"/>
+                            </form>
+                            <a href="<?php echo url('Students/expData'); ?>">
+                                <button type="button" class="layui-btn" >
+                                    <i class="layui-icon">&#xe67c;</i>导出学生信息
+                                </button>
+                            </a>
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form" lay-size="sm">
@@ -93,6 +112,7 @@
                                     <th>班级</th>
                                     <th>专业</th>
                                     <th>班主任</th>
+                                    <th>地址</th>
                                     <th>添加时间</th>
                                     <th>状态</th>
                                     <th>操作</th></tr>
@@ -112,6 +132,7 @@
                                     <td><?php echo $vo['class_name']; ?></td>
                                     <td><?php echo $vo['major_name']; ?></td>
                                     <td><?php echo $vo['class_teacher']; ?></td>
+                                    <td><?php echo $vo['address']; ?></td>
                                     <td><?php echo $vo['add_time']; ?></td>
                                     <td class="td-status">
                                       <span class="layui-btn layui-btn-normal layui-btn-mini">正常</span></td>

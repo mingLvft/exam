@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\judge\index.html";i:1571211691;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\judge\index.html";i:1571885504;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -42,19 +42,26 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5">
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" value="<?php echo \think\Request::instance()->get('start'); ?>" name="start" id="start">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
+                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" value="<?php echo \think\Request::instance()->get('end'); ?>" name="end" id="end">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入编号" autocomplete="off" class="layui-input">
+                                    <input type="text" name="id"  placeholder="请输入编号" value="<?php echo \think\Request::instance()->get('id'); ?>" autocomplete="off" class="layui-input">
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入专业" autocomplete="off" class="layui-input">
+                                    <select name="major_id" lay-filter="major" id="major_id">
+                                        <option value="">请选择一个专业</option>
+                                        <?php if(is_array($major) || $major instanceof \think\Collection || $major instanceof \think\Paginator): $i = 0; $__LIST__ = $major;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                        <option value="<?php echo $vo['id']; ?>" <?php if(\think\Request::instance()->get('major_id') == $vo['id']): ?>selected<?php endif; ?>><?php echo $vo['major_name']; ?></option>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </select>
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入科目" autocomplete="off" class="layui-input">
+                                    <select name="subject_id" id="subject_id">
+                                        <option value="">请选择一个科目</option>
+                                    </select>
                                 </div>
                                 <div class="layui-inline layui-show-xs-block">
                                     <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
@@ -64,12 +71,29 @@
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加','<?php echo url('Judge/add'); ?>',800,600)"><i class="layui-icon"></i>添加</button>
-                            <button type="button" class="layui-btn" id="test1">
-                                <i class="layui-icon">&#xe67c;</i>导入题库
-                            </button>
-                            <button type="button" class="layui-btn" id="test1">
-                                <i class="layui-icon">&#xe67c;</i>导出题库
-                            </button>
+                            <form  class="layui-form layui-col-space5" style="display: inline-block" name="form1" action="<?php echo url('Judge/import'); ?>" enctype="multipart/form-data" href="javascript:;" method="post" id="import">
+                                <div class="layui-inline layui-show-xs-block">
+                                    <select name="major_id1" lay-filter="major1" id="major_id1"  >
+                                        <option value="">请选择一个专业</option>
+                                        <?php if(is_array($major) || $major instanceof \think\Collection || $major instanceof \think\Paginator): $i = 0; $__LIST__ = $major;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                        <option value="<?php echo $vo['id']; ?>" <?php if(\think\Request::instance()->get('major_id') == $vo['id']): ?>selected<?php endif; ?>><?php echo $vo['major_name']; ?></option>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </select>
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <select name="subject_id1" id="subject_id1"  >
+                                        <option value="">请选择一个科目</option>
+                                    </select>
+                                </div>
+                                <input type="file" name="name" id="file" value=""/>
+                                <input type="submit" value="提交"/>
+                            </form>
+                            <a href="<?php echo url('Judge/expData'); ?>">
+                                <button type="button" class="layui-btn" >
+                                    <i class="layui-icon">&#xe67c;</i>导出判断题
+                                </button>
+                            </a>
+
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form" lay-size="sm">
@@ -167,6 +191,35 @@
           elem: '#end' //指定元素
         });
 
+          //选择专业二级联动
+          form.on('select(major)',function (data) {
+              var major_id = $('#major_id').val();   //获取专业表id
+              $.post("<?php echo url('Judge/major'); ?>",{major_id:major_id},function (data) {
+                  $("#subject_id").empty();    //清空#subject_id里的元素
+                  $.each(data,function (key,val) {
+                      $("#subject_id").append("<option value="+val.id+">"+val.subject_name+"</option>");
+                  })
+                  form.render('select');  //渲染
+              });
+          })
+
+          //导入题   选择专业科目二级联动
+
+          form.on('select(major1)',function (data) {
+
+              var major_id1 = $('#major_id1').val();   //获取专业表id
+
+              $.post("<?php echo url('Judge/major1'); ?>",{major_id1:major_id1},function (data) {
+                  $("#subject_id1").empty();    //清空#subject_id里的元素
+
+                  $.each(data,function (key,val) {
+
+                      $("#subject_id1").append("<option value="+val.id+">"+val.subject_name+"</option>");
+
+                  });
+                  form.render('select');  //渲染
+              });
+          });
 
       });
 

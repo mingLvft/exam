@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\single\index.html";i:1571720209;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:2:{s:84:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\single\index.html";i:1571880415;s:73:"D:\phpStudy\PHPTutorial\WWW\exam1\application\admin\view\public\base.html";i:1569555673;}*/ ?>
 <!doctype html>
 <html class="x-admin-sm">
 <head>
@@ -71,15 +71,29 @@
                         <div class="layui-card-header">
                             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加','<?php echo url('Single/add'); ?>',800,600)"><i class="layui-icon"></i>添加</button>
-                            <button type="button" class="layui-btn" id="myfile">
-                                选择文件：<i class="layui-icon">&#xe67c;</i>导入
-                            </button>
-                            <button type="button" class="layui-btn" id="upload-bth">上传</button>
-                            <a href="<?php echo url('Single/export'); ?>">
-                            <button type="button" class="layui-btn" >
-                                <i class="layui-icon">&#xe67c;</i>导出
-                            </button>
+                            <form  class="layui-form layui-col-space5" style="display: inline-block" name="form1" action="<?php echo url('Single/import'); ?>" enctype="multipart/form-data" href="javascript:;" method="post" id="import">
+                                <div class="layui-inline layui-show-xs-block">
+                                    <select name="major_id1" lay-filter="major1" id="major_id1"  >
+                                        <option value="">请选择一个专业</option>
+                                        <?php if(is_array($major) || $major instanceof \think\Collection || $major instanceof \think\Paginator): $i = 0; $__LIST__ = $major;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+                                        <option value="<?php echo $vo['id']; ?>" <?php if(\think\Request::instance()->get('major_id') == $vo['id']): ?>selected<?php endif; ?>><?php echo $vo['major_name']; ?></option>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </select>
+                                </div>
+                                <div class="layui-inline layui-show-xs-block">
+                                    <select name="subject_id1" id="subject_id1"  >
+                                        <option value="">请选择一个科目</option>
+                                    </select>
+                                </div>
+                                <input type="file" name="name" id="file" value=""/>
+                                <input type="submit" value="提交"/>
+                            </form>
+                            <a href="<?php echo url('Single/expData'); ?>">
+                                <button type="button" class="layui-btn" >
+                                    <i class="layui-icon">&#xe67c;</i>导出单选题
+                                </button>
                             </a>
+
                         </div>
                         <div class="layui-card-body layui-table-body layui-table-main">
                             <table class="layui-table layui-form" lay-size="sm">
@@ -205,37 +219,55 @@
                 form.render('select');  //渲染
             });
         })
-      });
-      //导入题
-      layui.use(['form','upload'],function(){
-          var form=layui.form;
-          var upload=layui.upload;
-          upload.render({ //允许上传的文件后缀
-              elem: '#myfile'
-              ,data:{major_id:function () {
-                      return major_id = $('#major_id').val();
-                  },subject_id:function () {
-                      return subject_id = $('#subject_id').val();
-                  }}
-              ,url: "<?php echo url('Single/import'); ?>"
-              ,accept: 'file' //普通文件
-              ,exts: 'xls|excel|xlsx' //只允许上传压缩文件
-              ,auto: false //选择文件后不自动上传
-              ,bindAction: '#upload-bth' //指向一个按钮触发上传
-              ,done: function(res){
-                  if(res.code==1){
-                      layer.msg('上传成功,已解析数据',{icon:6});
-                      location.href="<?php echo url('Single/index'); ?>";
-                  }else{
-                      layer.msg('解析失败',{icon:5});
-                  }
-              }
+
+          //导入题   选择专业科目二级联动
+
+          form.on('select(major1)',function (data) {
+
+              var major_id1 = $('#major_id1').val();   //获取专业表id
+
+              $.post("<?php echo url('Single/major1'); ?>",{major_id1:major_id1},function (data) {
+                  $("#subject_id1").empty();    //清空#subject_id里的元素
+
+                  $.each(data,function (key,val) {
+
+                      $("#subject_id1").append("<option value="+val.id+">"+val.subject_name+"</option>");
+
+                  });
+                  form.render('select');  //渲染
+              });
           });
-          form.on('submit(formsub)',function(data){
-              layer.msg('导入数据具体详情未协商确认,待确认后处理');
-              return false;
-          })
-      })
+      });
+      // //导入题
+      // layui.use(['form','upload'],function(){
+      //     var form=layui.form;
+      //     var upload=layui.upload;
+      //     upload.render({ //允许上传的文件后缀
+      //         elem: '#myfile'
+      //         ,data:{major_id:function () {
+      //                 return major_id = $('#major_id').val();
+      //             },subject_id:function () {
+      //                 return subject_id = $('#subject_id').val();
+      //             }}
+      //         ,url: "<?php echo url('Single/import'); ?>"
+      //         ,accept: 'file' //普通文件
+      //         ,exts: 'xls|excel|xlsx' //只允许上传压缩文件
+      //         ,auto: false //选择文件后不自动上传
+      //         ,bindAction: '#upload-bth' //指向一个按钮触发上传
+      //         ,done: function(res){
+      //             if(res.code==1){
+      //                 layer.msg('上传成功,已解析数据',{icon:6});
+      //                 location.href="<?php echo url('Single/index'); ?>";
+      //             }else{
+      //                 layer.msg('解析失败',{icon:5});
+      //             }
+      //         }
+      //     });
+      //     form.on('submit(formsub)',function(data){
+      //         layer.msg('导入数据具体详情未协商确认,待确认后处理');
+      //         return false;
+      //     })
+      // })
       // function Excel(){
       //         $.post("<?php echo url('Single/excel'); ?>",{data:data.field,name:'single'},function () {
       //

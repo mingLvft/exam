@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\login\login.html";i:1571122267;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:83:"D:\phpStudy\PHPTutorial\WWW\exam1\public/../application/admin\view\login\login.html";i:1571894275;}*/ ?>
 <!doctype html>
 <html  class="x-admin-sm">
 <head>
@@ -48,7 +48,6 @@
               //监听提交
               form.on('submit(login)', function(data){
                 $.post("<?php echo url('Login/login'); ?>",{data:data.field},function (data) {
-                    // layer.alert(data);return false;
                     // alert(888)
                     if(data.status == 1){
                         //登陆成功

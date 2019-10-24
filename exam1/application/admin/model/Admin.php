@@ -1,5 +1,6 @@
 <?php
 namespace app\admin\model;
+use Think\Db;
 use think\Model;
 use think\Cookie;
 /*
@@ -50,8 +51,9 @@ class Admin extends Model{
             //用户不存在
             return json(array('status'=>0,'msg'=>'用户名不存在'));
         }
+        $rule = Db::name('admin_role')->field('role_id')->where('admin_id',$info['id'])->find();
         //判断用户是否被禁用
-        if($info['status'] == 0 && $info['id'] != 1){
+        if($info['status'] == 0 && $rule['role_id'] != 1){
             return json(array('status'=>0,'msg'=>'用户被禁用'));
         }
         if($data['password'] != $info['password']){
