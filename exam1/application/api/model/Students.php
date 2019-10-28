@@ -8,6 +8,11 @@ class Students extends Model{
 
     //实现学生登陆
     public function login($data){
+        //判断考试开关状态
+        $status = Db::name('exam_status')->select();
+        if($status[0]['on_off'] == 0){
+            return json(['code'=>0,'msg'=>$status[0]['content']]);
+        }
         //检查用户名是否存在
         $info = $this->where("id_card",$data['username'])->find();
         if(!$info){
@@ -21,10 +26,11 @@ class Students extends Model{
         Session::set('admin',$info);
         //保存用户的信息
         $data = $this->where("id_card",$data['username'])->find();
+        $id_card = $data['id_card'];
         //获取专业科目信息
         $major_subject = $this->alias('a')->field('b.major_name,c.id,c.subject_name')
             ->join('em_major b','a.major_id=b.id')
-            ->join('em_subject c','b.id=c.major_id')->where('id_card',$data['id_card'])->select();
+            ->join('em_subject c','b.id=c.major_id')->where("c.on_off=1 and b.status=1 and c.status=1 and a.id_card = '$id_card'")->select();
         Session::set('major_subject',$major_subject);
         //返回 登陆状态 用户信息 科目
         return json(['code'=>1,'msg'=>'登陆成功','data'=>$data,'major_subject'=>$major_subject]);

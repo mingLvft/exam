@@ -83,6 +83,7 @@
                                     <th>题目</th>
                                     <th>专业</th>
                                     <th>科目</th>
+                                    <th>文件路径</th>
                                     <th>添加时间</th>
                                     <th>状态</th>
                                     <th>操作</th></tr>
@@ -94,9 +95,15 @@
                                       <input type="checkbox" name="id" value="{$vo.id}"   lay-skin="primary">
                                     </td>
                                     <td>{$vo.id}</td>
-                                    <td>{$vo.operation_name}</td>
+                                    <td>{$vo.operation_name|mb_substr=0,10}...</td>
                                     <td>{$vo.major_name}</td>
                                     <td>{$vo.subject_name}</td>
+                                    <td>{empty name="$vo.pathinfo"}
+                                    <form action="{:url('Operation/upload')}?id={$vo.id}" enctype="multipart/form-data" method="post">
+                                        <input type="file" name="operation">
+                                        <input type="submit" value="上传">
+                                    </form>
+                                        {/empty}{$vo.pathinfo}<a href="{:url('Operation/download')}?id={$vo.id}"><span style="color: #0B55C4">下载</span></a></td>
                                     <td>{$vo.add_time}</td>
                                     <td class="td-status">
                                       <span class="layui-btn layui-btn-normal layui-btn-mini">正常</span></td>

@@ -4,12 +4,12 @@ use think\Controller;
 use think\Db;
 
 /*
- * 成绩管理
+ * 教师阅卷
  */
 class Scroe extends Controller{
 
-    //首页显示
-    public function index(){
+    //教师阅卷列表
+    public function teacherIndex(){
         $model = Db::name('topic');
         $count = $model->count();
         //链表查询出专业科目 and 成绩
@@ -17,29 +17,32 @@ class Scroe extends Controller{
             ->join('em_major b','a.major_id=b.id')
             ->join('em_subject c','a.subject_id=c.id')->where("a.status",1)->paginate(20,$count);
         $this->assign('data',$data);
+        //查询考试开关
+        $status = Db::name('exam_status')->value('on_off');
+        $this->assign('status',$status);
         return $this->fetch();
     }
 
-    //阅卷
-    public function scroe(){
+    //教师阅卷
+    public function teacherRead(){
         if(request()->isPost()){
             $data = input('post.data/a');
             $model = Db::name('topic');
             //查询出原数据库成绩
-            $info = $model->where('id',$data['id'])->select();
-            if($info[0]['not_read'] == 1){
+            $info = $model->where('id',$data['id'])->find();
+            //1 为已经阅卷 0为未阅卷  2为已阅卷等待教务处审核
+            if($info['not_read'] == 1 || $info['not_read'] == 2){
                 return json(array('status' => 0, 'msg' => '已经阅卷'));
             }
             if (!$data) {
                 return json(array('status' => 0, 'msg' => '参数错误'));
             }
-            //修改成绩与原成绩相加
-//            $res = $model->where('id',$data['id'])->setField('scroe',$info[0]['scroe']+$data['scroe']);
-            $res = $model->where('id',$data['id'])->update(['scroe'=>$info[0]['scroe']+$data['scroe'],'not_read'=>1]);
+            //修改成绩与原成绩相加  修改阅卷状态 2 待审核
+            $res = $model->where('id',$data['id'])->update(['scroe'=>$info['scroe']+$data['scroe'],'not_read'=>2,'operation_scroe'=>$data['scroe']]);
             if ($res !== false){
-                return json(array('status'=>1,'msg'=>'修改成功'));
+                return json(array('status'=>1,'msg'=>'阅卷成功'));
             }else{
-                return json(array('status'=>0,'msg'=>'修改失败'));
+                return json(array('status'=>0,'msg'=>'阅卷失败'));
             }
         }else{
             $id = input('get.id');
@@ -48,17 +51,57 @@ class Scroe extends Controller{
             $data = $model->alias('a')->field('a.*,b.major_name,c.subject_name')
                 ->join('em_major b','a.major_id=b.id')
                 ->join('em_subject c','a.subject_id=c.id')->where('a.id',$id)->find();
-//            //判断是否阅卷
-//            $info = $model->where('id',$data['id'])->select();
-//            if($info[0]['not_read'] == 1){
-//                $this->error('已经阅卷',url('scroe/index'));
-//            }
             $this->assign('data',$data);
             return $this->fetch();
         }
     }
 
-    //成绩管理的删除
+    //教务处阅卷列表   只显示 待审核 和 已经阅卷
+    public function officeIndex(){
+        $model = Db::name('topic');
+        $count = $model->count();
+        //链表查询出专业科目 and 成绩
+        $data = $model->alias('a')->field('a.*,b.major_name,c.subject_name')
+            ->join('em_major b','a.major_id=b.id')
+            ->join('em_subject c','a.subject_id=c.id')->where("a.status=1 and not_read in (1,2)")->paginate(20,$count);
+        $this->assign('data',$data);
+        return $this->fetch();
+    }
+
+    //教务处阅卷
+    public function officeRead(){
+        if(request()->isPost()){
+            $data = input('post.data/a');
+            $model = Db::name('topic');
+            //查询出原数据库成绩
+            $info = $model->where('id',$data['id'])->find();
+            //1 为已经阅卷 0为未阅卷  2为已阅卷等待教务处审核
+            if($info['not_read'] == 1){
+                return json(array('status' => 0, 'msg' => '已经审核'));
+            }
+            if (!$data) {
+                return json(array('status' => 0, 'msg' => '参数错误'));
+            }
+            //修改阅卷状态为  1 已阅卷
+            $res = $model->where('id',$data['id'])->update(['not_read'=>1]);
+            if ($res !== false){
+                return json(array('status'=>1,'msg'=>'审核成功'));
+            }else{
+                return json(array('status'=>0,'msg'=>'审核失败'));
+            }
+        }else{
+            $id = input('get.id');
+            $model = Db::name('topic');
+            //链表查询出专业科目 and 成绩
+            $data = $model->alias('a')->field('a.*,b.major_name,c.subject_name')
+                ->join('em_major b','a.major_id=b.id')
+                ->join('em_subject c','a.subject_id=c.id')->where('a.id',$id)->find();
+            $this->assign('data',$data);
+            return $this->fetch();
+        }
+    }
+
+    //教师阅卷的删除
     public function del(){
         $model = Db::name('topic');
         $id = input('post.id/a');
@@ -72,7 +115,7 @@ class Scroe extends Controller{
         }
     }
 
-    //成绩管理回收站
+    //教师阅卷回收站
     public function trash(){
         $model = Db::name('topic');
         $count = $model->count();
@@ -84,7 +127,7 @@ class Scroe extends Controller{
         return $this->fetch();
     }
 
-    //成绩管理回收站的恢复
+    //教师阅卷回收站的恢复
     public function recover(){
         $model = Db::name('topic');
         $id = input('post.id/a');
@@ -99,7 +142,7 @@ class Scroe extends Controller{
         }
     }
 
-    //成绩管理回收站的彻底删除
+    //教师阅卷回收站的彻底删除
     public function remove(){
         $model = Db::name('topic');
         $id = input('post.id');
@@ -109,5 +152,42 @@ class Scroe extends Controller{
         }else{
             return json(array('status'=>0,'msg'=>'彻底删除失败'));
         }
+    }
+
+    //考试状态开关(关)
+    public function Off(){
+        $id = input('post.id');
+        $res = Db::name('exam_status')->where('id',$id)->setField('on_off',0);
+        if($res){
+            return json(array('status'=>1));
+        }else{
+            return json(array('status'=>0,'msg'=>'关闭失败'));
+        }
+    }
+
+    //考试状态开关(开)
+    public function On(){
+        $id = input('post.id');
+        $res = Db::name('exam_status')->where('id',$id)->setField('on_off',1);
+        if($res){
+            return json(array('status'=>1));
+        }else{
+            return json(array('status'=>0,'msg'=>'开启失败'));
+        }
+    }
+
+    //download方法  下载操作题
+    public function download(){
+        //接受id
+        $id = input('get.id');
+        //查询数据
+        $data = Db::name('topic')->where('id',$id)->value('pathinfo');
+        //下载代码
+        $filename = ROOT_PATH.$data;
+        //输出文件
+        header("Content-type: application/octet-stream");
+        header( "Content-Disposition:  attachment;  filename=". $filename);
+        //输出缓冲区
+        readfile($filename);
     }
 }

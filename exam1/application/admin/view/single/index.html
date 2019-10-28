@@ -99,7 +99,7 @@
                                       <input type="checkbox" name="id" value="{$vo.id}"   lay-skin="primary">
                                     </td>
                                     <td>{$vo.id}</td>
-                                    <td>{$vo.single_name}</td>
+                                    <td>{$vo.single_name|mb_substr=0,10}...</td>
                                     <td>{$vo.A}</td>
                                     <td>{$vo.B}</td>
                                     <td>{$vo.C}</td>

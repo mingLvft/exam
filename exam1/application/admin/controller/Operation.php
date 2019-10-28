@@ -150,4 +150,37 @@ class Operation extends Common
     public function expData(){
         action('admin/Download/out',['table_name'=>'em_operation']);
     }
+
+    //上传提题库
+    public function upload(){
+        $id = input('get.id');
+        //获取表单上传文件
+        $file = request()->file('operation');
+        if($file){
+            // 移动到框架应用根目录/public/uploads/ 目录下
+            $info = $file->move(ROOT_PATH . 'public' . DS .'uploads' . DS .'operation' . DS . $id);
+            if($info){
+                Db::name('operation')->where('id',$id)->update(['pathinfo'=>'public/uploads'.DS.'operation'.DS.$id.DS.$info->getSaveName()]);
+                $this->success('上传成功');
+            }else{
+                // 上传失败获取错误信息
+                $this->error($file->getError());
+            }
+        }
+    }
+
+    //download方法  下载操作题
+    public function download(){
+        //接受id
+        $id = input('get.id');
+        //查询数据
+        $data = Db::name('operation')->where('id',$id)->value('pathinfo');
+        //下载代码
+        $filename = ROOT_PATH.$data;
+        //输出文件
+        header("Content-type: application/octet-stream");
+        header( "Content-Disposition:  attachment;  filename=". $filename);
+        //输出缓冲区
+        readfile($filename);
+    }
 }

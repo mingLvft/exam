@@ -1,5 +1,6 @@
 <?php
 namespace app\api\controller;
+use Think\Exception;
 use think\Session;
 use think\Cookie;
 use think\Db;
@@ -67,17 +68,28 @@ class Index
 ////        //日期转换为时间戳
 //        $time = strtotime($time);
 //        dump($time);die;
-        //返回是否考试状态  成绩库 已有成绩   判断身份证专业科目  status 1为删除状态正常   数据库有成绩需返回已考试
-        $exam_status = Db::name('topic')->where('status = 1 and id_card=' . $admin['id_card'] . ' and major_id=' . $major_id . ' and subject_id=' . $subject_id)->find();
-        if ($exam_status) {
+        //获取已考试的 cookie信息 进行判断
+        $exam_status = Cookie::get('exam_status');
+        if($exam_status == $admin['id_card'].'-'.$major_id.'-'.$data['subject_id']){
             // 返回状态已经考试过了
             return json(['code' => 1, 'msg' => '开始考试', 'single' => $single,
                 'selection' => $selection, 'judge' => $judge, 'operation' => $operation, 'subject_id' => $subject_id, 'exam_status' => 1]);
-        } else {
+        }else{
             //返回状态没有考试过
             return json(['code' => 1, 'msg' => '开始考试', 'single' => $single,
                 'selection' => $selection, 'judge' => $judge, 'operation' => $operation, 'subject_id' => $subject_id, 'exam_status' => 0]);
         }
+        //返回是否考试状态  成绩库 已有成绩   判断身份证专业科目  not_read 0为未阅卷   未阅卷需返回已考试
+//        $exam_status = Db::name('topic')->where('not_read = 0 and id_card=' . $admin['id_card'] . ' and major_id=' . $major_id . ' and subject_id=' . $subject_id)->find();
+//        if ($exam_status) {
+//            // 返回状态已经考试过了
+//            return json(['code' => 1, 'msg' => '开始考试', 'single' => $single,
+//                'selection' => $selection, 'judge' => $judge, 'operation' => $operation, 'subject_id' => $subject_id, 'exam_status' => 1]);
+//        } else {
+//            //返回状态没有考试过
+//            return json(['code' => 1, 'msg' => '开始考试', 'single' => $single,
+//                'selection' => $selection, 'judge' => $judge, 'operation' => $operation, 'subject_id' => $subject_id, 'exam_status' => 0]);
+//        }
     }
 
     //提交试卷并评分
@@ -117,10 +129,7 @@ class Index
                 return json(['code' => '0', 'msg' => '判断作弊提交失败']);
             }
         }
-//        //判断超时交卷   提交答案用isset判断是否有答案
-//        //接受前端数据
-//        $data = input('post.');
-//        $subject_id = $data['subject_id'];
+
         //格式化json
         $data = json_decode($data["questions"]);
         //获取单选题答案
@@ -177,7 +186,8 @@ class Index
                     }
                     break;
                 case 4:   //操作题  提交答案
-                    $answer_operation[$id] = $right_key;
+                    $answer_operation[$id] = '题目：  '.$data[$key]->title . '    答案：  ' .$right_key;
+                    //保存操作题 题目
                     break;
             }
         }
@@ -205,6 +215,9 @@ class Index
             $commit4[] = 'operation' . $key . '-' . $value;
             $commit_operation = implode(',', $commit4);
         }
+        //获取文件保存路径
+        $savename = Session::get('savename');
+        $savename = isset($savename)?$savename:'';
         $data = [
             'single' => $commit_single,
             'selection' => $commit_selection,
@@ -222,10 +235,13 @@ class Index
             'selection_scroe' => $selection_count*3,
             'judge_scroe' => $judge_count*3,
             'operation_scroe' => 0,
+            'pathinfo' => $savename
         ];
         //提交的数据 到数据库
         $res = Db::name('topic')->insert($data);
         if ($res) {
+            //保存cookie判断已考试
+            Cookie::set('exam_status',$admin->id_card.'-'.$admin->major_id.'-'.$subject_id,18000);
             return json(['code' => '1', 'msg' => '提交成功']);
         } else {
             return json(['code' => '0', 'msg' => '提交失败']);
@@ -235,7 +251,7 @@ class Index
     //返回成绩api
     public function getGrade(){
         $id_card = input('get.id_card');
-        $data = Db::name('topic')->alias('a')->field('a.scroe,a.not_read,b.major_name,c.subject_name')
+        $data = Db::name('topic')->alias('a')->field('a.scroe,a.single_scroe,a.selection_scroe,a.judge_scroe,a.operation_scroe,a.not_read,b.major_name,c.subject_name')
             ->join('em_major b','a.major_id=b.id')
             ->join('em_subject c','a.subject_id=c.id')
             ->where('a.status = 1 and a.id_card='.$id_card)->select();
@@ -263,4 +279,37 @@ class Index
     public function score(){
         return view("index.html");
     }
+
+    //上传提题库
+    public function upload(){
+        //获取表单上传文件
+        $file = request()->file('file');
+        if($file){
+            // 移动到框架应用根目录/public/uploads/ 目录下
+            $info = $file->move(ROOT_PATH . 'public' . DS .'uploads' . DS .'operation_upload');
+            if($info){
+                //保存文件上传路径
+                Session::set('savename','public/uploads'.DS.'operation_upload'.DS.$info->getSaveName());
+                return json(['code'=>1,'msg'=>'上传成功']);
+            }else{
+                return json(['code'=>0,'msg'=>'上传失败']);
+            }
+        }
+    }
+
+    //download方法  下载操作题
+    public function download(){
+        //接受id
+        $id = input('get.id');
+        //查询数据
+        $data = Db::name('operation')->where('id',$id)->value('pathinfo');
+        //下载代码
+        $filename = ROOT_PATH.$data;
+        //输出文件
+        header("Content-type: application/octet-stream");
+        header( "Content-Disposition:  attachment;  filename=". $filename);
+        //输出缓冲区
+        readfile($filename);
+    }
+
 }

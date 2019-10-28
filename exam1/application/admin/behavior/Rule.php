@@ -84,7 +84,7 @@ class Rule extends Controller{
                     return json(array('status' => 0, 'msg' => '没有权限'));
                 } else {
 //                    return json(['status' => 0,'msg'=>'没有权限']);
-                    $this->error('没有权限', '/admin/index/index');exit();
+                    $this->error('没有权限', '/admin/index/index');exit;
                 }
             }
         }

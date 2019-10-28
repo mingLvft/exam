@@ -155,6 +155,11 @@ return [
     // 异常页面的模板文件
     'exception_tmpl'         => THINK_PATH . 'tpl' . DS . 'think_exception.tpl',
 
+    'http_exception_template' => [
+        // 定义404错误的重定向页面地址
+        404 => '../public/404.html',
+    ],
+
     // 错误显示信息,非调试模式有效
     'error_message'          => '页面错误！请稍后再试～',
     // 显示错误信息

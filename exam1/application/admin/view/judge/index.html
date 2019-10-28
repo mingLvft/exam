@@ -95,7 +95,7 @@
                                       <input type="checkbox" name="id" value="{$vo.id}"   lay-skin="primary">
                                     </td>
                                     <td>{$vo.id}</td>
-                                    <td>{$vo.judge_name}</td>
+                                    <td>{$vo.judge_name|mb_substr=0,15}...</td>
                                     <td>{eq name="vo.right_key" value="1"}正确{else/}错误{/eq}</td>
                                     <td>{$vo.major_name}</td>
                                     <td>{$vo.subject_name}</td>

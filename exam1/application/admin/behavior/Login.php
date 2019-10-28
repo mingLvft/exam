@@ -10,6 +10,8 @@ class Login extends Controller {
         $admin = Cookie::get('admin');
         if(!$admin){
             $this->error('没有登录',url('Login/login'));
+//            $url = url('Login/login');
+//            echo "<script>top.location.href='$url'</script>";
         }
     }
 }

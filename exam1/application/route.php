@@ -16,6 +16,8 @@ Route::rule('api/getQuestion', 'api/index/getQuestion', 'get | post');      //�
 Route::rule('api/commitQuestion', 'api/index/commitQuestion', 'get | post');      //提交考试路由
 Route::rule('api/getGrade', 'api/index/getGrade', 'get');      //请求成绩
 Route::rule('api/getUserinfo', 'api/index/getUserinfo', 'get');      //请求信息
+Route::rule('api/upload', 'api/index/upload', 'post');      //上传操作题
+Route::rule('api/download', 'api/index/download', 'get');      //下载操作题
 Route::rule('/answer', 'api/index/answer', 'get');
 Route::rule('/commit', 'api/index/commit', 'get');
 Route::rule('/score', 'api/index/score', 'get');

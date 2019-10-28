@@ -40,8 +40,8 @@ class Students extends Model {
         //接受身份证查询
         $id_card = input('get.id_card');
         if ($id_card){
-            $count_where .= " and id_card=$id_card";
-            $where .= " and a.id_card=$id_card";
+            $count_where .= " and id_card = '$id_card'";
+            $where .= " and a.id_card = '$id_card'";
         }
         //接受电话号码查询
         $tel = input('get.tel');

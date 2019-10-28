@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 24/10/2019 19:59:44
+ Date: 28/10/2019 21:03:35
 */
 
 SET NAMES utf8mb4;
@@ -28,22 +28,24 @@ CREATE TABLE `em_admin`  (
   `tel` int(20) NOT NULL COMMENT '手机号',
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态:1是,0否',
   `add_time` datetime NOT NULL COMMENT '添加时间',
+  `on_off` tinyint(4) NOT NULL DEFAULT 1 COMMENT '开关状态 1开启 0关闭',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_admin
 -- ----------------------------
-INSERT INTO `em_admin` VALUES (1, 'changchun', '123456', 2147483647, 0, '2019-10-08 21:21:11');
-INSERT INTO `em_admin` VALUES (5, 'tom', '123456', 2147483647, 1, '2019-10-09 08:39:47');
-INSERT INTO `em_admin` VALUES (20, 'user', '123456', 153456454, 1, '2019-10-09 10:00:29');
-INSERT INTO `em_admin` VALUES (30, 'li', '123456', 1234564, 1, '2019-10-09 10:10:29');
-INSERT INTO `em_admin` VALUES (32, 'check', '123456', 123123, 1, '2019-10-09 10:24:57');
-INSERT INTO `em_admin` VALUES (35, 'peter', '123456', 111, 1, '2019-10-10 08:42:30');
-INSERT INTO `em_admin` VALUES (36, 'tomk', '123456', 456151, 1, '2019-10-18 08:47:37');
-INSERT INTO `em_admin` VALUES (37, 'chengxuedong', '123456', 0, 0, '2019-10-24 12:38:37');
-INSERT INTO `em_admin` VALUES (38, 'liuyougang', '123456', 0, 0, '2019-10-24 12:38:39');
-INSERT INTO `em_admin` VALUES (39, 'zhangxudong', '123456', 0, 0, '2019-10-24 12:38:41');
+INSERT INTO `em_admin` VALUES (1, 'changchun', '123456', 0, 0, '2019-10-08 21:21:11', 0);
+INSERT INTO `em_admin` VALUES (2, 'chenxuedong', '123456', 0, 0, '2019-10-24 12:38:37', 0);
+INSERT INTO `em_admin` VALUES (3, 'liuyougang', '123456', 0, 0, '2019-10-24 12:38:39', 0);
+INSERT INTO `em_admin` VALUES (4, 'zhangxudong', '123456', 0, 0, '2019-10-24 12:38:41', 0);
+INSERT INTO `em_admin` VALUES (5, 'changsheng', '123456', 0, 0, '2019-10-26 18:55:20', 0);
+INSERT INTO `em_admin` VALUES (19, 'tom', '123456', 2147483647, 1, '2019-10-09 08:39:47', 1);
+INSERT INTO `em_admin` VALUES (20, 'user', '123456', 153456454, 1, '2019-10-09 10:00:29', 1);
+INSERT INTO `em_admin` VALUES (30, 'li', '123456', 1234564, 1, '2019-10-09 10:10:29', 1);
+INSERT INTO `em_admin` VALUES (32, 'check', '123456', 123123, 1, '2019-10-09 10:24:57', 1);
+INSERT INTO `em_admin` VALUES (35, 'peter', '123456', 111, 1, '2019-10-10 08:42:30', 1);
+INSERT INTO `em_admin` VALUES (36, 'tomk', '123456', 456151, 1, '2019-10-18 08:47:37', 1);
 
 -- ----------------------------
 -- Table structure for em_admin_role
@@ -54,7 +56,7 @@ CREATE TABLE `em_admin_role`  (
   `admin_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户ID',
   `role_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_admin_role
@@ -63,12 +65,29 @@ INSERT INTO `em_admin_role` VALUES (6, 20, '4');
 INSERT INTO `em_admin_role` VALUES (11, 30, '4');
 INSERT INTO `em_admin_role` VALUES (13, 32, '4');
 INSERT INTO `em_admin_role` VALUES (16, 1, '1');
-INSERT INTO `em_admin_role` VALUES (17, 5, '6');
+INSERT INTO `em_admin_role` VALUES (17, 19, '6');
 INSERT INTO `em_admin_role` VALUES (18, 35, '4');
 INSERT INTO `em_admin_role` VALUES (19, 36, '4,8');
-INSERT INTO `em_admin_role` VALUES (20, 37, '1');
-INSERT INTO `em_admin_role` VALUES (21, 38, '1');
-INSERT INTO `em_admin_role` VALUES (22, 39, '1');
+INSERT INTO `em_admin_role` VALUES (20, 2, '1');
+INSERT INTO `em_admin_role` VALUES (21, 3, '1');
+INSERT INTO `em_admin_role` VALUES (22, 4, '1');
+INSERT INTO `em_admin_role` VALUES (28, 5, '1');
+
+-- ----------------------------
+-- Table structure for em_exam_status
+-- ----------------------------
+DROP TABLE IF EXISTS `em_exam_status`;
+CREATE TABLE `em_exam_status`  (
+  `id` int(11) NOT NULL DEFAULT 0 COMMENT 'id字段',
+  `on_off` tinyint(4) NOT NULL DEFAULT 1 COMMENT '考试开关 1开启 0关闭',
+  `content` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '考试维护信息',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = MyISAM CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of em_exam_status
+-- ----------------------------
+INSERT INTO `em_exam_status` VALUES (1, 1, '当前未到考试时间，考试已关闭维护，详细联系管理员：184941312');
 
 -- ----------------------------
 -- Table structure for em_judge
@@ -382,19 +401,20 @@ CREATE TABLE `em_major`  (
   `major_name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '专业名称',
   `status` smallint(4) NOT NULL DEFAULT 1 COMMENT '状态:1是,0否',
   `add_time` datetime NOT NULL COMMENT '添加时间',
+  `on_off` tinyint(4) NOT NULL DEFAULT 1 COMMENT '开关状态 1开启 0关闭',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '专业表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of em_major
 -- ----------------------------
-INSERT INTO `em_major` VALUES (1, '软件开发', 1, '2019-09-28 16:41:52');
-INSERT INTO `em_major` VALUES (2, 'ui设计', 1, '2019-09-28 20:44:41');
-INSERT INTO `em_major` VALUES (3, '平面设计', 1, '2019-09-29 08:45:59');
-INSERT INTO `em_major` VALUES (4, '电子商务', 1, '2019-09-29 08:46:00');
-INSERT INTO `em_major` VALUES (7, '大数据', 1, '2019-10-24 09:42:13');
-INSERT INTO `em_major` VALUES (8, '人工智能', 1, '2019-10-24 18:56:09');
-INSERT INTO `em_major` VALUES (9, '移动app', 1, '2019-10-24 18:59:27');
+INSERT INTO `em_major` VALUES (1, '软件开发', 1, '2019-09-28 16:41:52', 1);
+INSERT INTO `em_major` VALUES (2, 'ui设计', 1, '2019-09-28 20:44:41', 1);
+INSERT INTO `em_major` VALUES (3, '平面设计', 1, '2019-09-29 08:45:59', 1);
+INSERT INTO `em_major` VALUES (4, '电子商务', 1, '2019-09-29 08:46:00', 1);
+INSERT INTO `em_major` VALUES (7, '大数据', 1, '2019-10-24 09:42:13', 1);
+INSERT INTO `em_major` VALUES (8, '人工智能', 1, '2019-10-24 18:56:09', 1);
+INSERT INTO `em_major` VALUES (9, '移动app', 1, '2019-10-24 18:59:27', 1);
 
 -- ----------------------------
 -- Table structure for em_operation
@@ -406,6 +426,7 @@ CREATE TABLE `em_operation`  (
   `status` smallint(4) NOT NULL DEFAULT 1 COMMENT '状态:1是,0否',
   `major_id` int(10) NOT NULL COMMENT '对应专业表的id',
   `subject_id` int(10) NOT NULL COMMENT '对应科目表的id',
+  `pathinfo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作题文件路径',
   `add_time` datetime NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 28 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '操作题' ROW_FORMAT = Dynamic;
@@ -413,33 +434,33 @@ CREATE TABLE `em_operation`  (
 -- ----------------------------
 -- Records of em_operation
 -- ----------------------------
-INSERT INTO `em_operation` VALUES (1, '考题名称', 1, 1, 1, '2019-10-24 19:29:12');
-INSERT INTO `em_operation` VALUES (2, '考题名称', 1, 1, 4, '2019-10-24 19:29:28');
-INSERT INTO `em_operation` VALUES (3, '考题名称', 1, 1, 8, '2019-10-24 19:29:39');
-INSERT INTO `em_operation` VALUES (4, 'MySQL常见数据库引擎及比较？', 1, 2, 3, '2019-10-24 19:31:35');
-INSERT INTO `em_operation` VALUES (5, '简述数据三大范式？', 1, 2, 3, '2019-10-24 19:31:35');
-INSERT INTO `em_operation` VALUES (6, 'MySQL索引有那几种类型', 1, 2, 3, '2019-10-24 19:31:35');
-INSERT INTO `em_operation` VALUES (7, 'char和varchar的区别？谁的存取速度快请简要说明', 1, 2, 3, '2019-10-24 19:31:35');
-INSERT INTO `em_operation` VALUES (8, 'char和varchar的区别？谁的存取速度快请简要说明', 1, 2, 3, '2019-10-24 19:31:35');
-INSERT INTO `em_operation` VALUES (9, '使用穷举法计算出以下每个汉字对应的数字  \n               好 啊 好\n        +      真 是 好\n------------------------\n        =    真 是 好 啊', 1, 2, 6, '2019-10-24 19:31:45');
-INSERT INTO `em_operation` VALUES (10, '设计一个汉罗塔', 1, 2, 6, '2019-10-24 19:31:45');
-INSERT INTO `em_operation` VALUES (11, '设计一个汉罗塔', 1, 2, 6, '2019-10-24 19:31:45');
-INSERT INTO `em_operation` VALUES (12, '考题名称', 1, 3, 2, '2019-10-24 19:31:52');
-INSERT INTO `em_operation` VALUES (13, '考题名称', 1, 4, 5, '2019-10-24 19:32:09');
-INSERT INTO `em_operation` VALUES (14, '考题名称', 1, 4, 9, '2019-10-24 19:32:30');
-INSERT INTO `em_operation` VALUES (15, '请完成下载文件中题目一的效果', 1, 7, 7, '2019-10-24 19:32:38');
-INSERT INTO `em_operation` VALUES (16, '请完成下载文件中题目一的效果', 1, 7, 7, '2019-10-24 19:32:38');
-INSERT INTO `em_operation` VALUES (17, 'Cola公司的雇员分为以下若干类： \n• 4.1 ColaEmployee ：这是所有员工总的父类，属性：员工的姓名,员工的生日月份。方法：getSalary(int month) 根据参数月份来确定工资，如果该月员工过生日，则公司会额外奖励100 元。 \n• 4.2 SalariedEmployee ： ColaEmployee 的子类，拿固定工资的员工。属性：月薪 \n• 4.3 HourlyEmployee ：ColaEmployee 的子类，按小时拿工资的员工，每月工作超出160 小时的部分按照1.', 1, 7, 13, '2019-10-24 19:32:45');
-INSERT INTO `em_operation` VALUES (18, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 7, 13, '2019-10-24 19:32:45');
-INSERT INTO `em_operation` VALUES (19, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 7, 13, '2019-10-24 19:32:45');
-INSERT INTO `em_operation` VALUES (20, 'Cola公司的雇员分为以下若干类： \n• 4.1 ColaEmployee ：这是所有员工总的父类，属性：员工的姓名,员工的生日月份。方法：getSalary(int month) 根据参数月份来确定工资，如果该月员工过生日，则公司会额外奖励100 元。 \n• 4.2 SalariedEmployee ： ColaEmployee 的子类，拿固定工资的员工。属性：月薪 \n• 4.3 HourlyEmployee ：ColaEmployee 的子类，按小时拿工资的员工，每月工作超出160 小时的部分按照1.', 1, 8, 10, '2019-10-24 19:32:53');
-INSERT INTO `em_operation` VALUES (21, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 8, 10, '2019-10-24 19:32:53');
-INSERT INTO `em_operation` VALUES (22, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 8, 10, '2019-10-24 19:32:53');
-INSERT INTO `em_operation` VALUES (23, '考题名称', 1, 8, 14, '2019-10-24 19:33:09');
-INSERT INTO `em_operation` VALUES (24, '考题名称', 1, 9, 11, '2019-10-24 19:33:25');
-INSERT INTO `em_operation` VALUES (25, 'Cola公司的雇员分为以下若干类： \n• 4.1 ColaEmployee ：这是所有员工总的父类，属性：员工的姓名,员工的生日月份。方法：getSalary(int month) 根据参数月份来确定工资，如果该月员工过生日，则公司会额外奖励100 元。 \n• 4.2 SalariedEmployee ： ColaEmployee 的子类，拿固定工资的员工。属性：月薪 \n• 4.3 HourlyEmployee ：ColaEmployee 的子类，按小时拿工资的员工，每月工作超出160 小时的部分按照1.', 1, 9, 12, '2019-10-24 19:33:38');
-INSERT INTO `em_operation` VALUES (26, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 9, 12, '2019-10-24 19:33:38');
-INSERT INTO `em_operation` VALUES (27, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 9, 12, '2019-10-24 19:33:38');
+INSERT INTO `em_operation` VALUES (1, '考题名称', 1, 1, 1, 'public/uploads\\operation\\1\\20191028\\a6143258e71a2da9111bf43592096a31.zip', '2019-10-24 19:29:12');
+INSERT INTO `em_operation` VALUES (2, '考题名称', 1, 1, 4, '', '2019-10-24 19:29:28');
+INSERT INTO `em_operation` VALUES (3, '考题名称', 1, 1, 8, '', '2019-10-24 19:29:39');
+INSERT INTO `em_operation` VALUES (4, 'MySQL常见数据库引擎及比较？', 1, 2, 3, '', '2019-10-24 19:31:35');
+INSERT INTO `em_operation` VALUES (5, '简述数据三大范式？', 1, 2, 3, '', '2019-10-24 19:31:35');
+INSERT INTO `em_operation` VALUES (6, 'MySQL索引有那几种类型', 1, 2, 3, '', '2019-10-24 19:31:35');
+INSERT INTO `em_operation` VALUES (7, 'char和varchar的区别？谁的存取速度快请简要说明', 1, 2, 3, '', '2019-10-24 19:31:35');
+INSERT INTO `em_operation` VALUES (8, 'char和varchar的区别？谁的存取速度快请简要说明', 1, 2, 3, '', '2019-10-24 19:31:35');
+INSERT INTO `em_operation` VALUES (9, '使用穷举法计算出以下每个汉字对应的数字  \n               好 啊 好\n        +      真 是 好\n------------------------\n        =    真 是 好 啊', 1, 2, 6, '', '2019-10-24 19:31:45');
+INSERT INTO `em_operation` VALUES (10, '设计一个汉罗塔', 1, 2, 6, '', '2019-10-24 19:31:45');
+INSERT INTO `em_operation` VALUES (11, '设计一个汉罗塔', 1, 2, 6, '', '2019-10-24 19:31:45');
+INSERT INTO `em_operation` VALUES (12, '考题名称', 1, 3, 2, '', '2019-10-24 19:31:52');
+INSERT INTO `em_operation` VALUES (13, '考题名称', 1, 4, 5, '', '2019-10-24 19:32:09');
+INSERT INTO `em_operation` VALUES (14, '考题名称', 1, 4, 9, '', '2019-10-24 19:32:30');
+INSERT INTO `em_operation` VALUES (15, '请完成下载文件中题目一的效果', 1, 7, 7, '', '2019-10-24 19:32:38');
+INSERT INTO `em_operation` VALUES (16, '请完成下载文件中题目一的效果', 1, 7, 7, '', '2019-10-24 19:32:38');
+INSERT INTO `em_operation` VALUES (17, 'Cola公司的雇员分为以下若干类： \n• 4.1 ColaEmployee ：这是所有员工总的父类，属性：员工的姓名,员工的生日月份。方法：getSalary(int month) 根据参数月份来确定工资，如果该月员工过生日，则公司会额外奖励100 元。 \n• 4.2 SalariedEmployee ： ColaEmployee 的子类，拿固定工资的员工。属性：月薪 \n• 4.3 HourlyEmployee ：ColaEmployee 的子类，按小时拿工资的员工，每月工作超出160 小时的部分按照1.', 1, 7, 13, '', '2019-10-24 19:32:45');
+INSERT INTO `em_operation` VALUES (18, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 7, 13, '', '2019-10-24 19:32:45');
+INSERT INTO `em_operation` VALUES (19, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 7, 13, '', '2019-10-24 19:32:45');
+INSERT INTO `em_operation` VALUES (20, 'Cola公司的雇员分为以下若干类： \n• 4.1 ColaEmployee ：这是所有员工总的父类，属性：员工的姓名,员工的生日月份。方法：getSalary(int month) 根据参数月份来确定工资，如果该月员工过生日，则公司会额外奖励100 元。 \n• 4.2 SalariedEmployee ： ColaEmployee 的子类，拿固定工资的员工。属性：月薪 \n• 4.3 HourlyEmployee ：ColaEmployee 的子类，按小时拿工资的员工，每月工作超出160 小时的部分按照1.', 1, 8, 10, '', '2019-10-24 19:32:53');
+INSERT INTO `em_operation` VALUES (21, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 8, 10, '', '2019-10-24 19:32:53');
+INSERT INTO `em_operation` VALUES (22, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 8, 10, '', '2019-10-24 19:32:53');
+INSERT INTO `em_operation` VALUES (23, '考题名称', 1, 8, 14, '', '2019-10-24 19:33:09');
+INSERT INTO `em_operation` VALUES (24, '考题名称', 1, 9, 11, '', '2019-10-24 19:33:25');
+INSERT INTO `em_operation` VALUES (25, 'Cola公司的雇员分为以下若干类： \n• 4.1 ColaEmployee ：这是所有员工总的父类，属性：员工的姓名,员工的生日月份。方法：getSalary(int month) 根据参数月份来确定工资，如果该月员工过生日，则公司会额外奖励100 元。 \n• 4.2 SalariedEmployee ： ColaEmployee 的子类，拿固定工资的员工。属性：月薪 \n• 4.3 HourlyEmployee ：ColaEmployee 的子类，按小时拿工资的员工，每月工作超出160 小时的部分按照1.', 1, 9, 12, '', '2019-10-24 19:33:38');
+INSERT INTO `em_operation` VALUES (26, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 9, 12, '', '2019-10-24 19:33:38');
+INSERT INTO `em_operation` VALUES (27, '编写三个系别的学生类：英语系，计算机系，文学系（要求通过继承学生类） [选做题] \n各系有以下成绩： \n• 英语系： 演讲，期末考试，期中考试； \n• 计算机系：操作能力，英语写作，期中考试，期末考试； \n• 文学系： 演讲，作品，期末考试，期中考试; \n各系总分评测标准： \n• 英语系： 演讲 50% \n• 期末考试 25% \n• 期中考试 25% \n• 计算机系： 操作能力 40% \n• 英语写作 20% \n• 期末考试 20% \n• 期中考试 20% \n• 文学系： 演讲 35% \n• 作品 35%', 1, 9, 12, '', '2019-10-24 19:33:38');
 
 -- ----------------------------
 -- Table structure for em_role
@@ -498,7 +519,7 @@ CREATE TABLE `em_rule`  (
   `is_show` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否导航菜单显示1  显示 0 不显示',
   `add_time` datetime NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_rule
@@ -540,7 +561,7 @@ INSERT INTO `em_rule` VALUES (34, '操作题删除', 'admin', 'operation', 'del'
 INSERT INTO `em_rule` VALUES (35, '操作题题回收站', 'admin', 'operation', 'trash', 31, 1, '2019-10-17 09:45:28');
 INSERT INTO `em_rule` VALUES (36, '操作题回收站恢复', 'admin', 'operation', 'recover', 31, 0, '2019-10-17 10:06:14');
 INSERT INTO `em_rule` VALUES (37, '操作题回收站删除', 'admin', 'operation', 'remove', 31, 0, '2019-10-10 22:38:11');
-INSERT INTO `em_rule` VALUES (38, '考试管理', 'admin', 'major,subject,subject,scroe', '#', 0, 1, '2019-10-10 22:38:11');
+INSERT INTO `em_rule` VALUES (38, '考试管理', 'admin', 'major,subject,scroe', '#', 0, 1, '2019-10-10 22:38:11');
 INSERT INTO `em_rule` VALUES (39, '专业列表', 'admin', 'major', 'index', 38, 1, '2019-10-15 10:05:55');
 INSERT INTO `em_rule` VALUES (40, '专业添加', 'admin', 'major', 'add', 38, 0, '2019-10-10 22:51:37');
 INSERT INTO `em_rule` VALUES (41, '专业编辑', 'admin', 'major', 'edit', 38, 0, '2019-10-10 22:52:11');
@@ -562,10 +583,14 @@ INSERT INTO `em_rule` VALUES (56, '权限列表', 'admin', 'rule', 'index', 47, 
 INSERT INTO `em_rule` VALUES (57, '权限添加', 'admin', 'rule', 'add', 47, 0, '2019-10-17 10:06:33');
 INSERT INTO `em_rule` VALUES (58, '权限编辑', 'admin', 'rule', 'edit', 47, 0, '2019-10-17 10:06:47');
 INSERT INTO `em_rule` VALUES (59, '权限删除', 'admin', 'rule', 'del', 47, 0, '2019-10-17 10:07:14');
-INSERT INTO `em_rule` VALUES (60, '成绩管理列表', 'admin', 'scroe', 'index', 38, 1, '2019-10-23 14:40:31');
-INSERT INTO `em_rule` VALUES (61, '成绩回收站', 'admin', 'scroe', 'trash', 60, 1, '2019-10-23 14:40:34');
-INSERT INTO `em_rule` VALUES (62, '成绩回收站恢复', 'admin', 'scroe', 'recover', 60, 0, '2019-10-23 14:45:31');
-INSERT INTO `em_rule` VALUES (63, '成绩回收站删除', 'admin', 'scroe', 'remove', 60, 0, '2019-10-23 14:45:33');
+INSERT INTO `em_rule` VALUES (60, '教师阅卷', 'admin', 'scroe', 'teacherIndex', 38, 1, '2019-10-23 14:40:31');
+INSERT INTO `em_rule` VALUES (61, '教师阅卷回收站', 'admin', 'scroe', 'trash', 60, 1, '2019-10-23 14:40:34');
+INSERT INTO `em_rule` VALUES (62, '教师阅卷回收站恢复', 'admin', 'scroe', 'recover', 60, 0, '2019-10-23 14:45:31');
+INSERT INTO `em_rule` VALUES (63, '教师阅卷回收站删除', 'admin', 'scroe', 'remove', 60, 0, '2019-10-23 14:45:33');
+INSERT INTO `em_rule` VALUES (64, '教务处阅卷', 'admin', 'scroe', 'officeIndex', 38, 1, '2019-10-25 13:49:54');
+INSERT INTO `em_rule` VALUES (65, '教师阅卷删除', 'admin', 'scroe', 'del', 38, 0, '2019-10-26 17:54:32');
+INSERT INTO `em_rule` VALUES (66, '教师阅卷功能', 'admin', 'scroe', 'teacherRead', 38, 0, '2019-10-26 17:57:11');
+INSERT INTO `em_rule` VALUES (67, '教务处阅卷功能', 'admin', 'scroe', 'officeRead', 38, 0, '2019-10-26 17:57:34');
 
 -- ----------------------------
 -- Table structure for em_selection
@@ -1228,7 +1253,7 @@ DROP TABLE IF EXISTS `em_students`;
 CREATE TABLE `em_students`  (
   `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'id编号',
   `username` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '姓名',
-  `id_card` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生身份证',
+  `id_card` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学生身份证',
   `sex` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '性别',
   `password` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '密码',
   `class_name` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '班级',
@@ -1373,7 +1398,7 @@ INSERT INTO `em_students` VALUES (126, '岳长春', '511922200101100516', '男',
 INSERT INTO `em_students` VALUES (127, '邓超耀', '51090220020203673X', '男', '123456', '17三年软件四', '王智', '17345457913', 4, 1, '2019-10-24 19:27:37', '四川遂宁');
 INSERT INTO `em_students` VALUES (128, '马冲', '513701200107016330', '男', '123456', '17三年软件四', '王智', '17364792883', 4, 1, '2019-10-24 19:27:37', '四川巴中');
 INSERT INTO `em_students` VALUES (129, '钟伟杰', '51032220030401821x', '男', '123456', '17三年软件四', '王智', '18581560742', 4, 1, '2019-10-24 19:27:37', '四川自贡');
-INSERT INTO `em_students` VALUES (130, '钟伟杰', '51032220030401821x', '男', '123456', '17三年软件四', '王智', '18581560742', 4, 1, '2019-10-24 19:27:37', '四川自贡');
+INSERT INTO `em_students` VALUES (130, '钟伟杰', '51032220030401821x', '男', '123456', '17三年软件四', '王智', '18581560742', 4, 0, '2019-10-24 19:27:37', '四川自贡');
 INSERT INTO `em_students` VALUES (131, '赖瑞鹏', '513822200110017657', '男', '1001', '17三年软件三班', '周鹏', '13548240496', 7, 1, '2019-10-24 19:27:54', '四川省眉山市仁寿县禾加镇');
 INSERT INTO `em_students` VALUES (132, '赵佳洋', '140311200201073015', '男', '0123456', '17三年软件三班', '周鹏', '15719437701', 7, 1, '2019-10-24 19:27:54', '四川省成都市金堂县赵镇');
 INSERT INTO `em_students` VALUES (133, '罗超', '51390120011124453x', '男', '12345', '17三年软件三班', '周鹏', '18512864324', 7, 1, '2019-10-24 19:27:54', '四川省资阳市雁江区伍隍镇');
@@ -1469,26 +1494,27 @@ CREATE TABLE `em_subject`  (
   `status` smallint(4) NOT NULL DEFAULT 1 COMMENT '状态:1是,0否',
   `major_id` int(10) NOT NULL COMMENT '关联专业表id',
   `add_time` datetime NOT NULL COMMENT '添加时间',
+  `on_off` tinyint(4) NOT NULL DEFAULT 1 COMMENT '开关状态 1开启 0关闭',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '科目表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of em_subject
 -- ----------------------------
-INSERT INTO `em_subject` VALUES (1, 'html5+ccs', 1, 1, '2019-09-29 08:55:16');
-INSERT INTO `em_subject` VALUES (2, 'c++', 1, 3, '2019-09-29 09:49:59');
-INSERT INTO `em_subject` VALUES (3, 'mysql', 1, 2, '2019-09-29 09:54:46');
-INSERT INTO `em_subject` VALUES (4, 'oracle', 1, 1, '2019-10-09 15:06:39');
-INSERT INTO `em_subject` VALUES (5, 'linux', 1, 4, '2019-10-09 15:59:11');
-INSERT INTO `em_subject` VALUES (6, 'scratch', 1, 2, '2019-10-09 16:04:21');
-INSERT INTO `em_subject` VALUES (7, 'jquery', 1, 7, '2019-10-24 09:42:45');
-INSERT INTO `em_subject` VALUES (8, 'jsp', 1, 1, '2019-10-24 10:18:43');
-INSERT INTO `em_subject` VALUES (9, 'python', 1, 4, '2019-10-24 10:18:56');
-INSERT INTO `em_subject` VALUES (10, 'java', 1, 8, '2019-10-24 18:56:38');
-INSERT INTO `em_subject` VALUES (11, 'web前端', 1, 9, '2019-10-24 18:59:41');
-INSERT INTO `em_subject` VALUES (12, 'java', 1, 9, '2019-10-24 19:00:29');
-INSERT INTO `em_subject` VALUES (13, 'java', 1, 7, '2019-10-24 19:00:39');
-INSERT INTO `em_subject` VALUES (14, 'python', 1, 8, '2019-10-24 19:00:52');
+INSERT INTO `em_subject` VALUES (1, 'html5+ccs', 1, 1, '2019-09-29 08:55:16', 1);
+INSERT INTO `em_subject` VALUES (2, 'c++', 1, 3, '2019-09-29 09:49:59', 1);
+INSERT INTO `em_subject` VALUES (3, 'mysql', 1, 2, '2019-09-29 09:54:46', 1);
+INSERT INTO `em_subject` VALUES (4, 'oracle', 1, 1, '2019-10-09 15:06:39', 1);
+INSERT INTO `em_subject` VALUES (5, 'linux', 1, 4, '2019-10-09 15:59:11', 1);
+INSERT INTO `em_subject` VALUES (6, 'scratch', 1, 2, '2019-10-09 16:04:21', 1);
+INSERT INTO `em_subject` VALUES (7, 'jquery', 1, 7, '2019-10-24 09:42:45', 1);
+INSERT INTO `em_subject` VALUES (8, 'jsp', 1, 1, '2019-10-24 10:18:43', 1);
+INSERT INTO `em_subject` VALUES (9, 'python', 1, 4, '2019-10-24 10:18:56', 1);
+INSERT INTO `em_subject` VALUES (10, 'java', 1, 8, '2019-10-24 18:56:38', 1);
+INSERT INTO `em_subject` VALUES (11, 'web前端', 1, 9, '2019-10-24 18:59:41', 1);
+INSERT INTO `em_subject` VALUES (12, 'java', 1, 9, '2019-10-24 19:00:29', 1);
+INSERT INTO `em_subject` VALUES (13, 'java', 1, 7, '2019-10-24 19:00:39', 1);
+INSERT INTO `em_subject` VALUES (14, 'python', 1, 8, '2019-10-24 19:00:52', 1);
 
 -- ----------------------------
 -- Table structure for em_topic
@@ -1508,11 +1534,12 @@ CREATE TABLE `em_topic`  (
   `add_time` datetime NOT NULL COMMENT '添加时间',
   `scroe` int(10) NOT NULL COMMENT '总分数',
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态 0已删除的成绩 1未删除的成绩',
-  `not_read` tinyint(4) NOT NULL COMMENT '1 为已经阅卷 0为未阅卷',
+  `not_read` tinyint(4) NOT NULL COMMENT '1 为已经阅卷 0为未阅卷  2为已阅卷等待教务处审核 ',
   `single_scroe` int(10) NOT NULL COMMENT '单选题分数',
   `selection_scroe` int(10) NOT NULL COMMENT '多选题分数',
   `judge_scroe` int(10) NOT NULL COMMENT '判断题分数',
   `operation_scroe` int(10) NOT NULL COMMENT '操作题分数',
+  `pathinfo` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '操作题上传路径',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '提交试卷分数题库' ROW_FORMAT = Dynamic;
 

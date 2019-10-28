@@ -68,4 +68,26 @@ class Major extends Common{
             return $this->fetch();
         }
     }
+
+    //专业状态开关(关)
+    public function Off(){
+        $id = input('post.id');
+        $res = Db::name('major')->where('id',$id)->setField('on_off',0);
+        if($res){
+            return json(array('status'=>1));
+        }else{
+            return json(array('status'=>0,'msg'=>'关闭失败'));
+        }
+    }
+
+    //专业状态开关(开)
+    public function On(){
+        $id = input('post.id');
+        $res = Db::name('major')->where('id',$id)->setField('on_off',1);
+        if($res){
+            return json(array('status'=>1));
+        }else{
+            return json(array('status'=>0,'msg'=>'开启失败'));
+        }
+    }
 }
