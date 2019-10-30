@@ -31,7 +31,7 @@ class Index extends Common {
         }else{
             //linux删除
             system("rm -rf ".escapeshellarg(ROOT_PATH . 'public' . DS .'uploads' . DS .'excel'));
-            return json(['status'=>1,'msg'=>'清空execl缓存文件失败!']);
+            return json(['status'=>1,'msg'=>'清空execl缓存文件成功!']);
         }
     }
 
@@ -47,7 +47,7 @@ class Index extends Common {
         }else{
             //linux删除
             system("rm -rf ".escapeshellarg(ROOT_PATH . 'public' . DS .'uploads' . DS .'operation'));
-            return json(['status'=>1,'msg'=>'清空操作题目文件失败!']);
+            return json(['status'=>1,'msg'=>'清空操作题目文件成功!']);
         }
     }
 
@@ -63,7 +63,7 @@ class Index extends Common {
         }else{
             //linux删除
             system("rm -rf ".escapeshellarg(ROOT_PATH . 'public' . DS .'uploads' . DS .'operation_upload'));
-            return json(['status'=>1,'msg'=>'清空操作上传答案文件失败!']);
+            return json(['status'=>1,'msg'=>'清空操作上传答案文件成功!']);
         }
     }
 }
