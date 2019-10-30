@@ -47,6 +47,8 @@ class Index extends Common {
         }else{
             //linux删除
             system("rm -rf ".escapeshellarg(ROOT_PATH . 'public' . DS .'uploads' . DS .'operation'));
+            //执行原生sql  更新 pathinfo不为空  成空
+            Db::execute("update em_operation set pathinfo = '' where pathinfo is not null");
             return json(['status'=>1,'msg'=>'清空操作题目文件成功!']);
         }
     }
@@ -63,6 +65,8 @@ class Index extends Common {
         }else{
             //linux删除
             system("rm -rf ".escapeshellarg(ROOT_PATH . 'public' . DS .'uploads' . DS .'operation_upload'));
+            //执行原生sql  更新 pathinfo不为空  成空
+            Db::execute("update em_topic set pathinfo = '' where pathinfo is not null");
             return json(['status'=>1,'msg'=>'清空操作上传答案文件成功!']);
         }
     }
