@@ -8,6 +8,16 @@
 - 联系方式QQ：843547212
 - 安卓app安装包：https://pan.baidu.com/s/1BR7PCcoR_1d3qsHjrowxJA 
 
+#### 项目截图
+![登陆界面](public/img/login.png)
+
+![准备界面](public/img/anwer.png)
+
+![考试界面](public/img/exam.png)
+
+![成绩查询界面](public/img/scroe.jpg)
+
+![后台界面](public/img/admin.png)
 #### 环境要求
 - Nginx/Apache/IIS
 - PHP5.4+
