@@ -8,19 +8,6 @@
 - 联系方式QQ：843547212
 - 安卓app安装包：https://pan.baidu.com/s/1BR7PCcoR_1d3qsHjrowxJA 
 
-
-#### 项目截图
-![输入图片说明](https://github.com/wycilu/exam/tree/master/public/dist/img/bg.1b97f9f5.jpg "前端.jpg")
-
-#### 后台截图
-![输入图片说明]( "后台-商品列表.png")
-
-![输入图片说明]( "后台-新增商品.png")
-
-![输入图片说明]( "后台-首页设计.png")
-
-![输入图片说明]( "后台-配送设置.png")
-
 #### 环境要求
 - Nginx/Apache/IIS
 - PHP5.4+
