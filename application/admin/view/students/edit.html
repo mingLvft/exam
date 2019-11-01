@@ -19,7 +19,7 @@
                     <div class="layui-form-item">
                         <label for="desc" class="layui-form-label"><span class="x-red">*</span>性别</label>
                         <div class="layui-input-block">
-                            <select name="sex" lay-verify="">
+                            <select name="sex" lay-verify="required">
                                 <option value="">性别</option>
                                 <option value="男" {eq name="data.sex" value="男"}selected{/eq}>男</option>
                                 <option value="女" {eq name="data.sex" value="女"}selected{/eq}>女</option>
@@ -53,7 +53,7 @@
                     <div class="layui-form-item">
                         <label for="desc" class="layui-form-label"><span class="x-red">*</span>专业</label>
                         <div class="layui-input-block">
-                            <select name="major_id" lay-verify="">
+                            <select name="major_id" lay-verify="required">
                                 <option value="">专业</option>
                                 {volist name="major" id="vo"}
                                 <option value="{$vo.id}" {eq name="data.major_id" value="$vo.id"}selected{/eq}>{$vo.major_name}</option>

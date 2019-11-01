@@ -2,15 +2,12 @@
 namespace app\admin\controller;
 use think\Controller;
 use think\Db;
-use think\Loader;
 
 class Major extends Common{
 
     //专业管理页面显示
     public function index(){
-        $model = Db::name('major');
-        $count = $model->where("status",1)->count();
-        $data = $model->where("status",1)->paginate(20,$count);
+        $data = model('major')->getAllData(1);
         $this->assign('data',$data);
         return $this->fetch();
     }

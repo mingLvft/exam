@@ -11,7 +11,7 @@
  Target Server Version : 50553
  File Encoding         : 65001
 
- Date: 31/10/2019 11:00:03
+ Date: 01/11/2019 00:29:08
 */
 
 SET NAMES utf8mb4;
@@ -25,28 +25,81 @@ CREATE TABLE `em_admin`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '用户名',
   `password` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '密码',
-  `tel` int(20) NOT NULL COMMENT '手机号',
+  `login_time` datetime NOT NULL COMMENT '最后登录时间',
+  `login_ip` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '最后登录ip地址',
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态:1是,0否',
   `add_time` datetime NOT NULL COMMENT '添加时间',
   `on_off` tinyint(4) NOT NULL DEFAULT 1 COMMENT '开关状态 1开启 0关闭',
+  `login_site` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'ip物理地址',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 38 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 89 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_admin
 -- ----------------------------
-INSERT INTO `em_admin` VALUES (1, 'changchun', '123456', 0, 0, '2019-10-08 21:21:11', 0);
-INSERT INTO `em_admin` VALUES (2, 'dongshao', '123456', 0, 0, '2019-10-24 12:38:37', 0);
-INSERT INTO `em_admin` VALUES (3, 'liuyougang', '123456', 0, 0, '2019-10-24 12:38:39', 0);
-INSERT INTO `em_admin` VALUES (4, 'zhangxudong', '123456', 0, 0, '2019-10-24 12:38:41', 0);
-INSERT INTO `em_admin` VALUES (5, 'changsheng', '123456', 0, 0, '2019-10-26 18:55:20', 0);
-INSERT INTO `em_admin` VALUES (19, 'tom', '123456', 2147483647, 1, '2019-10-09 08:39:47', 1);
-INSERT INTO `em_admin` VALUES (20, 'user', '123456', 153456454, 1, '2019-10-09 10:00:29', 1);
-INSERT INTO `em_admin` VALUES (30, 'li', '123456', 1234564, 1, '2019-10-09 10:10:29', 1);
-INSERT INTO `em_admin` VALUES (32, 'check', '123456', 123123, 1, '2019-10-09 10:24:57', 1);
-INSERT INTO `em_admin` VALUES (35, 'peter', '123456', 111, 1, '2019-10-10 08:42:30', 1);
-INSERT INTO `em_admin` VALUES (36, 'tomk', '123456', 211, 1, '2019-10-29 21:39:26', 1);
-INSERT INTO `em_admin` VALUES (37, 'yt', '123456', 1, 0, '2019-10-29 21:41:24', 1);
+INSERT INTO `em_admin` VALUES (1, 'changchun', '123456', '0000-00-00 00:00:00', '', 0, '2019-10-08 21:21:11', 0, '');
+INSERT INTO `em_admin` VALUES (2, 'dongshao', '123456', '0000-00-00 00:00:00', '', 0, '2019-10-24 12:38:37', 0, '');
+INSERT INTO `em_admin` VALUES (3, 'liuyougang', '123456', '0000-00-00 00:00:00', '', 0, '2019-10-24 12:38:39', 0, '');
+INSERT INTO `em_admin` VALUES (4, 'zhangxudong', '123456', '2019-11-01 00:01:49', '127.0.0.1', 0, '2019-10-24 12:38:41', 0, '本机地址');
+INSERT INTO `em_admin` VALUES (5, 'changsheng', '123456', '0000-00-00 00:00:00', '', 0, '2019-10-26 18:55:20', 0, '');
+INSERT INTO `em_admin` VALUES (19, 'tom', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-09 08:39:47', 1, '');
+INSERT INTO `em_admin` VALUES (20, 'user', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-09 10:00:29', 1, '');
+INSERT INTO `em_admin` VALUES (30, 'li', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-09 10:10:29', 1, '');
+INSERT INTO `em_admin` VALUES (32, 'check', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-09 10:24:57', 1, '');
+INSERT INTO `em_admin` VALUES (35, 'peter', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-10 08:42:30', 1, '');
+INSERT INTO `em_admin` VALUES (36, 'tomk', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-29 21:39:26', 1, '');
+INSERT INTO `em_admin` VALUES (37, 'yt', '123456', '0000-00-00 00:00:00', '', 0, '2019-10-29 21:41:24', 1, '');
+INSERT INTO `em_admin` VALUES (38, '王正相', '123456', '2019-11-01 00:01:31', '127.0.0.1', 1, '2019-10-31 22:44:54', 1, '本机地址');
+INSERT INTO `em_admin` VALUES (39, '张兴强', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (40, '赵昌', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (41, '李宗伟', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (42, '王宏', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (43, '马政', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (44, '王鑫', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (45, '梁月辉', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (46, '汪道彬', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (47, '李龙强', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (48, '肖体莲', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (49, '王伟', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (50, '郭伟', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (51, '郭腾芳', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (52, '任红吏', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (53, '康 颗', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (54, '陈雪冬', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (55, '杨孝明', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (56, '吕军', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (57, '郑欣', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (58, '蒋伟', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (59, '李阳勇', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (60, '龙炳全', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (61, '叶俊利', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (62, '樊家岐', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (63, '肖恒', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (64, '刘晓晶', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (65, '成亮', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (66, '叶何林', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (67, '李金柯', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:54', 1, '');
+INSERT INTO `em_admin` VALUES (68, '侯晓轩', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (69, '叶鉴原', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (70, '凌娟', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (71, '翁邦维', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (72, '李鑫全', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (73, '田玲玲', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (74, '卿舒心', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (75, '谢鑫', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (76, '吕平', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (77, '廖雅婷', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (78, '黄鑫宇', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (79, '王佩文', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (80, '丁洋', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (81, '钱程', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (82, '廖理', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (83, '吴寻', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (84, '刘庆花', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (85, '黄婧', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (86, '卿文浩', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (87, '黎莉媛', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
+INSERT INTO `em_admin` VALUES (88, '刘富腾', '123456', '0000-00-00 00:00:00', '', 1, '2019-10-31 22:44:55', 1, '');
 
 -- ----------------------------
 -- Table structure for em_admin_role
@@ -57,7 +110,7 @@ CREATE TABLE `em_admin_role`  (
   `admin_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户ID',
   `role_id` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 81 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_admin_role
@@ -74,6 +127,57 @@ INSERT INTO `em_admin_role` VALUES (21, 3, '1');
 INSERT INTO `em_admin_role` VALUES (22, 4, '1');
 INSERT INTO `em_admin_role` VALUES (28, 5, '1');
 INSERT INTO `em_admin_role` VALUES (29, 37, '1');
+INSERT INTO `em_admin_role` VALUES (30, 38, '9');
+INSERT INTO `em_admin_role` VALUES (31, 39, '9');
+INSERT INTO `em_admin_role` VALUES (32, 40, '9');
+INSERT INTO `em_admin_role` VALUES (33, 41, '9');
+INSERT INTO `em_admin_role` VALUES (34, 42, '9');
+INSERT INTO `em_admin_role` VALUES (35, 43, '9');
+INSERT INTO `em_admin_role` VALUES (36, 44, '9');
+INSERT INTO `em_admin_role` VALUES (37, 45, '9');
+INSERT INTO `em_admin_role` VALUES (38, 46, '9');
+INSERT INTO `em_admin_role` VALUES (39, 47, '9');
+INSERT INTO `em_admin_role` VALUES (40, 48, '9');
+INSERT INTO `em_admin_role` VALUES (41, 49, '9');
+INSERT INTO `em_admin_role` VALUES (42, 50, '9');
+INSERT INTO `em_admin_role` VALUES (43, 51, '9');
+INSERT INTO `em_admin_role` VALUES (44, 52, '9');
+INSERT INTO `em_admin_role` VALUES (45, 53, '9');
+INSERT INTO `em_admin_role` VALUES (46, 54, '9');
+INSERT INTO `em_admin_role` VALUES (47, 55, '9');
+INSERT INTO `em_admin_role` VALUES (48, 56, '9');
+INSERT INTO `em_admin_role` VALUES (49, 57, '9');
+INSERT INTO `em_admin_role` VALUES (50, 58, '9');
+INSERT INTO `em_admin_role` VALUES (51, 59, '9');
+INSERT INTO `em_admin_role` VALUES (52, 60, '9');
+INSERT INTO `em_admin_role` VALUES (53, 61, '9');
+INSERT INTO `em_admin_role` VALUES (54, 62, '9');
+INSERT INTO `em_admin_role` VALUES (55, 63, '9');
+INSERT INTO `em_admin_role` VALUES (56, 64, '9');
+INSERT INTO `em_admin_role` VALUES (57, 65, '9');
+INSERT INTO `em_admin_role` VALUES (58, 66, '9');
+INSERT INTO `em_admin_role` VALUES (59, 67, '9');
+INSERT INTO `em_admin_role` VALUES (60, 68, '9');
+INSERT INTO `em_admin_role` VALUES (61, 69, '9');
+INSERT INTO `em_admin_role` VALUES (62, 70, '9');
+INSERT INTO `em_admin_role` VALUES (63, 71, '9');
+INSERT INTO `em_admin_role` VALUES (64, 72, '9');
+INSERT INTO `em_admin_role` VALUES (65, 73, '9');
+INSERT INTO `em_admin_role` VALUES (66, 74, '9');
+INSERT INTO `em_admin_role` VALUES (67, 75, '9');
+INSERT INTO `em_admin_role` VALUES (68, 76, '9');
+INSERT INTO `em_admin_role` VALUES (69, 77, '9');
+INSERT INTO `em_admin_role` VALUES (70, 78, '9');
+INSERT INTO `em_admin_role` VALUES (71, 79, '9');
+INSERT INTO `em_admin_role` VALUES (72, 80, '9');
+INSERT INTO `em_admin_role` VALUES (73, 81, '9');
+INSERT INTO `em_admin_role` VALUES (74, 82, '9');
+INSERT INTO `em_admin_role` VALUES (75, 83, '9');
+INSERT INTO `em_admin_role` VALUES (76, 84, '9');
+INSERT INTO `em_admin_role` VALUES (77, 85, '9');
+INSERT INTO `em_admin_role` VALUES (78, 86, '9');
+INSERT INTO `em_admin_role` VALUES (79, 87, '9');
+INSERT INTO `em_admin_role` VALUES (80, 88, '9');
 
 -- ----------------------------
 -- Table structure for em_exam_status
@@ -486,17 +590,16 @@ CREATE TABLE `em_role`  (
   `status` tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态:1是,0否',
   `add_time` datetime NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_role
 -- ----------------------------
 INSERT INTO `em_role` VALUES (1, '超级管理员', '最高权限', 0, '2019-10-15 09:35:44');
 INSERT INTO `em_role` VALUES (4, '学生管理员', '描述', 1, '2019-10-10 21:46:08');
-INSERT INTO `em_role` VALUES (5, '分类管理员', '描述', 0, '2019-10-10 21:46:11');
 INSERT INTO `em_role` VALUES (6, '题库管理员', '描述', 1, '2019-10-11 21:59:05');
-INSERT INTO `em_role` VALUES (7, '权限管理员', '描述、。', 0, '2019-10-11 22:14:33');
 INSERT INTO `em_role` VALUES (8, '考试管理员', '啊', 1, '2019-10-17 12:08:30');
+INSERT INTO `em_role` VALUES (9, '教师阅卷管理员', '教师和教务处阅卷', 1, '2019-10-31 22:41:33');
 
 -- ----------------------------
 -- Table structure for em_role_rule
@@ -507,16 +610,15 @@ CREATE TABLE `em_role_rule`  (
   `role_id` int(11) NOT NULL DEFAULT 0 COMMENT '角色ID',
   `rule_id` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '权限ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_role_rule
 -- ----------------------------
 INSERT INTO `em_role_rule` VALUES (1, 6, '9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30');
-INSERT INTO `em_role_rule` VALUES (2, 7, '47,48,49,50,51,52,53,54,55,56,57,58,59');
-INSERT INTO `em_role_rule` VALUES (3, 5, '1,2,36,41');
 INSERT INTO `em_role_rule` VALUES (4, 4, '1,2,3,4,5,6,7,8');
 INSERT INTO `em_role_rule` VALUES (5, 8, '38,39,40,41,42,43,44,45,46,60,61,62,63');
+INSERT INTO `em_role_rule` VALUES (6, 9, '38,60,61,62,63,64,65,66,67,68');
 
 -- ----------------------------
 -- Table structure for em_rule
@@ -532,7 +634,7 @@ CREATE TABLE `em_rule`  (
   `is_show` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否导航菜单显示1  显示 0 不显示',
   `add_time` datetime NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 68 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 69 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of em_rule
@@ -604,6 +706,7 @@ INSERT INTO `em_rule` VALUES (64, '教务处阅卷', 'admin', 'scroe', 'officeIn
 INSERT INTO `em_rule` VALUES (65, '教师阅卷删除', 'admin', 'scroe', 'del', 38, 0, '2019-10-26 17:54:32');
 INSERT INTO `em_rule` VALUES (66, '教师阅卷功能', 'admin', 'scroe', 'teacherRead', 38, 0, '2019-10-26 17:57:11');
 INSERT INTO `em_rule` VALUES (67, '教务处阅卷功能', 'admin', 'scroe', 'officeRead', 38, 0, '2019-10-26 17:57:34');
+INSERT INTO `em_rule` VALUES (68, '教务处阅卷删除', 'admin', 'scroe', 'officedel', 38, 0, '2019-10-31 15:15:48');
 
 -- ----------------------------
 -- Table structure for em_selection
@@ -1432,7 +1535,7 @@ INSERT INTO `em_students` VALUES (126, '岳长春', '511922200101100516', '男',
 INSERT INTO `em_students` VALUES (127, '邓超耀', '51090220020203673X', '男', '123456', '17三年软件四', '王智', '17345457913', 1, 1, '2019-10-24 19:27:37', '四川遂宁');
 INSERT INTO `em_students` VALUES (128, '马冲', '513701200107016330', '男', '123456', '17三年软件四', '王智', '17364792883', 1, 1, '2019-10-24 19:27:37', '四川巴中');
 INSERT INTO `em_students` VALUES (129, '钟伟杰', '51032220030401821x', '男', '123456', '17三年软件四', '王智', '18581560742', 1, 1, '2019-10-24 19:27:37', '四川自贡');
-INSERT INTO `em_students` VALUES (130, '钟伟杰', '51032220030401821x', '男', '123456', '17三年软件四', '王智', '18581560742', 1, 0, '2019-10-24 19:27:37', '四川自贡');
+INSERT INTO `em_students` VALUES (130, '钟伟杰', '51032220030401821x', '男', '123456', '17三年软件四', '王智', '18581560742', 1, 1, '2019-10-24 19:27:37', '四川自贡');
 INSERT INTO `em_students` VALUES (131, '赖瑞鹏', '513822200110017657', '男', '1001', '17三年软件三班', '周鹏', '13548240496', 1, 1, '2019-10-24 19:27:54', '四川省眉山市仁寿县禾加镇');
 INSERT INTO `em_students` VALUES (132, '赵佳洋', '140311200201073015', '男', '0123456', '17三年软件三班', '周鹏', '15719437701', 1, 1, '2019-10-24 19:27:54', '四川省成都市金堂县赵镇');
 INSERT INTO `em_students` VALUES (133, '罗超', '51390120011124453x', '男', '12345', '17三年软件三班', '周鹏', '18512864324', 1, 1, '2019-10-24 19:27:54', '四川省资阳市雁江区伍隍镇');

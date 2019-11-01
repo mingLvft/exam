@@ -13,8 +13,9 @@ class Students extends Model{
         if($status[0]['on_off'] == 0){
             return json(['code'=>0,'msg'=>$status[0]['content']]);
         }
+        $username = $data['username'];
         //检查用户名是否存在
-        $info = $this->where("id_card",$data['username'])->find();
+        $info = $this->where("id_card = '$username' and status = 1")->find();
         if(!$info){
             //用户不存在
             return json(['code'=>0,'msg'=>'用户不存在']);
@@ -38,8 +39,9 @@ class Students extends Model{
 
     //实现学生修改
     public function changePassword($data){
+        $username = $data['username'];
         //查询需要修改的用户
-        $info = $this->where("id_card",$data['username'])->find();
+        $info = $this->where("id_card = '$username' and status = 1")->find();
         if(!$info){
             //用户不存在
             return json(['code'=>0,'msg'=>'用户不存在']);

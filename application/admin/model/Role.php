@@ -9,11 +9,30 @@ class Role extends Model{
 
     //获取角色下对应的权限id以及角色信息
     public function getAllData($status){
-        $count = $this->where("status",$status)->count();
+        //拼接where
+        $count_where = 'status='.$status;
+        $where = 'a.status='.$status;
+        //接受开始日
+        $start = input('get.start');
+        //日期转换为时间戳
+        $start = strtotime($start);
+        if ($start){
+            $count_where .= " and unix_timestamp(add_time)>$start";
+            $where .= " and unix_timestamp(a.add_time)>$start";
+        }
+        //接受结束日
+        $end = input('get.end');
+        //日期转换为时间戳
+        $end = strtotime($end);
+        if ($end){
+            $count_where .= " and unix_timestamp(add_time)<$end";
+            $where .= " and unix_timestamp(a.add_time)<$end";
+        }
+        $count = $this->where($count_where)->count();
         $data = $this->alias('a')
             ->join('em_role_rule b', 'a.id=b.role_id')
             ->field('a.*,b.rule_id')
-            ->where("a.status",$status)->paginate(20,$count);
+            ->where($where)->order('id')->paginate(20,$count);
         return $data;
     }
 

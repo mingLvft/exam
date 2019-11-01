@@ -27,8 +27,8 @@ class Single extends Model{
         //接受编号查询
         $id = input('get.id');
         if ($id){
-            $count_where .= " and id=$id";
-            $where .= " and a.id=$id";
+            $count_where .= " and id = $id";
+            $where .= " and a.id = $id";
         }
         //接受专业查询
         $major_id = input('get.major_id');
@@ -47,7 +47,9 @@ class Single extends Model{
             ->join('em_major b', 'a.major_id=b.id')
             ->join('em_subject c','a.subject_id=c.id')
             ->field('a.*,b.major_name,c.subject_name')
-            ->where($where)->order('id')->paginate(20,$count);
+            ->where($where)->order('id')->paginate(20,$count,[
+                'query'     => array('start'=>$start,'end'=>$end,'id'=>$id,'major_id'=>$major_id,'subject_id'=>$subject_id)
+            ]);
         return $data;
     }
 }

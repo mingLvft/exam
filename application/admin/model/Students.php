@@ -28,8 +28,8 @@ class Students extends Model {
         //接受学生姓名查询
         $username = input('get.username');
         if ($username){
-            $count_where .= " and username = '$username'";
-            $where .= " and a.username = '$username'";
+            $count_where .= " and username like '%$username%'";
+            $where .= " and a.username like '%$username%'";
         }
         //接受专业查询
         $major_id = input('get.major_id');
@@ -40,31 +40,36 @@ class Students extends Model {
         //接受身份证查询
         $id_card = input('get.id_card');
         if ($id_card){
-            $count_where .= " and id_card = '$id_card'";
-            $where .= " and a.id_card = '$id_card'";
+            $count_where .= " and id_card like '%$id_card%'";
+            $where .= " and a.id_card like '%$id_card%'";
         }
         //接受电话号码查询
         $tel = input('get.tel');
         if ($tel){
-            $count_where .= " and tel=$tel";
-            $where .= " and a.tel=$tel";
+            $count_where .= " and tel like '%$tel%'";
+            $where .= " and a.tel like '%$tel%'";
         }
         //接受班级查询
         $class_name = input('get.class_name');
         if ($class_name){
-            $count_where .= " and class_name = '$class_name'";
-            $where .= " and a.class_name = '$class_name'";
+            $count_where .= " and class_name like '%$class_name%'";
+            $where .= " and a.class_name like '%$class_name%'";
         }
         //接受班主任查询
         $class_teacher = input('get.class_teacher');
         if ($class_teacher){
-            $count_where .= " and class_teacher = '$class_teacher'";
-            $where .= " and a.class_teacher = '$class_teacher'";
+            $count_where .= " and class_teacher like '%$class_teacher%'";
+            $where .= " and a.class_teacher like '%$class_teacher%'";
         }
+
         $count = $this->where($count_where)->count();
         $data = $this->alias('a')->field('a.*,b.major_name')
             ->join('em_major b','a.major_id=b.id')
-            ->where($where)->order('id')->paginate(20,$count);
+            ->where($where)->order('id')->paginate(20,$count ,[
+                'query'     => array('start'=>$start,'end'=>$end,
+                    'username'=>$username,'major_id'=>$major_id,'id_card'=>$id_card,
+                    'tel'=>$tel,'class_name'=>$class_name,'class_teacher'=>$class_teacher)
+            ]);
         return $data;
 //        $model = Db::name('students');
 //        //获取数据总条数 实现分页

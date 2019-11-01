@@ -19,14 +19,22 @@
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
+                            <input class="layui-input" value="{$Think.get.start}" autocomplete="off" placeholder="开始日" name="start" id="start">
                         </div>
                         <div class="layui-inline layui-show-xs-block">
-                            <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
+                            <input class="layui-input" value="{$Think.get.end}" autocomplete="off" placeholder="截止日" name="end" id="end">
                         </div>
-                        <div class="layui-inline layui-show-xs-block">
-                            <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                        </div>
+<!--                        <div class="layui-inline layui-show-xs-block">-->
+<!--                            <input type="text" name="username" value="{$Think.get.username}" placeholder="请输入用户名" autocomplete="off" class="layui-input">-->
+<!--                        </div>-->
+<!--                        <div class="layui-inline layui-show-xs-block">-->
+<!--                            <select name="id" lay-filter="major" id="major_id">-->
+<!--                                <option value="">请选择一个角色</option>-->
+<!--                                {volist name="role" id="vo"}-->
+<!--                                <option value="{$vo.id}" {eq name="$Think.get.id" value="$vo.id"}selected{/eq}>{$vo.role_name}</option>-->
+<!--                                {/volist}-->
+<!--                            </select>-->
+<!--                        </div>-->
                         <div class="layui-inline layui-show-xs-block">
                             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
                         </div>
@@ -35,6 +43,10 @@
                 <div class="layui-card-header">
                     <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                     <button class="layui-btn" onclick="xadmin.open('添加用户','{:url('Admin/add')}',600,400)"><i class="layui-icon"></i>添加</button>
+                    <form  class="layui-form layui-col-space5" style="display: inline-block" action="{:url('Admin/import')}" enctype="multipart/form-data" method="post">
+                        <input type="file" name="name" id="file" value=""/>
+                        <input type="submit" value="提交"/>
+                    </form>
                 </div>
                 <div class="layui-card-body ">
                     <table class="layui-table layui-form">
@@ -45,9 +57,11 @@
                             </th>
                             <th>ID</th>
                             <th>登录名</th>
-                            <th>手机</th>
                             <th>密码</th>
                             <th>角色</th>
+                            <th>最后登录时间</th>
+                            <th>最后登录IP</th>
+                            <th>IP物理地址</th>
                             <th>加入时间</th>
                             <th>状态</th>
                             <th>操作</th>
@@ -60,9 +74,11 @@
                             </td>
                             <td>{$vo.id}</td>
                             <td>{$vo.username}</td>
-                            <td>{$vo.tel}</td>
                             <td>{$vo.password}</td>
                             <td>{volist name="role" id="v"}{in name="v.id" value="$vo.role_id"}{$v.role_name},{/in}{/volist}</td>
+                            <td>{$vo.login_time}</td>
+                            <td>{$vo.login_ip}</td>
+                            <td>{$vo.login_site}</td>
                             <td>{$vo.add_time}</td>
                             <td class="td-status">
                                 <a onclick="member_stop(this,'{$vo.id}')" href="javascript:;"  title="{eq name="vo.on_off" value="1"}正常{else/}停用{/eq}">

@@ -153,4 +153,9 @@ class Admin extends Common{
             return json(array('status'=>0,'msg'=>'开启失败'));
         }
     }
+
+    //导入教室列表  管理员
+    public function import(){
+        action('admin/Excel/impUser',['table_name'=>'em_admin']);
+    }
 }

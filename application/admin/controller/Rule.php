@@ -9,8 +9,8 @@ class Rule extends Common{
     //权限页面显示
     public function index(){
         $count = Db::name('rule')->count();
-        $data = Db::name('rule')->paginate(20,$count);
-        //解决分页选择上级权限bug
+        $data = Db::name('rule')->order('id')->paginate(20,$count);
+        //解决分页选择上级权限bug  bug只显示单页的权限
         $rule = Db::name('rule')->select();
         $this->assign('data',$data);
         $this->assign('rule',$rule);

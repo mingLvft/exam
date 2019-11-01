@@ -9,7 +9,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
-use think\Upload;
+use think\Db;
 
 class Excel extends Controller
 {
@@ -328,6 +328,11 @@ class Excel extends Controller
         foreach ($other as $k=>&$v){
             $v = array_map(function($aa){return trim($aa); },$v);
         }
+        //2019年10月31日22:27:05
+        //提交表 admin 去字段
+        if($table_name == 'admin'){
+            $arr_continue = array('id','add_time','on_off','login_site');
+        }
 
         $arr_continue = array('id','major_id','add_time','status','subject_id','pathinfo');
 
@@ -369,6 +374,27 @@ class Excel extends Controller
      *
      */
     private function inert_data($insert_datas,$table_name=''){
+        //2019年10月31日22:27:12
+        //提交管理员表
+        if($table_name == 'admin'){
+            //foreach 遍历 添加 获取 自增id 方便添加中间表
+            foreach ($insert_datas as $key => $value){
+                $value['add_time'] = date('Y-m-d H:i:s');
+                $result = model($table_name)->insertGetId($value);
+                $admin_role[] = array(
+                    'admin_id' => $result,
+                    //教师阅卷管理员
+                    'role_id' => 9,
+                );
+            }
+            if($result){
+                //添加到 管理员与角色的中间表
+                Db::name('admin_role')->insertAll($admin_role);
+                return true;
+            }else{
+                return false;
+            }
+        }
         //将添加时间修改成当前时间
         foreach ($insert_datas as &$insert_data){
             $major_id = input('post.major_id1','');

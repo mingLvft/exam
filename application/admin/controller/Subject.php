@@ -10,6 +10,9 @@ class Subject extends Common{
         //获取科目下对应的专业信息
         $data = model('subject')->getAllData(1);
         $this->assign('data',$data);
+        //获取所有专业信息
+        $major = Db::name('major')->select();
+        $this->assign('major',$major);
         return $this->fetch();
     }
 
@@ -103,5 +106,12 @@ class Subject extends Common{
         }else{
             return json(array('status'=>0,'msg'=>'开启失败'));
         }
+    }
+
+    //二级联动 返回数据
+    public function major(){
+        $major_id = input('post.major_id');
+        $data = Db::name('subject')->where("major_id",$major_id)->select();
+        return json($data);
     }
 }

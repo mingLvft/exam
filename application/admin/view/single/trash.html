@@ -39,7 +39,8 @@
                         </form>
                     </div>
                     <div class="layui-card-header">
-                        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量恢复</button>
+                        <button class="layui-btn layui-btn-danger" onclick="trashAll()"><i class="layui-icon"></i>批量恢复</button>
+                        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
                     </div>
                     <div class="layui-card-body ">
                         <table class="layui-table layui-form " lay-size="sm">
@@ -174,9 +175,9 @@
               }
           });
   
-        layer.confirm('确认要恢复吗？'+ids.toString(),function(index){
+        layer.confirm('确认要删除吗？'+ids.toString(),function(index){
             //ajax请求 id数组
-            $.post("{:url('Single/recover')}",{id:ids},function (data) {
+            $.post("{:url('Single/del')}",{id:ids},function (data) {
                 if(data.status == 1){
                     //捉到所有被选中的，发异步进行删除
                     layer.msg(data.msg, {icon: 1});
@@ -186,6 +187,31 @@
                 }
             });
         });
+      }
+
+      function trashAll (argument) {
+
+          var ids = [];
+
+          // 获取选中的id
+          $('tbody input').each(function(index, el) {
+              if($(this).prop('checked')){
+                  ids.push($(this).val())
+              }
+          });
+
+          layer.confirm('确认要恢复吗？'+ids.toString(),function(index){
+              //ajax请求 id数组
+              $.post("{:url('Single/recover')}",{id:ids},function (data) {
+                  if(data.status == 1){
+                      //捉到所有被选中的，发异步进行删除
+                      layer.msg(data.msg, {icon: 1});
+                      $(".layui-form-checked").not('.header').parents('tr').remove();
+                  }else{
+                      layer.msg(data.msg, {icon: 2});
+                  }
+              });
+          });
       }
     </script>
     <script>var _hmt = _hmt || []; (function() {

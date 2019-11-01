@@ -10,13 +10,11 @@ class Scroe extends Controller{
 
     //教师阅卷列表
     public function teacherIndex(){
-        $model = Db::name('topic');
-        $count = $model->count();
-        //链表查询出专业科目 and 成绩
-        $data = $model->alias('a')->field('a.*,b.major_name,c.subject_name')
-            ->join('em_major b','a.major_id=b.id')
-            ->join('em_subject c','a.subject_id=c.id')->where("a.status",1)->paginate(20,$count);
+        $data = model('topic')->getAllData(1);
         $this->assign('data',$data);
+        //获取专业信息
+        $major = db('major')->where("status",1)->select();
+        $this->assign('major',$major);
         //查询考试开关
         $status = Db::name('exam_status')->value('on_off');
         $this->assign('status',$status);
@@ -58,13 +56,11 @@ class Scroe extends Controller{
 
     //教务处阅卷列表   只显示 待审核 和 已经阅卷
     public function officeIndex(){
-        $model = Db::name('topic');
-        $count = $model->count();
-        //链表查询出专业科目 and 成绩
-        $data = $model->alias('a')->field('a.*,b.major_name,c.subject_name')
-            ->join('em_major b','a.major_id=b.id')
-            ->join('em_subject c','a.subject_id=c.id')->where("a.status=1 and not_read in (1,2)")->paginate(20,$count);
+        $data = model('topic')->getOfficeData(1);
         $this->assign('data',$data);
+        //获取专业信息
+        $major = db('major')->where("status",1)->select();
+        $this->assign('major',$major);
         return $this->fetch();
     }
 
@@ -103,6 +99,20 @@ class Scroe extends Controller{
 
     //教师阅卷的删除
     public function del(){
+        $model = Db::name('topic');
+        $id = input('post.id/a');
+        //转换成数组方便使用mysql in语法
+        $id = implode(',',$id);
+        $res = $model->where("id in ($id)")->setField("status",0);
+        if ($res){
+            return json(array('status'=>1,'msg'=>'删除成功'));
+        }else{
+            return json(array('status'=>0,'msg'=>'删除失败'));
+        }
+    }
+
+    //教务处阅卷的删除
+    public function officedel(){
         $model = Db::name('topic');
         $id = input('post.id/a');
         //转换成数组方便使用mysql in语法
@@ -189,5 +199,12 @@ class Scroe extends Controller{
         header( "Content-Disposition:  attachment;  filename=". $filename);
         //输出缓冲区
         readfile($filename);
+    }
+
+    //二级联动 返回数据
+    public function major(){
+        $major_id = input('post.major_id');
+        $data = Db::name('subject')->where("major_id",$major_id)->select();
+        return json($data);
     }
 }

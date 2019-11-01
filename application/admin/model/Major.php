@@ -1,9 +1,9 @@
 <?php
 namespace app\admin\model;
 use think\Model;
-class Subject extends Model{
 
-    //获取科目下对应的专业信息
+class Major extends Model{
+
     public function getAllData($status){
         //拼接where
         $count_where = 'status='.$status;
@@ -27,22 +27,13 @@ class Subject extends Model{
         //接受专业查询
         $major_id = input('get.major_id');
         if ($major_id){
-            $count_where .= " and major_id = $major_id";
-            $where .= " and a.major_id = $major_id";
-        }
-        //接受科目查询
-        $subject_id = input('get.subject_id');
-        if ($subject_id){
-            $count_where .= " and id = $subject_id";
-            $where .= " and a.id = $subject_id";
+            $count_where .= " and id = $major_id";
+            $where .= " and a.id = $major_id";
         }
         $count = $this->where($count_where)->count();
-        $data = $this->alias('a')->
-        join('em_major b', 'a.major_id=b.id')
-            ->field('a.*,b.major_name')
-            ->where($where)->order('id')->paginate(20,$count,[
-                'query'     => array('start'=>$start,'end'=>$end,'major_id'=>$major_id,'subject_id'=>$subject_id)
-            ]);
+        $data = $this->alias('a')->where($where)->order('id')->paginate(20,$count,[
+            'query'     => array('start'=>$start,'end'=>$end,'major_id'=>$major_id,)
+        ]);
         return $data;
     }
 }

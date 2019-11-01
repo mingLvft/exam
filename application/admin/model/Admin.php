@@ -10,11 +10,30 @@ class Admin extends Model{
 
     //获取管理员下对应的角色id以及管理员信息
     public function getAllData($status){
-        $count = $this->where("status",$status)->count();
+        //拼接where
+        $count_where = 'status='.$status;
+        $where = 'a.status='.$status;
+        //接受开始日
+        $start = input('get.start');
+        //日期转换为时间戳
+        $start = strtotime($start);
+        if ($start){
+            $count_where .= " and unix_timestamp(add_time)>$start";
+            $where .= " and unix_timestamp(a.add_time)>$start";
+        }
+        //接受结束日
+        $end = input('get.end');
+        //日期转换为时间戳
+        $end = strtotime($end);
+        if ($end){
+            $count_where .= " and unix_timestamp(add_time)<$end";
+            $where .= " and unix_timestamp(a.add_time)<$end";
+        }
+        $count = $this->where($count_where)->count();
         $data = $this->alias('a')
             ->join('em_admin_role b', 'a.id=b.admin_id')
             ->field('a.*,b.role_id')
-            ->where("a.status",$status)->paginate(20,$count);
+            ->where($where)->order('id')->paginate(20,$count);
         return $data;
     }
 
@@ -52,7 +71,7 @@ class Admin extends Model{
             return json(array('status'=>0,'msg'=>'用户名不存在'));
         }
         $rule = Db::name('admin_role')->field('role_id')->where('admin_id',$info['id'])->find();
-        //判断用户是否被禁用
+        //判断用户是否被禁用   超级管理员不判断
         if($info['status'] == 0 && $rule['role_id'] != 1 && $info['on_off'] == 0){
             return json(array('status'=>0,'msg'=>'用户被禁用'));
         }
@@ -66,6 +85,18 @@ class Admin extends Model{
         Cookie::set('username',$info['username'],18000);
         //保存管理员id
         Cookie::set('id',$info['id'],18000);
+        //保存最后登录时间
+        $time = date('Y-m-d H:i:s');
+        $this->where('id',$info['id'])->setField('login_time',$time);
+        //保存最后登录ip
+        $ip = request()->ip();
+        $this->where('id',$info['id'])->setField('login_ip',$ip);
+        //保存ip真实地址
+        $IpLocation = new \think\ipLocation\IpLocation();
+        $site = $IpLocation->getlocation($ip);
+        $site['country']=iconv('gb2312', 'utf-8', $site['country']);
+        $site['area']=iconv('gb2312', 'utf-8', $site['area']);
+        $this->where('id',$info['id'])->setField('login_site',$site['country'].$site['area']);
         return json(array('status'=>1,'msg'=>'登陆成功'));
     }
 }

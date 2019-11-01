@@ -47,7 +47,9 @@ class Selection extends Model{
             ->join('em_major b', 'a.major_id=b.id')
             ->join('em_subject c','a.subject_id=c.id')
             ->field('a.*,b.major_name,c.subject_name')
-            ->where($where)->order('id')->paginate(20,$count);
+            ->where($where)->order('id')->paginate(20,$count,[
+                'query'     => array('start'=>$start,'end'=>$end,'id'=>$id,'major_id'=>$major_id,'subject_id'=>$subject_id)
+            ]);
         return $data;
     }
 }
