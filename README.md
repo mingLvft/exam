@@ -9,6 +9,17 @@
 - 安卓app安装包：https://pan.baidu.com/s/1BR7PCcoR_1d3qsHjrowxJA 
 
 
+#### 项目截图
+![输入图片说明](https://github.com/wycilu/exam/tree/master/public/dist/img/bg.1b97f9f5.jpg "前端.jpg")
+
+#### 后台截图
+![输入图片说明]( "后台-商品列表.png")
+
+![输入图片说明]( "后台-新增商品.png")
+
+![输入图片说明]( "后台-首页设计.png")
+
+![输入图片说明]( "后台-配送设置.png")
 
 #### 环境要求
 - Nginx/Apache/IIS
@@ -23,6 +34,10 @@
 2.项目入口目录：/public  服务器虚拟主机www运行目录指向public
 
 3.本地配置host 127.0.0.1 你的域名
+
+4.如404 需添加伪静态
+
+5.apache或nginx需将 index.html设置优先访问
 
 #### ==友情提示==
 - 引入了扩展类获取定位ip地址。
