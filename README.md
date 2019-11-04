@@ -36,11 +36,11 @@
 
 5.apache或nginx需将 index.html设置优先访问
 
-#### ==友情提示==
+#### 友情提示
 - 引入了扩展类获取定位ip地址。
 - 文件路径在\thinkphp\library\think\ipLocation
-- 注意qqwry.dat如需==获取最新ip地址信息==， 需在==纯真数据库==官网下载最新数据库文件然后覆盖==qqwry.dat==即可。
-- 若上传文件大小受到限制需要将php.ini，设置upload_max_filesize = 50M     注：50为大小单位M
+- 注意qqwry.dat如需获取最新ip地址信息， 需在纯真数据库官网下载最新数据库文件然后覆盖qqwry.dat即可。
+- 若上传文件大小受到限制需要将php.ini，设置upload_max_filesize = 50M     注：大小单位M
 - 若后台清理缓存文件失败需要将编辑php.ini查找 disable_functions，将等号后面的 exec system shell_exec 去掉即可。
 
 #### 服务器搭建安装配置
